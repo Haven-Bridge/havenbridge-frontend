@@ -64,7 +64,7 @@ export default function HavenBridgeLanding() {
   return (
     <div className="bg-white font-sans">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 py-32">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 py-32">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -92,7 +92,7 @@ export default function HavenBridgeLanding() {
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-10 md:mb-14 leading-tight text-white px-4">
             Building Communities,<br />
-            <span className="bg-gradient-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
               Creating Homes
             </span>
           </h1>
@@ -103,7 +103,7 @@ export default function HavenBridgeLanding() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-5 justify-center mb-24 md:mb-32">
-            <button className="group bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-900 px-10 py-5 text-lg md:text-xl font-bold rounded-lg hover:from-amber-400 hover:to-yellow-400 transition-all shadow-xl hover:shadow-2xl hover:scale-105 inline-flex items-center justify-center gap-2">
+            <button className="group bg-linear-to-r from-amber-500 to-yellow-500 text-slate-900 px-10 py-5 text-lg md:text-xl font-bold rounded-lg hover:from-amber-400 hover:to-yellow-400 transition-all shadow-xl hover:shadow-2xl hover:scale-105 inline-flex items-center justify-center gap-2">
               Explore Our Services 
               <ArrowRight className="group-hover:translate-x-1 transition-transform w-5 h-5" />
             </button>
@@ -129,7 +129,7 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* Services Overview */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-24 bg-linear-to-b from-gray-50 to-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
             <div className="inline-block mb-4">
@@ -151,7 +151,7 @@ export default function HavenBridgeLanding() {
                 key={i} 
                 className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-amber-200 hover:-translate-y-2"
               >
-                <div className="bg-gradient-to-br from-amber-400 to-yellow-500 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                <div className="bg-linear-to-br from-amber-400 to-yellow-500 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">{service.title}</h3>
@@ -159,7 +159,7 @@ export default function HavenBridgeLanding() {
                 <ul className="space-y-2">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                      <CheckCircle2 className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -202,9 +202,9 @@ export default function HavenBridgeLanding() {
               { name: "Community Hub Brisbane", location: "Brisbane, QLD", type: "Mixed Use" }
             ].map((project, i) => (
               <div key={i} className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer">
-                <div className="aspect-[4/3] bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-70 group-hover:opacity-80 transition-opacity"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="aspect-4/3 bg-linear-to-br from-slate-800 to-slate-600 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/50 to-transparent opacity-70 group-hover:opacity-80 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
                 
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform">
@@ -231,7 +231,7 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white relative overflow-hidden">
+      <section className="py-24 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.4) 0%, transparent 50%)`
@@ -241,14 +241,14 @@ export default function HavenBridgeLanding() {
         <div className="container mx-auto px-6 text-center relative z-10">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Ready to Build Something<br />
-            <span className="bg-gradient-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
               Great Together?
             </span>
           </h2>
           <p className="text-xl mb-10 max-w-2xl mx-auto text-gray-200 leading-relaxed">
             Partner with us for your next community development project and create lasting impact.
           </p>
-          <button className="bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-lg hover:from-amber-400 hover:to-yellow-400 transition-all shadow-2xl hover:shadow-amber-500/50 hover:scale-105 inline-block">
+          <button className="bg-linear-to-r from-amber-500 to-yellow-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-lg hover:from-amber-400 hover:to-yellow-400 transition-all shadow-2xl hover:shadow-amber-500/50 hover:scale-105 inline-block">
             Start Your Project Today
           </button>
         </div>
