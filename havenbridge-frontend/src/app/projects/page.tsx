@@ -1,10 +1,10 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import { ArrowRight, MapPin, Building2, Users } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
 export default function ProjectsPage() {
   const projects = [
@@ -15,8 +15,7 @@ export default function ProjectsPage() {
       units: "48 Homes",
       status: "Completed",
       year: "2024",
-      desc: "A sustainable modular housing community featuring energy-efficient homes and community spaces.",
-      imageUrl: "https://media.istockphoto.com/id/503943499/photo/arial-view-of-melbourne-australia.webp?a=1&b=1&s=612x612&w=0&k=20&c=9jkv3OfDvvclRiZdGbr8fdpUb_sipPifO-_u-k0bYv4="
+      desc: "A sustainable modular housing community featuring energy-efficient homes and community spaces."
     },
     { 
       name: "Sunrise Care Centre", 
@@ -25,8 +24,7 @@ export default function ProjectsPage() {
       units: "80 Beds",
       status: "Completed",
       year: "2024",
-      desc: "State-of-the-art aged care facility with modern amenities and compassionate care environments.",
-      imageUrl: "https://media.istockphoto.com/id/2247111233/photo/aerial-panorama-drone-view-of-a-inner-western-sydney-suburb-of-ashbury-urban-sprawl-and-the.webp?a=1&b=1&s=612x612&w=0&k=20&c=GZ2qqbC8uTN2T6NHxGkqavy82q_G3Psa3Rm9GfBhVZQ=" // e.g. "https://example.com/sunrise-care.jpg"
+      desc: "State-of-the-art aged care facility with modern amenities and compassionate care environments."
     },
     { 
       name: "Community Hub Brisbane", 
@@ -35,8 +33,7 @@ export default function ProjectsPage() {
       units: "35 Units",
       status: "In Progress",
       year: "2025",
-      desc: "Mixed-use development combining affordable housing with community facilities and retail spaces.",
-      imageUrl: "https://media.istockphoto.com/id/1425748659/photo/aerial-view-of-brisbane-river-at-west-end.webp?a=1&b=1&s=612x612&w=0&k=20&c=1bcTRVw2tsSKiDBnTnbMkAYh0V-xkmkne7tdUZly9CY=" // e.g. "https://example.com/community-hub.jpg"
+      desc: "Mixed-use development combining affordable housing with community facilities and retail spaces."
     },
     { 
       name: "Adelaide Childcare Centre", 
@@ -45,8 +42,7 @@ export default function ProjectsPage() {
       units: "120 Places",
       status: "Completed",
       year: "2023",
-      desc: "Purpose-built childcare facility with outdoor play areas and educational spaces.",
-      imageUrl: "https://media.istockphoto.com/id/1472729148/photo/aerial-view-adelaide-cbd-from-the-east-with-parklands-and-low-rise-buildings-in-foreground.webp?a=1&b=1&s=612x612&w=0&k=20&c=qvTRTconqt8nwIM4HnlQoREBp_UOZMvRs3oTP5REQMM=" // e.g. "https://example.com/adelaide-childcare.jpg"
+      desc: "Purpose-built childcare facility with outdoor play areas and educational spaces."
     },
     { 
       name: "Perth Rooming House Complex", 
@@ -55,8 +51,7 @@ export default function ProjectsPage() {
       units: "24 Rooms",
       status: "Completed",
       year: "2023",
-      desc: "Affordable rooming house development providing safe and accessible accommodation.",
-      imageUrl: "https://images.unsplash.com/photo-1559331709-adc470c83d72?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8UGVydGglMjBSb29taW5nJTIwSG91c2UlMjBDb21wbGV4JTIwUGVydGglMkMlMjBXQSUyMDI0JTIwUm9vbXMlMjAlRTIlODAlQTIlMjAyMDIzfGVufDB8fDB8fHww" // e.g. "https://example.com/perth-rooming.jpg"
+      desc: "Affordable rooming house development providing safe and accessible accommodation."
     },
     { 
       name: "Canberra Social Housing Project", 
@@ -65,8 +60,7 @@ export default function ProjectsPage() {
       units: "60 Units",
       status: "In Progress",
       year: "2025",
-      desc: "Government partnership project delivering affordable social housing solutions.",
-      imageUrl: "https://images.unsplash.com/photo-1666304720961-214472c70339?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fFNvY2lhbCUyMEhvdXNpbmclMjBDYW5iZXJyYSUyMFNvY2lhbCUyMEhvdXNpbmclMjBQcm9qZWN0JTIwQ2FuYmVycmElMkMlMjBBQ1QlMjA2MCUyMFVuaXRzJTIwJUUyJTgwJUEyJTIwMjAyNXxlbnwwfHwwfHx8MA%3D%3D" // e.g. "https://example.com/canberra-social.jpg"
+      desc: "Government partnership project delivering affordable social housing solutions."
     }
   ];
 
@@ -119,21 +113,9 @@ export default function ProjectsPage() {
                 key={i} 
                 className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
               >
-                <div className="aspect-4/3 relative overflow-hidden rounded-2xl bg-linear-to-br from-slate-800 to-slate-600 p-2">
-                  <div className="relative w-full h-full rounded-xl overflow-hidden">
-                    {project.imageUrl ? (
-                      <Image
-                        src={project.imageUrl}
-                        alt={project.name}
-                        fill
-                        className="object-cover"
-                        sizes="(min-width: 1024px) 33vw, 100vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-linear-to-br from-slate-900 to-slate-700" />
-                    )}
-                    <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/50 to-transparent" />
-                  </div>
+                <div className="aspect-4/3 bg-linear-to-br from-slate-800 to-slate-600 relative overflow-hidden">
+                
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
                   <div className="absolute top-4 right-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                       project.status === "Completed" 
