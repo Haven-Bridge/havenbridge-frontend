@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import {
   Target,
   Shield,
@@ -27,8 +28,6 @@ import {
   Building,
   Home as HomeIcon,
   Award as Trophy,
-  Users as Community,
-  Users as People,
   FileText,
   CheckCircle
 } from 'lucide-react';
@@ -88,7 +87,7 @@ export default function AboutPage() {
       bio: "Former banker and Ministerial Advisor in the environment portfolio with direct experience in homelessness and public housing responses, including the Flemington public housing tower lockdown. Brings deep understanding of Victorian government policy, planning overlays, and social outcome frameworks.",
       expertise: ["Government Policy", "Strategic Planning", "Social Outcomes"],
       color: "from-amber-400 to-amber-500",
-      icon: Shield
+      image: "/team/John-Kuot.png" 
     },
     {
       name: "Angok Lueth",
@@ -96,7 +95,7 @@ export default function AboutPage() {
       bio: "Former banker with 12 years of development experience across townhouses, rooming houses, shopping centres, mixed-use projects, SDA accommodation, NDIS housing, and community accommodation. Highly experienced in planning approvals and on-time, on-budget project delivery.",
       expertise: ["Project Delivery", "Development Planning", "NDIS/SDA"],
       color: "from-cyan-500 to-blue-500",
-      icon: Building2
+      image: "/leadership/angok-lueth.jpg" // Replace with actual image path
     },
     {
       name: "Him Malhotra",
@@ -104,7 +103,7 @@ export default function AboutPage() {
       bio: "Land acquisition specialist with extensive networks across Melbourne's key growth corridors. Proven ability to source off-market sites and structure complex development deals that unlock value for community benefit.",
       expertise: ["Land Acquisition", "Deal Structuring", "Market Analysis"],
       color: "from-emerald-500 to-green-500",
-      icon: MapPin
+      image: "/leadership/him-malhotra.jpg" // Replace with actual image path
     }
   ];
 
@@ -407,7 +406,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Team - Enhanced */}
+      {/* Leadership Team - Enhanced with Images */}
       <section id="leadership" className="py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
@@ -426,44 +425,52 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {leadership.map((person, i) => {
-              const Icon = person.icon;
               const expertise = person.expertise;
               return (
                 <div key={i} className="group relative">
                   {/* Glow effect */}
                   <div className={`absolute -inset-4 bg-linear-to-br ${person.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
                   
-                  <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+                  <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 h-full flex flex-col">
                     {/* Top accent */}
                     <div className={`h-2 bg-linear-to-br ${person.color}`}></div>
                     
-                    <div className="p-8">
-                      <div className="flex items-start gap-4 mb-6">
-                        {/* Avatar placeholder with gradient */}
-                        <div className={`w-16 h-16 rounded-full bg-linear-to-br ${person.color} flex items-center justify-center flex-shrink-0`}>
-                          <Icon className="w-8 h-8 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-slate-900">{person.name}</h3>
-                          <p className="text-sm font-semibold text-amber-600 mb-2">{person.title}</p>
-                          
-                          {/* Expertise tags */}
-                          <div className="flex flex-wrap gap-1">
-                            {expertise.map((skill, j) => (
-                              <span key={j} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
+                    {/* Image Section */}
+                    <div className="relative h-95 overflow-hidden">
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent to-slate-900/20 z-10"></div>
+                      <Image
+                        src={person.image}
+                        alt={person.name}
+                        fill
+                        className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={i === 0}
+                      />
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-linear-to-t from-slate-900/40 via-transparent to-transparent"></div>
+                    </div>
+                    
+                    <div className="p-8 flex-1 flex flex-col">
+                      <div className="mb-6">
+                        <h3 className="text-xl font-bold text-slate-900 mb-1">{person.name}</h3>
+                        <p className="text-sm font-semibold text-amber-600 mb-3">{person.title}</p>
+                        
+                        {/* Expertise tags */}
+                        <div className="flex flex-wrap gap-1">
+                          {expertise.map((skill, j) => (
+                            <span key={j} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">
+                              {skill}
+                            </span>
+                          ))}
                         </div>
                       </div>
                       
-                      <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                      <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1">
                         {person.bio}
                       </p>
                       
-                      <button className="w-full py-2.5 bg-linear-to-br from-slate-900 to-slate-800 text-white font-bold rounded-lg hover:from-slate-800 hover:to-slate-700 transition-all">
-                        View Profile
+                      <button className="w-full py-2.5 bg-linear-to-br from-slate-900 to-slate-800 text-white font-bold rounded-lg hover:from-slate-800 hover:to-slate-700 transition-all mt-auto">
+                        View Full Profile
                       </button>
                     </div>
                   </div>

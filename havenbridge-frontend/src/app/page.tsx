@@ -206,7 +206,7 @@ export default function HavenBridgeLanding() {
       <Navbar />
 
       {/* Hero Section - Enhanced */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -214,8 +214,8 @@ export default function HavenBridgeLanding() {
           <div className="absolute top-3/4 left-1/3 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
         </div>
 
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-3 lg:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
               {/* Animated header */}
               <div className="relative inline-block mb-4">
@@ -225,7 +225,7 @@ export default function HavenBridgeLanding() {
                   <span className="block">
                     Communities.
                     <span className="relative ml-3">
-                      <span className="text-amber-400">Impact</span>
+                      <p className="text-amber-400">Delivering Impact.</p>
                       <Sparkles className="absolute -top-2 -right-6 w-6 h-6 text-cyan-500 animate-pulse" />
                     </span>
                   </span>

@@ -420,7 +420,7 @@ export default function InvestorsPage() {
           <div className="text-center mt-12">
             <a 
               href="/contact"
-              className="group relative inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-10 py-4 rounded-xl font-bold hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl"
+              className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-10 py-4 rounded-xl font-bold hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl"
             >
               <span className="relative z-10">Discuss Partnership</span>
               <ChevronRight className="relative z-10 w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
