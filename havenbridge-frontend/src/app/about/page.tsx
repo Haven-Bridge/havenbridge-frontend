@@ -121,7 +121,7 @@ export default function AboutPage() {
       bio: "Land acquisition specialist with extensive networks across Melbourne's key growth corridors.",
       expertise: ["Land Acquisition", "Deal Structuring", "Market Analysis"],
       color: "from-emerald-500 to-green-500",
-      image: "/team/Mohatra.png",
+      image: "/team/Him.jpg",
     },
   ];
 
@@ -163,11 +163,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
 
-        {/* Animated Orbs */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
+        
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -229,30 +225,12 @@ export default function AboutPage() {
                 />
 
                 {/* Floating Elements */}
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
-                    <BuildingIcon className="w-6 h-6 text-amber-400" />
-                  </div>
-                </div>
-                <div className="absolute bottom-6 left-6 z-20">
+              <div className="absolute bottom-6 left-6 z-20">
                   <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
                     <Community className="w-6 h-6 text-cyan-400" />
                   </div>
                 </div>
 
-                {/* Stats Overlay */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-                  <div className="flex gap-4">
-                    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
-                      <div className="text-2xl font-bold text-white">50+</div>
-                      <div className="text-xs text-gray-300">Projects</div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
-                      <div className="text-2xl font-bold text-white">100%</div>
-                      <div className="text-xs text-gray-300">Compliance</div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -311,12 +289,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Story - Professional Layout with FULL CLIENT CONTENT */}
+      {/* Our Story - Visual Narrative with Alternating Layout */}
       <section id="our-story" className="py-24 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {/* Section Header */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-20">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 rounded-full border border-amber-400/20 mb-6">
                 <Book className="w-4 h-4 text-amber-400" />
                 <span className="text-sm font-semibold text-amber-600">
@@ -324,225 +302,266 @@ export default function AboutPage() {
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                Built by the Community, for the Community
+                Built by the Community,
+                <br />
+                <span className="bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-cyan-500">
+                  for the Community
+                </span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Property development in Australia has long been dominated by the
-                "big guys"—but it's the "little guys" who live in the homes they
-                create. HavenBridge was born to change that.
+                Property development has long been dominated by the "big
+                guys"; but it's the "little guys" who live in these homes.
+                HavenBridge was born to change that.
               </p>
             </div>
 
-            {/* Main Story Content */}
-            <div className="space-y-16">
-              {/* Section 1: Full Client Content */}
-              <div className="bg-linear-to-br from-slate-50 to-white rounded-2xl p-8 border border-gray-100 shadow-lg">
-                <div className="grid lg:grid-cols-2 gap-12">
-                  <div className="space-y-8">
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <BuildingIcon className="w-6 h-6 text-amber-400" />
-                        <h3 className="text-2xl font-bold text-slate-900">
-                          About HavenBridge
-                        </h3>
-                      </div>
-                      <div className="space-y-6 text-gray-700 leading-relaxed">
-                        <p>
-                          HavenBridge Development is a values-led property
-                          development and project management firm founded by
-                          leaders who represent the diversity, resilience, and
-                          ambition of modern Australia. As part of the 50% of
-                          Australians who trace their roots beyond the country's
-                          borders, we understand what it means to be
-                          misunderstood, overlooked, or excluded. That lived
-                          experience shapes how we build, how we partner, and
-                          how we deliver.
-                        </p>
-                        <p>
-                          We specialise in community-focused housing solutions
-                          that uplift migrant communities, enable government
-                          priorities, and deliver long-term value for partners
-                          and investors. Our projects sit at the intersection of
-                          social impact, commercial excellence, and cultural
-                          insight—bringing forward developments that are
-                          financially sound, socially responsible, and deeply
-                          connected to the people who will ultimately call them
-                          home.
-                        </p>
-                        <p>
-                          At HavenBridge, we operate with the discipline of
-                          major institutions and the agility of an
-                          entrepreneurial team. We have been shaped by
-                          world-class global organisations—but raised, grounded,
-                          and inspired by the communities who depend on better
-                          housing solutions. This dual perspective enables us to
-                          bridge worlds: the world of capital, policy, and
-                          development; and the world of lived experience,
-                          community, and belonging.
-                        </p>
-                        <p>
-                          We exist to build places that feel like home—projects
-                          that speak to the aspirations of the people they
-                          serve, and that stand as long-term assets for
-                          governments, partners, and investors.
-                        </p>
-                        <p className="text-lg font-semibold text-amber-600">
-                          HavenBridge is not simply developing property. We are
-                          developing futures.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-8">
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <Community className="w-6 h-6 text-cyan-500" />
-                        <h3 className="text-2xl font-bold text-slate-900">
-                          Our Story: Built by the Community, for the Community
-                        </h3>
-                      </div>
-                      <div className="space-y-6 text-gray-700 leading-relaxed">
-                        <p>
-                          Property development in Australia has long been
-                          dominated by the "big guys"—large corporations with
-                          deep pockets, long histories, and familiar names. For
-                          decades, they have shaped skylines, acquired land, and
-                          defined what housing should look like. Yet, despite
-                          this scale, it is the little guys—everyday families,
-                          migrants, workers, and young people—who end up living
-                          in the homes these institutions create.
-                        </p>
-                        <p>
-                          Too often, the people who occupy these dwellings have
-                          no voice in how they are designed, planned, or
-                          delivered.
-                        </p>
-                        <p className="text-lg font-semibold text-cyan-700">
-                          HavenBridge was born to change that.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Mission & Vision Cards */}
-                    <div className="grid gap-6">
-                      <div className="bg-linear-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
-                        <div className="flex items-center gap-3 mb-4">
-                          <Bullseye className="w-5 h-5 text-cyan-600" />
-                          <span className="text-sm font-semibold text-cyan-600">
-                            OUR MISSION
-                          </span>
-                        </div>
-                        <h4 className="text-xl font-bold text-slate-900 mb-3">
-                          Creating Dignified, Community-Focused Housing
-                        </h4>
-                        <p className="text-gray-700">
-                          To create housing that reflects the lived experiences
-                          of multicultural Australians and strengthens their
-                          sense of belonging.
-                        </p>
-                      </div>
-
-                      <div className="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-100">
-                        <div className="flex items-center gap-3 mb-4">
-                          <Target className="w-5 h-5 text-amber-600" />
-                          <span className="text-sm font-semibold text-amber-600">
-                            OUR VISION
-                          </span>
-                        </div>
-                        <h4 className="text-xl font-bold text-slate-900 mb-3">
-                          Australia's leading inclusive housing developer
-                        </h4>
-                        <p className="text-gray-700">
-                          To be Australia's leading developer—where commercial
-                          excellence, multicultural insight, and government
-                          partnership come together to shape a more inclusive
-                          housing future.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Section 2: The Full Story Continues */}
-              <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-100 shadow-lg">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <GraduationCap className="w-6 h-6 text-blue-500" />
-                      <h3 className="text-xl font-bold text-slate-900">
-                        Our Journey: From Both Worlds
-                      </h3>
-                    </div>
-                    <div className="space-y-4 text-gray-700 leading-relaxed">
-                      <p>
-                        We are the children of migrants, the first in our
-                        families to navigate corporate Australia, and the
-                        beneficiaries of world-class education and institutional
-                        training. We were taught by major organisations,
-                        mentored by leaders of industry, and shaped by
-                        governance and finance at the highest levels.
-                      </p>
-                      <p>
-                        But we were raised by commoners—by communities who know
-                        the struggles of housing insecurity, the barriers of
-                        language and income, and the hope that comes with
-                        finally finding a place to call home.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Zap className="w-6 h-6 text-cyan-500" />
-                      <h3 className="text-xl font-bold text-slate-900">
-                        Bridging the Gap
-                      </h3>
-                    </div>
-                    <div className="space-y-4 text-gray-700 leading-relaxed">
-                      <p className="font-semibold text-cyan-700">
-                        HavenBridge exists because we saw a gap: housing was
-                        being built for communities, but never with them.
-                      </p>
-                      <p>
-                        So, we chose to step into the space between institutions
-                        and the people they serve. We are nimble. We are agile.
-                        We understand strategy and scale—but we also understand
-                        culture, family, and belonging.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Section 3: The Final Message */}
-              <div className="bg-linear-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700 text-white">
-                <div className="text-center max-w-4xl mx-auto">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    <span className="text-sm font-semibold">
-                      OUR COMMITMENT
+            {/* Story Blocks - Alternating Layout */}
+            <div className="space-y-24">
+              {/* Story 1: Who We Are - Image Right */}
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 rounded-full border border-amber-200">
+                    <BuildingIcon className="w-4 h-4 text-amber-600" />
+                    <span className="text-xs font-bold text-amber-600 uppercase tracking-wide">
+                      Chapter 01
                     </span>
                   </div>
-                  <div className="space-y-6">
-                    <p className="text-2xl font-bold">
-                      We bring together the worlds of policy, development, and
-                      community to design housing that restores dignity, builds
-                      opportunity, and strengthens social cohesion.
+                  <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
+                    Who We Are
+                  </h3>
+                  <div className="h-1 w-16 bg-linear-to-r from-amber-400 to-amber-500 rounded-full"></div>
+                  <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                    <p>
+                      HavenBridge is a values-led property development firm
+                      founded by leaders who represent modern Australia's
+                      diversity. As part of the 50% of Australians with roots
+                      beyond these borders, we understand what it means to be
+                      overlooked or excluded.
                     </p>
-                    <div className="h-1 w-24 bg-linear-to-r from-amber-400 to-cyan-500 rounded-full mx-auto"></div>
-                    <p className="text-xl text-gray-300">
-                      Every project we deliver is guided by a simple truth:
+                    <p>
+                      We specialize in community-focused housing that uplifts
+                      migrant communities, enables government priorities, and
+                      delivers lasting value. Our projects blend social impact,
+                      commercial excellence, and cultural insight.
                     </p>
-                    <p className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-cyan-500">
+                    <p className="text-amber-600 font-semibold">
+                      We operate with institutional discipline and
+                      entrepreneurial agility, bridging the worlds of capital and
+                      community.
+                    </p>
+                  </div>
+                </div>
+                <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-cyan-500/20"></div>
+                  {/* Replace with actual image */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-blue-900">
+                    <Image
+                      src="/about-images/chapter-1.jpg"
+                      alt="Story Image 1"
+                      fill
+                      className="object-cover opacity-50"
+                    />
+                  </div>
+                  <div className="absolute bottom-6 left-6 z-20">
+                    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                      <p className="text-white font-semibold text-sm">
+                        Values-Led Development
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Story 2: The Problem - Image Left */}
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl group order-2 lg:order-1">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent z-10"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-cyan-500/20 to-blue-500/20"></div>
+                  {/* Replace with actual image */}
+                  <div className="absolute inset-0 bg-linear-to-br from-slate-800 to-blue-900">
+                    <Image
+                      src="/about-images/chapter-2.jpg"
+                      alt="Story Image 1"
+                      fill
+                      className="object-cover opacity-50"
+                    />
+                  </div>
+                  <div className="absolute bottom-6 right-6 z-20">
+                    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                      <p className="text-white font-semibold text-sm">
+                        Community Voice Matters
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-6 order-1 lg:order-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-50 rounded-full border border-cyan-200">
+                    <Community className="w-4 h-4 text-cyan-600" />
+                    <span className="text-xs font-bold text-cyan-600 uppercase tracking-wide">
+                      Chapter 02
+                    </span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
+                    The Gap We Saw
+                  </h3>
+                  <div className="h-1 w-16 bg-linear-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+                  <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                    <p>
+                      For decades, large corporations have shaped Australia's
+                      housing landscape. Yet it's everyday families; migrants,
+                      workers, young people, who live in these homes.
+                    </p>
+                    <p className="text-cyan-700 font-semibold">
+                      Too often, these residents have no voice in how their
+                      homes are designed or delivered.
+                    </p>
+                    <p>
+                      HavenBridge exists because we saw housing being built{" "}
+                      <span className="italic font-semibold">for</span> communities, but never{" "}
+                      <span className="italic font-semibold">with</span> them. We
+                      stepped into that gap.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Story 3: Our Background - Image Right */}
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 rounded-full border border-emerald-200">
+                    <GraduationCap className="w-4 h-4 text-emerald-600" />
+                    <span className="text-xs font-bold text-emerald-600 uppercase tracking-wide">
+                      Chapter 03
+                    </span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
+                    From Both Worlds
+                  </h3>
+                  <div className="h-1 w-16 bg-linear-to-r from-emerald-400 to-green-500 rounded-full"></div>
+                  <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                    <p>
+                      We're children of migrants; the first in our families to
+                      navigate corporate Australia. We've been shaped by
+                      world-class institutions, mentored by industry leaders,
+                      and trained in governance and finance at the highest
+                      levels.
+                    </p>
+                    <p>
+                      But we were raised by communities who know housing
+                      insecurity, language barriers, and the hope that comes
+                      with finally finding home.
+                    </p>
+                    <p className="text-emerald-600 font-semibold">
+                      This dual perspective lets us bridge institutions and the
+                      people they serve, understanding both strategy and
+                      belonging.
+                    </p>
+                  </div>
+                </div>
+                <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent z-10"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-emerald-500/20 to-green-500/20"></div>
+                  {/* Replace with actual image */}
+                  <div className="absolute inset-0 bg-linear-to-br from-slate-800 to-blue-900">
+                    <Image
+                      src="/about-images/Chapter3.png"
+                      alt="Story Image 1"
+                      fill
+                      className="object-cover opacity-50"
+                    />
+                  </div>
+                  <div className="absolute bottom-6 left-6 z-20">
+                    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                      <p className="text-white font-semibold text-sm">
+                        Institutional + Community
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mission & Vision Cards - Full Width */}
+              <div className="grid md:grid-cols-2 gap-8 pt-8">
+                <div className="bg-linear-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 border border-cyan-100 shadow-lg hover:shadow-xl transition-all">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-cyan-500 rounded-xl">
+                      <Bullseye className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-sm font-bold text-cyan-600 uppercase tracking-wide">
+                      Our Mission
+                    </span>
+                  </div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-4">
+                    Creating Dignified, Community-Focused Housing
+                  </h4>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    To create housing that reflects the lived experiences of
+                    multicultural Australians and strengthens their sense of
+                    belonging.
+                  </p>
+                  <div className="mt-6 h-1 w-16 bg-linear-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+                </div>
+
+                <div className="bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-100 shadow-lg hover:shadow-xl transition-all">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-amber-500 rounded-xl">
+                      <Target className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-sm font-bold text-amber-600 uppercase tracking-wide">
+                      Our Vision
+                    </span>
+                  </div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-4">
+                    Australia's Leading Inclusive Developer
+                  </h4>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    Where commercial excellence, multicultural insight, and
+                    government partnership shape a more inclusive housing
+                    future.
+                  </p>
+                  <div className="mt-6 h-1 w-16 bg-linear-to-r from-amber-400 to-orange-500 rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Final Statement - Image Left */}
+              <div className="bg-linear-to-br from-slate-900 to-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+                <div className="grid lg:grid-cols-2">
+                  <div className="relative h-[400px] lg:h-auto min-h-[400px]">
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent to-slate-900/60 z-10"></div>
+                    {/* Replace with actual image */}
+                    <div className="absolute inset-0 bg-linear-to-br from-slate-800 to-blue-900">
+                    <Image
+                      src="/about-images/commitment.jpg"
+                      alt="Story Image 1"
+                      fill
+                      className="object-cover opacity-50"
+                    />
+                  </div>
+                  </div>
+                  <div className="p-8 lg:p-12 flex flex-col justify-center text-white space-y-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/20 w-fit">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <span className="text-xs font-bold uppercase tracking-wide">
+                        Our Commitment
+                      </span>
+                    </div>
+                    <h3 className="text-3xl md:text-4xl font-bold">
+                      Building Futures, Not Just Buildings
+                    </h3>
+                    <div className="h-1 w-16 bg-linear-to-r from-amber-400 to-cyan-500 rounded-full"></div>
+                    <p className="text-xl text-gray-200 leading-relaxed">
+                      We bring together policy, development, and community to
+                      design housing that restores dignity and strengthens
+                      social cohesion.
+                    </p>
+                    <p className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-cyan-500">
                       The homes we build must reflect the people who will live
                       in them.
                     </p>
-                    <div className="h-1 w-24 bg-linear-to-r from-cyan-500 to-amber-400 rounded-full mx-auto"></div>
-                    <p className="text-lg text-gray-300">
-                      This is our story. This is HavenBridge. Building
-                      differently—because we know who we build for.
+                    <p className="text-gray-300 italic">
+                      This is HavenBridge. Building differently—because we know
+                      who we build for.
                     </p>
                   </div>
                 </div>
