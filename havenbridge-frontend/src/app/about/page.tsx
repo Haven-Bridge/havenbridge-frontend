@@ -354,7 +354,7 @@ export default function AboutPage() {
                   {/* Replace with actual image */}
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-blue-900">
                     <Image
-                      src="/about-images/chapter-1.jpg"
+                      src="/about-images/Chapter-1.jpg"
                       alt="Story Image 1"
                       fill
                       className="object-cover opacity-50"
@@ -381,7 +381,7 @@ export default function AboutPage() {
                   {/* Replace with actual image */}
                   <div className="absolute inset-0 bg-linear-to-br from-slate-800 to-blue-900">
                     <Image
-                      src="/about-images/chapter-2.jpg"
+                      src="/about-images/Chapter-2.jpg"
                       alt="Story Image 2"
                       fill
                       className="object-cover opacity-50"
