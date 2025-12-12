@@ -203,17 +203,7 @@ export default function ProjectsPage() {
                                     priority
                                   />
                 </div>
-                {/* Replace above div with actual image:
-                <Image
-                  src="/projects/hero-project.jpg"
-                  alt="HavenBridge Development Projects"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 0px, 50vw"
-                  priority
-                />
-                */}
-
+                
                 {/* Floating Stats */}
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
                   <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
