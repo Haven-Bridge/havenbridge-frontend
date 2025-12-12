@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import Image from "next/image";
 import {
   Building2,
   HeartHandshake,
@@ -27,7 +27,7 @@ import {
   Award as Trophy,
   Target as Bullseye,
   TrendingUp as Growth,
-  Shield as Protection
+  Shield as Protection,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -43,16 +43,17 @@ export default function HavenBridgeLanding() {
       imageUrl:
         "https://plus.unsplash.com/premium_photo-1676983352797-a12800a05dfb?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       color: "from-amber-400 to-amber-500",
-      stats: "500+ Homes"
+      stats: "500+ Homes",
     },
     {
       icon: Building,
       title: "Rooming Houses & Community Accommodation",
       desc: "High-yield, fully compliant rooming house and community accommodation developments across key growth corridors.",
       link: "/services",
-      imageUrl: "https://media.istockphoto.com/id/1440036658/photo/row-of-townhouses-in-winter.webp?a=1",
+      imageUrl:
+        "https://media.istockphoto.com/id/1440036658/photo/row-of-townhouses-in-winter.webp?a=1",
       color: "from-cyan-500 to-blue-500",
-      stats: "High Yield"
+      stats: "High Yield",
     },
     {
       icon: Heart,
@@ -60,7 +61,7 @@ export default function HavenBridgeLanding() {
       desc: "Faith- and culturally-aligned aged care, SIL, and SDA housing designed for dignity, safety, and inclusion.",
       link: "/services",
       color: "from-emerald-500 to-green-500",
-      stats: "Specialist Care"
+      stats: "Specialist Care",
     },
     {
       icon: Baby,
@@ -68,7 +69,7 @@ export default function HavenBridgeLanding() {
       desc: "End-to-end delivery of compliant childcare centres aligned with Victorian Education & Care regulations.",
       link: "/services",
       color: "from-violet-500 to-purple-500",
-      stats: "Family Focused"
+      stats: "Family Focused",
     },
     {
       icon: HeartHandshake,
@@ -76,7 +77,7 @@ export default function HavenBridgeLanding() {
       desc: "Modular cabin parks for transitional housing, crisis accommodation, workers villages, and faith-based housing.",
       link: "/services",
       color: "from-orange-500 to-red-500",
-      stats: "Flexible Solutions"
+      stats: "Flexible Solutions",
     },
     {
       icon: Handshake,
@@ -84,7 +85,7 @@ export default function HavenBridgeLanding() {
       desc: "Full lifecycle development and project management from feasibility through delivery and risk management.",
       link: "/services",
       color: "from-indigo-500 to-purple-500",
-      stats: "Full Service"
+      stats: "Full Service",
     },
   ];
 
@@ -94,28 +95,28 @@ export default function HavenBridgeLanding() {
       title: "Quality Assured",
       desc: "Every project meets the highest standards of construction and compliance with Australian regulations.",
       color: "bg-cyan-500/10",
-      iconColor: "text-cyan-500"
+      iconColor: "text-cyan-500",
     },
     {
       icon: Target,
       title: "Community Focused",
       desc: "We prioritize social impact and community wellbeing in every development we undertake.",
       color: "bg-amber-400/10",
-      iconColor: "text-amber-400"
+      iconColor: "text-amber-400",
     },
     {
       icon: TrendingUp,
       title: "Sustainable Growth",
       desc: "Building with environmental responsibility and long-term sustainability at the forefront.",
       color: "bg-emerald-500/10",
-      iconColor: "text-emerald-500"
+      iconColor: "text-emerald-500",
     },
     {
       icon: Award,
       title: "Proven Excellence",
       desc: "Recognized by government partners and industry leaders for outstanding project delivery.",
       color: "bg-violet-500/10",
-      iconColor: "text-violet-500"
+      iconColor: "text-violet-500",
     },
   ];
 
@@ -129,7 +130,7 @@ export default function HavenBridgeLanding() {
       completion: "June 2025",
       imageUrl:
         "https://media.istockphoto.com/id/503943499/photo/arial-view-of-melbourne-australia.webp?a=1&b=1&s=612x612&w=0&k=20&c=9jkv3OfDvvclRiZdGbr8fdpUb_sipPifO-_u-k0bYv4=",
-      featured: true
+      featured: true,
     },
     {
       name: "Sunrise Care Centre",
@@ -140,7 +141,7 @@ export default function HavenBridgeLanding() {
       completion: "Dec 2024",
       imageUrl:
         "https://media.istockphoto.com/id/2247111233/photo/aerial-panorama-drone-view-of-a-inner-western-sydney-suburb-of-ashbury-urban-sprawl-and-the.webp?a=1&b=1&s=612x612&w=0&k=20&c=GZ2qqbC8uTN2T6NHxGkqavy82q_G3Psa3Rm9GfBhVZQ=",
-      featured: false
+      featured: false,
     },
     {
       name: "Community Hub Brisbane",
@@ -151,15 +152,35 @@ export default function HavenBridgeLanding() {
       completion: "Sep 2025",
       imageUrl:
         "https://media.istockphoto.com/id/1425748659/photo/aerial-view-of-brisbane-river-at-west-end.webp?a=1&b=1&s=612x612&w=0&k=20&c=1bcTRVw2tsSKiDBnTnbMkAYh0V-xkmkne7tdUZly9CY=",
-      featured: false
+      featured: false,
     },
   ];
 
   const stats = [
-    { value: "500+", label: "Homes Delivered", icon: Home, color: "text-amber-400" },
-    { value: "$150M+", label: "Project Value", icon: TrendingUp, color: "text-cyan-500" },
-    { value: "95%", label: "Client Satisfaction", icon: Heart, color: "text-emerald-500" },
-    { value: "25+", label: "Industry Awards", icon: Trophy, color: "text-violet-500" },
+    {
+      value: "500+",
+      label: "Homes Delivered",
+      icon: Home,
+      color: "text-amber-400",
+    },
+    {
+      value: "$150M+",
+      label: "Project Value",
+      icon: TrendingUp,
+      color: "text-cyan-500",
+    },
+    {
+      value: "95%",
+      label: "Client Satisfaction",
+      icon: Heart,
+      color: "text-emerald-500",
+    },
+    {
+      value: "25+",
+      label: "Industry Awards",
+      icon: Trophy,
+      color: "text-violet-500",
+    },
   ];
 
   const whyChooseUs = [
@@ -167,37 +188,37 @@ export default function HavenBridgeLanding() {
       title: "A Developer with Dual Advantage",
       desc: "Our team has been trained by major global institutions, bringing world-class standards in finance, governance, planning, and project delivery. At the same time, our lived experience keeps us deeply connected to the communities we serve.",
       icon: Globe,
-      color: "from-amber-400 to-orange-500"
+      color: "from-amber-400 to-orange-500",
     },
     {
       title: "We Understand the Communities",
       desc: "We come from migrant backgrounds, multicultural communities, and real lived experiences of housing insecurity. That authenticity ensures our developments are grounded, relevant, and human-centred.",
       icon: Users,
-      color: "from-cyan-500 to-blue-500"
+      color: "from-cyan-500 to-blue-500",
     },
     {
       title: "Value Aligned With Government Priorities",
       desc: "From affordable housing to multicultural engagement, social impact investment, and community infrastructure, our projects directly support federal, state, and local government objectives.",
       icon: Shield,
-      color: "from-emerald-500 to-green-500"
+      color: "from-emerald-500 to-green-500",
     },
     {
       title: "Agile Delivery with High-Standard Governance",
       desc: "We operate like an agile startup but carry the governance discipline of a major property institution. This makes us fast, reliable, and accountable—ideal partners for government and impact investors.",
       icon: Zap,
-      color: "from-violet-500 to-purple-500"
+      color: "from-violet-500 to-purple-500",
     },
     {
       title: "We Build Trust Through Transparency",
       desc: "Clear financial models, realistic timelines, community consultations, and honest conversations. We are building a reputation as a developer that puts clarity before complexity.",
       icon: CheckCircle2,
-      color: "from-indigo-500 to-blue-500"
+      color: "from-indigo-500 to-blue-500",
     },
     {
       title: "Developments Strengthen Social Cohesion",
       desc: "Housing is not just infrastructure—it is nation-building. Our work ensures multicultural communities are not left behind but are uplifted through access to safe, affordable, and dignified homes.",
       icon: HeartHandshake,
-      color: "from-pink-500 to-rose-500"
+      color: "from-pink-500 to-rose-500",
     },
   ];
 
@@ -219,7 +240,6 @@ export default function HavenBridgeLanding() {
             <div>
               {/* Animated header */}
               <div className="relative inline-block mb-4">
-                
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                   Building
                   <span className="block">
@@ -237,7 +257,7 @@ export default function HavenBridgeLanding() {
                 migrant communities, enables government priorities, and delivers
                 long-term value for partners and investors.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="/contact"
@@ -258,22 +278,22 @@ export default function HavenBridgeLanding() {
               </div>
             </div>
 
-            <div className="relative">
-              {/* Hero image with effects */}
-              <div className="">
-                
-                <div className="relative rounded-3xl shadow-2xl overflow-hidden border-4 border-white/10">
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                    <img
-                      src="/h.png"
-                      alt="Hero Image"
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-linear-to-t from-slate-900/40 to-transparent"></div>
-                  </div>
-                </div>
-                </div>
+            {/* Right Column - Hero Image (Hidden on Mobile) */}
+            <div className="hidden lg:block relative">
+              <div className="relative h-[420px]  rounded-2xl overflow-hidden">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+
+                {/* Main Image */}
+                <Image
+                  src="/hero-images/home.jpg"
+                  alt="HavenBridge Development - Community-focused housing solutions"
+                  fill
+                  className="object-fil"
+                  sizes="(max-width: 1024px) 0px, 50vw"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -288,9 +308,15 @@ export default function HavenBridgeLanding() {
               return (
                 <div key={i} className="group text-center">
                   <div className="relative">
-                    <Icon className={`w-12 h-12 mx-auto mb-4 ${stat.color} transform group-hover:scale-110 transition-transform`} />
-                    <div className="text-4xl font-bold text-slate-900 mb-2">{stat.value}</div>
-                    <div className="text-gray-600 font-medium">{stat.label}</div>
+                    <Icon
+                      className={`w-12 h-12 mx-auto mb-4 ${stat.color} transform group-hover:scale-110 transition-transform`}
+                    />
+                    <div className="text-4xl font-bold text-slate-900 mb-2">
+                      {stat.value}
+                    </div>
+                    <div className="text-gray-600 font-medium">
+                      {stat.label}
+                    </div>
                   </div>
                 </div>
               );
@@ -305,7 +331,9 @@ export default function HavenBridgeLanding() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-cyan-500/10 rounded-full">
               <Sparkles className="w-4 h-4 text-cyan-500" />
-              <span className="text-sm font-semibold text-cyan-600">WHAT WE DO</span>
+              <span className="text-sm font-semibold text-cyan-600">
+                WHAT WE DO
+              </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
               Our Core Services
@@ -322,7 +350,7 @@ export default function HavenBridgeLanding() {
               <div key={i} className="group relative">
                 {/* Glow effect */}
                 <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-                
+
                 <a
                   href={service.link}
                   className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 p-6 hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
@@ -339,19 +367,25 @@ export default function HavenBridgeLanding() {
                         <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent"></div>
                       </>
                     ) : (
-                      <div className={`w-full h-full bg-linear-to-br ${service.color} flex items-center justify-center`}>
+                      <div
+                        className={`w-full h-full bg-linear-to-br ${service.color} flex items-center justify-center`}
+                      >
                         <service.icon className="w-16 h-16 text-white/80" />
                       </div>
                     )}
-                    
+
                     {/* Icon badge */}
-                    <div className={`absolute top-4 left-4 p-3 rounded-lg bg-linear-to-br ${service.color}`}>
+                    <div
+                      className={`absolute top-4 left-4 p-3 rounded-lg bg-linear-to-br ${service.color}`}
+                    >
                       <service.icon className="w-6 h-6 text-white" />
                     </div>
-                    
+
                     {/* Stats badge */}
                     <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
-                      <span className="text-sm font-bold text-slate-900">{service.stats}</span>
+                      <span className="text-sm font-bold text-slate-900">
+                        {service.stats}
+                      </span>
                     </div>
                   </div>
 
@@ -360,9 +394,11 @@ export default function HavenBridgeLanding() {
                     <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">{service.desc}</p>
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      {service.desc}
+                    </p>
                   </div>
-                  
+
                   {/* Learn More */}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <span className="inline-flex items-center text-cyan-600 font-semibold group-hover:gap-2 transition-all">
@@ -398,7 +434,9 @@ export default function HavenBridgeLanding() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-amber-400/10 rounded-full">
               <Star className="w-4 h-4 text-amber-400" />
-              <span className="text-sm font-semibold text-amber-600">WHY CHOOSE US</span>
+              <span className="text-sm font-semibold text-amber-600">
+                WHY CHOOSE US
+              </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
               Why HavenBridge
@@ -415,21 +453,23 @@ export default function HavenBridgeLanding() {
               return (
                 <div key={i} className="group relative">
                   {/* Background glow */}
-                  <div className={`absolute -inset-2 bg-linear-to-br ${item.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-                  
+                  <div
+                    className={`absolute -inset-2 bg-linear-to-br ${item.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  ></div>
+
                   <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-gray-100">
                     {/* Icon */}
-                    <div className={`p-4 rounded-xl bg-linear-to-br ${item.color} w-fit mb-6`}>
+                    <div
+                      className={`p-4 rounded-xl bg-linear-to-br ${item.color} w-fit mb-6`}
+                    >
                       <Icon className="w-8 h-8 text-white" />
                     </div>
-                    
+
                     <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-cyan-600 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {item.desc}
-                    </p>
-                    
+                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+
                     {/* Hover indicator */}
                     <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-2 h-2 bg-linear-to-r from-amber-400 to-cyan-500 rounded-full"></div>
@@ -442,8 +482,6 @@ export default function HavenBridgeLanding() {
         </div>
       </section>
 
-    
-
       {/* Featured Projects - Enhanced */}
       <section className="py-20 bg-linear-to-b from-slate-50 to-white">
         <div className="container mx-auto px-6 lg:px-12">
@@ -451,7 +489,9 @@ export default function HavenBridgeLanding() {
             <div>
               <div className="inline-flex items-center gap-2 mb-2 px-4 py-2 bg-cyan-500/10 rounded-full">
                 <Zap className="w-4 h-4 text-cyan-500" />
-                <span className="text-sm font-semibold text-cyan-600">FEATURED WORK</span>
+                <span className="text-sm font-semibold text-cyan-600">
+                  FEATURED WORK
+                </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
                 Featured Projects
@@ -464,7 +504,8 @@ export default function HavenBridgeLanding() {
               href="/projects"
               className="hidden md:inline-flex items-center gap-2 text-cyan-600 font-semibold hover:text-cyan-700 transition-colors group"
             >
-              View All Projects <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              View All Projects{" "}
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
@@ -479,10 +520,10 @@ export default function HavenBridgeLanding() {
                     </span>
                   </div>
                 )}
-                
+
                 {/* Glow effect */}
                 <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-                
+
                 <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 group">
                   {/* Image with overlay */}
                   <div className="aspect-4/3 relative overflow-hidden rounded-2xl">
@@ -514,11 +555,15 @@ export default function HavenBridgeLanding() {
                     <div className="flex items-center gap-4 text-sm">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-4 h-4 text-gray-300" />
-                        <span className="text-gray-300">{project.location}</span>
+                        <span className="text-gray-300">
+                          {project.location}
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Home className="w-4 h-4 text-amber-400" />
-                        <span className="text-amber-400 font-semibold">{project.units}</span>
+                        <span className="text-amber-400 font-semibold">
+                          {project.units}
+                        </span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 mt-4 text-xs">
@@ -526,7 +571,7 @@ export default function HavenBridgeLanding() {
                       <span>Completion: {project.completion}</span>
                     </div>
                   </div>
-                  
+
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                     <button className="w-full bg-linear-to-r from-amber-400 to-cyan-500 text-white py-3 rounded-lg font-bold hover:from-amber-500 hover:to-cyan-600 transition-all">
@@ -558,7 +603,7 @@ export default function HavenBridgeLanding() {
           <div className="absolute top-0 left-0 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
-        
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
           <div className="max-w-3xl mx-auto">
             <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" />
