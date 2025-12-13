@@ -30,6 +30,7 @@ import {
   Calendar,
   Briefcase,
   Heart,
+  Calculator,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -348,7 +349,9 @@ export default function InvestorsPage() {
                         key={i}
                         className="flex items-start gap-4 p-4 bg-linear-to-r from-slate-50 to-white rounded-xl border border-gray-100 hover:shadow-lg transition-all"
                       >
-                        <div className={`p-3 rounded-xl bg-linear-to-r ${benefit.color}`}>
+                        <div
+                          className={`p-3 rounded-xl bg-linear-to-r ${benefit.color}`}
+                        >
                           <Icon className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -368,20 +371,21 @@ export default function InvestorsPage() {
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent z-10"></div>
 
                 {/* Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-blue-900 to-cyan-900">
+                <div className="absolute inset-0 bg-linear-to-br from-slate-800 via-blue-900 to-cyan-900">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <BarChart3 className="w-20 h-20 mx-auto mb-4 opacity-40" />
-                      <p className="text-lg opacity-60 font-semibold">
-                        [Investment Benefits]
-                      </p>
-                      <p className="text-sm opacity-40 mt-2">
-                        Strong Returns & Impact
-                      </p>
+                    <div className="absolute inset-0 bg-linear-to-br from-slate-800 to-blue-900">
+                      <Image
+                        src="/investor-images/why.png"
+                        alt="Story Image 1"
+                        fill
+                        className="object-cover opacity-50"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        quality={85}
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                 </div>
-                {/* Replace with: <Image src="/investors/why-invest.jpg" ... /> */}
 
                 {/* Stats Overlay */}
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
@@ -683,49 +687,12 @@ export default function InvestorsPage() {
                 <span className="relative z-10">Schedule Meeting</span>
               </a>
               <a
-                href="/contact"
+                href="/calculators"
                 className="group relative inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white px-12 py-5 text-xl font-bold rounded-xl border-2 border-white/20 hover:bg-white/20 transition-all"
               >
-                <Download className="w-5 h-5" />
-                <span>Download Info Pack</span>
+                <Calculator className="w-5 h-5" />
+                <span>Use the calculator</span>
               </a>
-            </div>
-
-            {/* Contact Info */}
-            <div className="grid md:grid-cols-3 gap-6 mt-12 pt-12 border-t border-white/20">
-              <div className="flex items-center gap-4 text-white">
-                <div className="p-3 rounded-lg bg-emerald-500/20">
-                  <Mail className="w-6 h-6 text-emerald-400" />
-                </div>
-                <div className="text-left">
-                  <div className="text-sm text-gray-300">Email</div>
-                  <div className="font-semibold">
-                    investors@havenbridge.com.au
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 text-white">
-                <div className="p-3 rounded-lg bg-amber-500/20">
-                  <Phone className="w-6 h-6 text-amber-400" />
-                </div>
-                <div className="text-left">
-                  <div className="text-sm text-gray-300">Phone</div>
-                  <div className="font-semibold">+61 (0) 3 XXXX XXXX</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 text-white">
-                <div className="p-3 rounded-lg bg-cyan-500/20">
-                  <MapPin className="w-6 h-6 text-cyan-400" />
-                </div>
-                <div className="text-left">
-                  <div className="text-sm text-gray-300">Office</div>
-                  <div className="font-semibold text-sm">
-                    Level 8, 90 Collins St, Melbourne
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

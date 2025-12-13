@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import { Home, Heart, Shield, Building2, MapPin, Phone, Mail, Newspaper, FileText, ClipboardCheck, Download } from 'lucide-react';
+import { Home, Heart, Shield, Building2, MapPin, Phone, Mail, Newspaper, FileText, ClipboardCheck, Download, Calculator } from 'lucide-react';
 
 export default function Footer() {
   const services = [
@@ -23,6 +23,7 @@ export default function Footer() {
   ];
 
   const resources = [
+    { name: 'Calculators', href: '/calculators', icon: Calculator },
     { name: 'News & Insights', href: '/resources/news', icon: Newspaper },
     { name: 'Project Planning Guides', href: '/resources/guides', icon: FileText },
     { name: 'Compliance Resources', href: '/resources/compliance', icon: ClipboardCheck },
