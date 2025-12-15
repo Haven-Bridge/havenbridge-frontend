@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, useState, useEffect } from 'react';
-import { X, Download, Printer, FileText, Save, Clock } from 'lucide-react';
+import { X, Download, Printer, FileText, Save, Clock, Calculator as CalcIcon } from 'lucide-react';
 
 interface CalculatorModalProps {
   isOpen: boolean;
@@ -11,6 +11,26 @@ interface CalculatorModalProps {
   children: ReactNode;
 }
 
+// Interface for calculator results
+export interface CalculatorResults {
+  title: string;
+  metrics: Array<{
+    label: string;
+    value: string | number;
+    unit?: string;
+    color?: string;
+  }>;
+  summary?: string;
+  breakdown?: Array<{
+    label: string;
+    value: string | number;
+  }>;
+  chartData?: Array<{
+    label: string;
+    value: number;
+  }>;
+}
+
 export default function CalculatorModal({ 
   isOpen, 
   onClose, 
@@ -18,191 +38,49 @@ export default function CalculatorModal({
   calculatorId, 
   children 
 }: CalculatorModalProps) {
-  const [inputs, setInputs] = useState<Record<string, any>>({});
-  const [results, setResults] = useState<Record<string, any>>({});
+  const [results, setResults] = useState<CalculatorResults | null>(null);
+  const [isCalculating, setIsCalculating] = useState(false);
 
-  if (!isOpen) return null;
-
-  // Listen for updates from calculator components
   useEffect(() => {
-    const handleInputUpdate = (e: CustomEvent) => {
+    // Listen for calculation results from child components
+    const handleResultsUpdate = (e: CustomEvent) => {
       if (e.detail.calculatorId === calculatorId) {
-        setInputs(e.detail.inputs || {});
-        setResults(e.detail.results || {});
+        setResults(e.detail.results);
+        setIsCalculating(false);
       }
     };
 
+    const handleCalculationStart = () => {
+      setIsCalculating(true);
+    };
+
     // @ts-ignore
-    window.addEventListener('calculatorInputsUpdated', handleInputUpdate);
-    
+    window.addEventListener('calculatorResultsUpdated', handleResultsUpdate);
+    // @ts-ignore
+    window.addEventListener('calculationStarted', handleCalculationStart);
+
     return () => {
       // @ts-ignore
-      window.removeEventListener('calculatorInputsUpdated', handleInputUpdate);
+      window.removeEventListener('calculatorResultsUpdated', handleResultsUpdate);
+      // @ts-ignore
+      window.removeEventListener('calculationStarted', handleCalculationStart);
     };
   }, [calculatorId]);
 
-  const handleExportPDF = () => {
-    // Dispatch event for export
-    const event = new CustomEvent('exportPDF', {
-      detail: { calculatorId, title, inputs, results }
-    });
-    window.dispatchEvent(event);
-  };
+  if (!isOpen) return null;
 
-  const handleExportCSV = () => {
-    const event = new CustomEvent('exportCSV', {
-      detail: { calculatorId, title, inputs, results }
-    });
-    window.dispatchEvent(event);
+  const handleExportPDF = () => {
+    // Will be implemented with export functionality
+    alert('PDF export will be available soon');
   };
 
   const handlePrint = () => {
-    const printWindow = window.open('', '_blank');
-    if (printWindow) {
-      printWindow.document.write(`
-        <html>
-          <head>
-            <title>${title} - HavenBridge</title>
-            <style>
-              body { 
-                font-family: Arial, sans-serif; 
-                max-width: 800px; 
-                margin: 0 auto; 
-                padding: 20px;
-                color: #333;
-              }
-              .header { 
-                background: #0f172a; 
-                color: white; 
-                padding: 20px; 
-                text-align: center;
-                margin-bottom: 30px;
-                border-radius: 8px;
-              }
-              .section { 
-                margin: 30px 0; 
-                padding: 20px;
-                border: 1px solid #e2e8f0;
-                border-radius: 8px;
-              }
-              h1 { 
-                color: #0f172a; 
-                margin: 20px 0; 
-              }
-              h2 { 
-                color: #475569; 
-                border-bottom: 2px solid #f59e0b;
-                padding-bottom: 10px;
-              }
-              table { 
-                width: 100%; 
-                border-collapse: collapse; 
-                margin: 15px 0;
-              }
-              th { 
-                background: #f1f5f9; 
-                padding: 12px; 
-                text-align: left;
-                border: 1px solid #e2e8f0;
-              }
-              td { 
-                padding: 12px; 
-                border: 1px solid #e2e8f0;
-              }
-              .footer { 
-                margin-top: 40px; 
-                padding-top: 20px; 
-                border-top: 1px solid #e2e8f0; 
-                font-size: 12px;
-                color: #64748b;
-                text-align: center;
-              }
-              @media print {
-                .no-print { display: none; }
-                body { padding: 0; }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="header">
-              <h1 style="margin: 0; color: white;">HavenBridge Development</h1>
-              <p style="margin: 5px 0 0 0; opacity: 0.9;">${title}</p>
-              <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">
-                Generated: ${new Date().toLocaleDateString('en-AU', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </p>
-            </div>
-            
-            <div class="section">
-              <h2>Input Parameters</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Parameter</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${Object.entries(inputs).map(([key, value]) => `
-                    <tr>
-                      <td>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</td>
-                      <td>${value}</td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
-            
-            <div class="section">
-              <h2>Results & Analysis</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Metric</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${Object.entries(results).map(([key, value]) => `
-                    <tr>
-                      <td>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</td>
-                      <td>${value}</td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
-            
-            <div class="footer">
-              <p>© 2025 HavenBridge Development. All rights reserved.</p>
-              <p>Calculations are estimates only. Professional advice recommended.</p>
-              <p class="no-print">Close this window to return to the calculator.</p>
-            </div>
-            
-            <script>
-              window.onload = function() {
-                window.print();
-                setTimeout(() => {
-                  document.querySelector('.no-print').innerHTML = 'Print completed. You may close this window.';
-                }, 1000);
-              }
-            </script>
-          </body>
-        </html>
-      `);
-      printWindow.document.close();
-    }
+    window.print();
   };
 
   const handleSaveCalculation = () => {
     const event = new CustomEvent('saveCalculation', {
-      detail: { calculatorId, title, inputs, results }
+      detail: { calculatorId, title, results }
     });
     window.dispatchEvent(event);
   };
@@ -224,12 +102,11 @@ export default function CalculatorModal({
               <div>
                 <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
                 <p className="text-sm text-slate-600 mt-1">
-                  Fill in the inputs on the left, view results on the right
+                  Enter values on the left, see results on the right
                 </p>
               </div>
               
               <div className="flex flex-wrap items-center gap-3">
-                {/* Quick Action Buttons */}
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleSaveCalculation}
@@ -286,31 +163,108 @@ export default function CalculatorModal({
                 <div className="h-1 w-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
               </div>
               
-              {/* Results Container - Will be populated by calculator components */}
-              <div id={`results-${calculatorId}`} className="space-y-6">
-                <div className="text-center py-12 text-slate-400">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
-                    <FileText className="w-8 h-8 text-slate-300" />
+              {/* Results Display */}
+              <div className="space-y-6">
+                {isCalculating ? (
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 mx-auto mb-4">
+                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-500"></div>
+                    </div>
+                    <p className="text-lg font-medium text-slate-900">Calculating...</p>
+                    <p className="text-sm text-slate-600 mt-2">Processing your inputs</p>
                   </div>
-                  <p className="text-lg font-medium">Fill in inputs to see results</p>
-                  <p className="text-sm mt-2">Results will appear here as you enter data</p>
-                </div>
+                ) : results ? (
+                  <>
+                    {/* Summary Card */}
+                    <div className="bg-white rounded-xl p-6 border border-slate-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="font-bold text-slate-900">Calculation Summary</h4>
+                        <div className="flex items-center gap-2">
+                          <CalcIcon className="w-4 h-4 text-slate-400" />
+                          <span className="text-sm text-slate-600">Results</span>
+                        </div>
+                      </div>
+                      
+                      {/* Key Metrics */}
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        {results.metrics.slice(0, 4).map((metric, index) => (
+                          <div 
+                            key={index} 
+                            className={`p-4 rounded-lg ${
+                              metric.color === 'positive' ? 'bg-emerald-50' :
+                              metric.color === 'warning' ? 'bg-amber-50' :
+                              metric.color === 'negative' ? 'bg-red-50' : 'bg-slate-50'
+                            }`}
+                          >
+                            <div className="text-sm text-slate-600 mb-1">{metric.label}</div>
+                            <div className="text-2xl font-bold text-slate-900">
+                              {metric.value} {metric.unit || ''}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {results.summary && (
+                        <div className="mt-4 pt-4 border-t border-slate-200">
+                          <p className="text-slate-700">{results.summary}</p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Breakdown Table */}
+                    {results.breakdown && results.breakdown.length > 0 && (
+                      <div className="bg-white rounded-xl p-6 border border-slate-200">
+                        <h4 className="font-bold text-slate-900 mb-4">Detailed Breakdown</h4>
+                        <div className="space-y-3">
+                          {results.breakdown.map((item, index) => (
+                            <div key={index} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
+                              <span className="text-slate-700">{item.label}</span>
+                              <span className="font-bold text-slate-900">{item.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Recommendations */}
+                    <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
+                      <h4 className="font-bold text-slate-900 mb-3">Recommendations</h4>
+                      <ul className="space-y-2">
+                        <li className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2"></div>
+                          <span className="text-slate-700">Review all calculated values for accuracy</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2"></div>
+                          <span className="text-slate-700">Consider market conditions and contingencies</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2"></div>
+                          <span className="text-slate-700">Consult with financial advisors for major projects</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-center py-12 text-slate-400">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
+                      <CalcIcon className="w-8 h-8 text-slate-300" />
+                    </div>
+                    <p className="text-lg font-medium">Enter values to see results</p>
+                    <p className="text-sm mt-2">Results will appear here as you input data</p>
+                  </div>
+                )}
               </div>
 
-              {/* Export Panel - Always visible */}
+              {/* Action Buttons */}
               <div className="mt-8 pt-8 border-t border-slate-200">
-                <div className="flex items-center gap-2 mb-4">
-                  <Download className="w-5 h-5 text-slate-600" />
-                  <h4 className="font-bold text-slate-900">Export Options</h4>
-                </div>
-                
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={handleSaveCalculation}
                     className="flex items-center justify-center gap-2 px-4 py-3 bg-cyan-500 text-white rounded-lg font-medium hover:bg-cyan-600 transition-colors"
                   >
                     <Save className="w-4 h-4" />
-                    Save
+                    Save Results
                   </button>
                   <button
                     onClick={() => {
@@ -322,25 +276,15 @@ export default function CalculatorModal({
                     <Clock className="w-4 h-4" />
                     View Saved
                   </button>
-                  <button
-                    onClick={handleExportPDF}
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-amber-500 text-white rounded-lg font-medium hover:bg-amber-600 transition-colors"
-                  >
-                    <FileText className="w-4 h-4" />
-                    PDF
-                  </button>
-                  <button
-                    onClick={handleExportCSV}
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors"
-                  >
-                    <Download className="w-4 h-4" />
-                    CSV
-                  </button>
                 </div>
                 
                 <div className="mt-4 text-center">
                   <button
-                    onClick={() => window.location.reload()}
+                    onClick={() => {
+                      // Reset calculator
+                      const event = new CustomEvent('resetCalculator', { detail: { calculatorId } });
+                      window.dispatchEvent(event);
+                    }}
                     className="text-sm text-slate-600 hover:text-slate-900 hover:underline"
                   >
                     Reset Calculator

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputField from '../components/InputField';
-import { Building2, Ruler, Layers, Truck, Wrench } from 'lucide-react';
+import { Building2, Ruler, Layers } from 'lucide-react';
 import { formatCurrency, formatNumber } from '../utils/formatters';
 
 export default function ConstructionCostCalculator() {
@@ -15,8 +15,34 @@ export default function ConstructionCostCalculator() {
     siteComplexity: 'medium'
   });
 
+  const [hasCalculated, setHasCalculated] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (Object.values(inputs).some(val => val && (typeof val === 'string'))) {
+        calculateAndUpdateResults();
+        setHasCalculated(true);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [inputs]);
+
   const handleInputChange = (field: string, value: string) => {
     setInputs(prev => ({ ...prev, [field]: value }));
+  };
+
+  const calculateAndUpdateResults = () => {
+    window.dispatchEvent(new CustomEvent('calculationStarted'));
+    const results = calculateResults();
+    
+    const event = new CustomEvent('calculatorResultsUpdated', {
+      detail: {
+        calculatorId: 'construction-cost',
+        results: results
+      }
+    });
+    window.dispatchEvent(event);
   };
 
   const calculateResults = () => {
@@ -61,27 +87,83 @@ export default function ConstructionCostCalculator() {
     
     const totalProjectCost = constructionCost + designFees + councilFees + contingency;
 
+    // Property type labels
+    const typeLabels: Record<string, string> = {
+      townhouse: 'Townhouse',
+      house: 'Detached House',
+      apartment: 'Apartment',
+      commercial: 'Commercial',
+      industrial: 'Industrial'
+    };
+
+    const qualityLabels: Record<string, string> = {
+      low: 'Budget',
+      medium: 'Standard',
+      high: 'Premium'
+    };
+
+    const complexityLabels: Record<string, string> = {
+      easy: 'Easy',
+      medium: 'Medium',
+      difficult: 'Difficult'
+    };
+
+    const locationLabels: Record<string, string> = {
+      metro: 'Metro Area',
+      regional: 'Regional',
+      remote: 'Remote'
+    };
+
+    let summary = '';
+    if (costPerSqm < 3000) {
+      summary = 'Below average construction costs for this property type';
+    } else if (costPerSqm < 4000) {
+      summary = 'Standard construction costs within market range';
+    } else {
+      summary = 'Premium construction costs with higher quality finishes';
+    }
+
     return {
-      costPerSqm,
-      constructionCost,
-      designFees,
-      councilFees,
-      contingency,
-      totalProjectCost
+      title: 'Construction Cost Estimate',
+      metrics: [
+        { label: 'Total Project Cost', value: formatCurrency(totalProjectCost), unit: '', color: 'info' },
+        { label: 'Cost per sqm', value: formatCurrency(costPerSqm), unit: '/sqm' },
+        { label: 'Construction Cost', value: formatCurrency(constructionCost), unit: '' },
+        { label: 'Contingency', value: formatCurrency(contingency), unit: '' }
+      ],
+      summary: summary,
+      breakdown: [
+        { label: 'Property Type', value: typeLabels[inputs.propertyType] || inputs.propertyType },
+        { label: 'Building Size', value: `${formatNumber(size)} sqm` },
+        { label: 'Quality Level', value: qualityLabels[inputs.quality] || inputs.quality },
+        { label: 'Location', value: locationLabels[inputs.location] || inputs.location },
+        { label: 'Number of Floors', value: inputs.floors },
+        { label: 'Site Complexity', value: complexityLabels[inputs.siteComplexity] || inputs.siteComplexity }
+      ]
     };
   };
 
-  const results = calculateResults();
+  const handleReset = () => {
+    setInputs({
+      propertyType: 'townhouse',
+      size: '200',
+      quality: 'medium',
+      location: 'metro',
+      floors: '2',
+      siteComplexity: 'medium'
+    });
+    setHasCalculated(false);
+  };
 
   return (
-    <>
-      {/* Inputs Section */}
-      <div className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-900">
-              Property Type
-            </label>
+    <div className="space-y-6">
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-slate-900">
+            Property Type
+          </label>
+          <div className="flex items-center gap-2">
+            <Building2 className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.propertyType}
               onChange={(e) => handleInputChange('propertyType', e.target.value)}
@@ -94,40 +176,41 @@ export default function ConstructionCostCalculator() {
               <option value="industrial">Industrial</option>
             </select>
           </div>
-          
-          <InputField
-            label="Total Area"
-            type="number"
-            value={inputs.size}
-            onChange={(value) => handleInputChange('size', value)}
-            suffix="sqm"
-            placeholder="200"
-            min={50}
-            max={5000}
-            step={10}
-          />
         </div>
+        
+        <InputField
+          label="Total Area"
+          type="text"
+          value={inputs.size}
+          onChange={(value) => handleInputChange('size', value)}
+          suffix="sqm"
+          placeholder="200"
+          helpText="Total floor area in square meters"
+        />
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-900">
-              Quality Level
-            </label>
-            <select
-              value={inputs.quality}
-              onChange={(e) => handleInputChange('quality', e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
-            >
-              <option value="low">Budget</option>
-              <option value="medium">Standard</option>
-              <option value="high">Premium</option>
-            </select>
-          </div>
-          
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-900">
-              Location
-            </label>
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-slate-900">
+            Quality Level
+          </label>
+          <select
+            value={inputs.quality}
+            onChange={(e) => handleInputChange('quality', e.target.value)}
+            className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
+          >
+            <option value="low">Budget</option>
+            <option value="medium">Standard</option>
+            <option value="high">Premium</option>
+          </select>
+        </div>
+        
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-slate-900">
+            Location
+          </label>
+          <div className="flex items-center gap-2">
+            <Ruler className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.location}
               onChange={(e) => handleInputChange('location', e.target.value)}
@@ -139,23 +222,25 @@ export default function ConstructionCostCalculator() {
             </select>
           </div>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <InputField
-            label="Number of Floors"
-            type="number"
-            value={inputs.floors}
-            onChange={(value) => handleInputChange('floors', value)}
-            suffix="floors"
-            placeholder="2"
-            min={1}
-            max={10}
-          />
-          
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-900">
-              Site Complexity
-            </label>
+      <div className="grid md:grid-cols-2 gap-6">
+        <InputField
+          label="Number of Floors"
+          type="text"
+          value={inputs.floors}
+          onChange={(value) => handleInputChange('floors', value)}
+          suffix="floors"
+          placeholder="2"
+          helpText="Number of storeys in the building"
+        />
+        
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-slate-900">
+            Site Complexity
+          </label>
+          <div className="flex items-center gap-2">
+            <Layers className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.siteComplexity}
               onChange={(e) => handleInputChange('siteComplexity', e.target.value)}
@@ -167,174 +252,36 @@ export default function ConstructionCostCalculator() {
             </select>
           </div>
         </div>
-
-        <div className="bg-violet-50 border border-violet-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Building2 className="w-4 h-4 text-violet-600" />
-            <span className="text-sm font-medium text-violet-800">Cost Guidelines</span>
-          </div>
-          <p className="text-sm text-violet-700">
-            Costs vary based on materials, design complexity, and market conditions
-          </p>
-        </div>
       </div>
 
-      {/* Results Script */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          window.updateConstructionCostResults = function() {
-            const container = document.getElementById('results-container');
-            if (!container) return;
-            
-            const results = ${JSON.stringify(results)};
-            const inputs = ${JSON.stringify(inputs)};
-            
-            // Quality labels
-            const qualityLabels = { low: 'Budget', medium: 'Standard', high: 'Premium' };
-            const locationLabels = { metro: 'Metro Area', regional: 'Regional', remote: 'Remote' };
-            const complexityLabels = { easy: 'Easy', medium: 'Medium', difficult: 'Difficult' };
-            const typeLabels = {
-              townhouse: 'Townhouse', house: 'Detached House', 
-              apartment: 'Apartment', commercial: 'Commercial', industrial: 'Industrial'
-            };
-            
-            container.innerHTML = \`
-              <div class="space-y-6">
-                <!-- Cost Summary -->
-                <div class="bg-white rounded-xl p-6 border border-slate-200">
-                  <div class="flex items-center justify-between mb-6">
-                    <h4 class="font-bold text-slate-900">Cost Summary</h4>
-                    <div class="flex items-center gap-2">
-                      <Ruler class="w-4 h-4 text-slate-400" />
-                      <span class="text-sm text-slate-600">\${inputs.size} sqm</span>
-                    </div>
-                  </div>
-                  
-                  <div class="text-center mb-6">
-                    <div class="text-4xl font-bold text-slate-900 mb-2">\${formatCurrency(results.totalProjectCost)}</div>
-                    <div class="text-sm text-slate-600">
-                      Total project cost • \${formatCurrency(results.costPerSqm)} per sqm
-                    </div>
-                  </div>
-                  
-                  <!-- Cost Breakdown -->
-                  <div class="space-y-3">
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-600">Construction Cost</span>
-                      <span class="font-bold text-slate-900">\${formatCurrency(results.constructionCost)}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-600">Design & Engineering Fees</span>
-                      <span class="font-bold text-slate-900">\${formatCurrency(results.designFees)}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-600">Council & Permit Fees</span>
-                      <span class="font-bold text-slate-900">\${formatCurrency(results.councilFees)}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-slate-600">Contingency (10%)</span>
-                      <span class="font-bold text-slate-900">\${formatCurrency(results.contingency)}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Project Details -->
-                <div class="bg-white rounded-xl p-6 border border-slate-200">
-                  <h4 class="font-bold text-slate-900 mb-4">Project Details</h4>
-                  <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-slate-50 rounded-lg p-4">
-                      <div class="text-sm text-slate-600 mb-1">Property Type</div>
-                      <div class="font-bold text-slate-900">\${typeLabels[inputs.propertyType]}</div>
-                    </div>
-                    <div class="bg-slate-50 rounded-lg p-4">
-                      <div class="text-sm text-slate-600 mb-1">Quality Level</div>
-                      <div class="font-bold text-slate-900">\${qualityLabels[inputs.quality]}</div>
-                    </div>
-                    <div class="bg-slate-50 rounded-lg p-4">
-                      <div class="text-sm text-slate-600 mb-1">Location</div>
-                      <div class="font-bold text-slate-900">\${locationLabels[inputs.location]}</div>
-                    </div>
-                    <div class="bg-slate-50 rounded-lg p-4">
-                      <div class="text-sm text-slate-600 mb-1">Site Complexity</div>
-                      <div class="font-bold text-slate-900">\${complexityLabels[inputs.siteComplexity]}</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Cost Comparison -->
-                <div class="bg-gradient-to-r from-slate-900 to-blue-900 rounded-xl p-6 text-white">
-                  <h4 class="font-bold mb-4">Cost Per Square Meter</h4>
-                  
-                  <div class="mb-6">
-                    <div class="flex justify-between items-center mb-2">
-                      <span class="text-gray-300">Your Project</span>
-                      <span class="font-bold text-amber-400">\${formatCurrency(results.costPerSqm)}</span>
-                    </div>
-                    <div class="w-full bg-gray-700 rounded-full h-2">
-                      <div 
-                        class="bg-amber-500 h-2 rounded-full" 
-                        style="width: \${Math.min(100, (results.costPerSqm / 5000) * 100)}%"
-                      ></div>
-                    </div>
-                  </div>
-                  
-                  <div class="space-y-3">
-                    <div class="flex justify-between items-center">
-                      <span class="text-sm text-gray-300">Budget Range</span>
-                      <span class="text-sm">\$2,200 - \$3,000</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-sm text-gray-300">Standard Range</span>
-                      <span class="text-sm">\$3,000 - \$3,800</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-sm text-gray-300">Premium Range</span>
-                      <span class="text-sm">\$3,800 - \$5,000+</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Trade Breakdown (Estimate) -->
-                <div class="bg-white rounded-xl p-6 border border-slate-200">
-                  <h4 class="font-bold text-slate-900 mb-4">Estimated Trade Breakdown</h4>
-                  <div class="space-y-3">
-                    \${[
-                      { trade: 'Structure & Frame', percent: 25, icon: '🏗️' },
-                      { trade: 'Electrical & Plumbing', percent: 15, icon: '⚡' },
-                      { trade: 'Interior Finishes', percent: 20, icon: '🪚' },
-                      { trade: 'External Works', percent: 15, icon: '🌳' },
-                      { trade: 'Kitchen & Bathrooms', percent: 25, icon: '🚿' }
-                    ].map(item => {
-                      const amount = results.constructionCost * (item.percent / 100);
-                      return \`
-                        <div class="flex items-center justify-between">
-                          <div class="flex items-center gap-3">
-                            <span class="text-lg">\${item.icon}</span>
-                            <div>
-                              <div class="text-sm font-medium text-slate-700">\${item.trade}</div>
-                              <div class="text-xs text-slate-500">\${item.percent}% of construction</div>
-                            </div>
-                          </div>
-                          <div class="font-bold text-slate-900">\${formatCurrency(amount)}</div>
-                        </div>
-                      \`;
-                    }).join('')}
-                  </div>
-                </div>
-              </div>
-            \`;
-          };
-          
-          // Update results when inputs change
-          document.querySelectorAll('input, select').forEach(element => {
-            element.addEventListener('input', window.updateConstructionCostResults);
-            element.addEventListener('change', window.updateConstructionCostResults);
-          });
-          
-          // Initial update
-          window.updateConstructionCostResults();
-        `
-      }} />
-    </>
+      {/* Action Buttons */}
+      <div className="flex gap-4 pt-4 border-t border-slate-200">
+        <button
+          onClick={calculateAndUpdateResults}
+          className="flex-1 flex items-center justify-center gap-2 bg-cyan-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
+          disabled={!Object.values(inputs).some(val => val)}
+        >
+          <Building2 className="w-4 h-4" />
+          Calculate Now
+        </button>
+        <button
+          onClick={handleReset}
+          className="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors"
+        >
+          Reset
+        </button>
+      </div>
+
+      {hasCalculated && (
+        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-emerald-800">
+              Results updating in real-time
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

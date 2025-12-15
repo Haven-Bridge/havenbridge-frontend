@@ -15,25 +15,41 @@ export default function FeasibilityCalculator() {
     profitMarginTarget: '20'
   });
 
-  const [results, setResults] = useState<Record<string, any>>({});
+  const [hasCalculated, setHasCalculated] = useState(false);
 
+  // Calculate whenever inputs change
   useEffect(() => {
-    const calculatedResults = calculateResults();
-    setResults(calculatedResults);
-    
-    // Dispatch event to update modal
-    const event = new CustomEvent('calculatorInputsUpdated', {
-      detail: {
-        calculatorId: 'feasibility',
-        inputs,
-        results: calculatedResults
+    const timer = setTimeout(() => {
+      if (Object.values(inputs).some(val => val && parseFloat(val) > 0)) {
+        calculateAndUpdateResults();
+        setHasCalculated(true);
       }
-    });
-    window.dispatchEvent(event);
+    }, 500); // Debounce for 500ms
+
+    return () => clearTimeout(timer);
   }, [inputs]);
 
   const handleInputChange = (field: string, value: string) => {
-    setInputs(prev => ({ ...prev, [field]: value }));
+    // Allow only numbers and decimal points
+    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+      setInputs(prev => ({ ...prev, [field]: value }));
+    }
+  };
+
+  const calculateAndUpdateResults = () => {
+    // Start calculation event
+    window.dispatchEvent(new CustomEvent('calculationStarted'));
+
+    const results = calculateResults();
+    
+    // Dispatch results to parent
+    const event = new CustomEvent('calculatorResultsUpdated', {
+      detail: {
+        calculatorId: 'feasibility',
+        results: results
+      }
+    });
+    window.dispatchEvent(event);
   };
 
   const calculateResults = () => {
@@ -50,185 +66,179 @@ export default function FeasibilityCalculator() {
     const expectedProfit = expectedSalePrice - totalProjectCost;
     const profitMargin = (expectedProfit / totalProjectCost) * 100;
     const roi = (expectedProfit / totalProjectCost) * 100;
-    const feasibilityScore = profitMargin >= profitMarginTarget ? 'High' : profitMargin >= profitMarginTarget * 0.7 ? 'Medium' : 'Low';
+    
+    let feasibilityScore = 'Medium';
+    let scoreColor = 'warning';
+    
+    if (profitMargin >= profitMarginTarget) {
+      feasibilityScore = 'High';
+      scoreColor = 'positive';
+    } else if (profitMargin < profitMarginTarget * 0.5) {
+      feasibilityScore = 'Low';
+      scoreColor = 'negative';
+    }
+
+    let summary = '';
+    if (feasibilityScore === 'High') {
+      summary = 'Project meets profitability targets and shows strong viability.';
+    } else if (feasibilityScore === 'Medium') {
+      summary = 'Project shows moderate viability. Consider reviewing costs or adjusting sale price.';
+    } else {
+      summary = 'Project requires significant review. Consider re-evaluating project parameters.';
+    }
 
     return {
-      totalCost: formatCurrency(totalCost),
-      financingCost: formatCurrency(financingCost),
-      totalProjectCost: formatCurrency(totalProjectCost),
-      expectedProfit: formatCurrency(expectedProfit),
-      profitMargin: formatPercentage(profitMargin),
-      roi: formatPercentage(roi),
-      feasibilityScore,
-      profitTarget: formatPercentage(profitMarginTarget),
-      profitStatus: expectedProfit >= 0 ? 'profitable' : 'loss'
+      title: 'Development Feasibility Analysis',
+      metrics: [
+        { label: 'Feasibility Score', value: feasibilityScore, color: scoreColor },
+        { label: 'Profit Margin', value: formatPercentage(profitMargin), unit: '', color: profitMargin >= profitMarginTarget ? 'positive' : profitMargin >= 0 ? 'warning' : 'negative' },
+        { label: 'ROI', value: formatPercentage(roi), unit: '' },
+        { label: 'Expected Profit', value: formatCurrency(expectedProfit), unit: '' }
+      ],
+      summary: summary,
+      breakdown: [
+        { label: 'Land Cost', value: formatCurrency(landCost) },
+        { label: 'Construction Cost', value: formatCurrency(constructionCost) },
+        { label: 'Financing Cost', value: formatCurrency(financingCost) },
+        { label: 'Total Project Cost', value: formatCurrency(totalProjectCost) },
+        { label: 'Expected Sale Price', value: formatCurrency(expectedSalePrice) },
+        { label: 'Profit Margin Target', value: formatPercentage(profitMarginTarget) }
+      ]
     };
   };
 
-  // Update results display
-  useEffect(() => {
-    const resultsContainer = document.getElementById('results-feasibility');
-    if (resultsContainer && Object.keys(results).length > 0) {
-      const colorClass = results.feasibilityScore === 'High' ? 'bg-emerald-500' : 
-                        results.feasibilityScore === 'Medium' ? 'bg-amber-500' : 'bg-red-500';
-      
-      resultsContainer.innerHTML = `
-        <div class="space-y-6">
-          <!-- Feasibility Score -->
-          <div class="bg-white rounded-xl p-6 border border-slate-200">
-            <div class="flex items-center justify-between mb-4">
-              <h4 class="font-bold text-slate-900">Feasibility Assessment</h4>
-              <div class="flex items-center gap-2">
-                <i class="w-4 h-4 text-slate-400">🎯</i>
-                <span class="text-sm text-slate-600">Score</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-center mb-4">
-              <div class="${colorClass} text-white text-4xl font-bold w-24 h-24 rounded-full flex items-center justify-center">
-                ${results.feasibilityScore === 'High' ? '✓' : results.feasibilityScore === 'Medium' ? '~' : '✗'}
-              </div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-slate-900 mb-1">${results.feasibilityScore} Viability</div>
-              <div class="text-sm text-slate-600">
-                ${results.feasibilityScore === 'High' ? 'Project meets all targets' : 
-                  results.feasibilityScore === 'Medium' ? 'Review costs or pricing' : 
-                  'Re-evaluate project parameters'}
-              </div>
-            </div>
-          </div>
-          
-          <!-- Key Metrics -->
-          <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white rounded-lg p-4 border border-slate-200">
-              <div class="flex items-center gap-2 mb-2">
-                <i class="w-4 h-4 text-cyan-500">%</i>
-                <span class="text-sm font-medium text-slate-700">Profit Margin</span>
-              </div>
-              <div class="text-2xl font-bold text-slate-900">${results.profitMargin}</div>
-              <div class="text-xs text-slate-500 mt-1">vs target: ${results.profitTarget}</div>
-            </div>
-            
-            <div class="bg-white rounded-lg p-4 border border-slate-200">
-              <div class="flex items-center gap-2 mb-2">
-                <i class="w-4 h-4 text-emerald-500">📈</i>
-                <span class="text-sm font-medium text-slate-700">ROI</span>
-              </div>
-              <div class="text-2xl font-bold text-slate-900">${results.roi}</div>
-              <div class="text-xs text-slate-500 mt-1">Return on investment</div>
-            </div>
-          </div>
-          
-          <!-- Breakdown -->
-          <div class="bg-white rounded-xl p-6 border border-slate-200">
-            <h4 class="font-bold text-slate-900 mb-4">Cost Breakdown</h4>
-            <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="text-slate-600">Total Project Cost</span>
-                <span class="font-bold text-slate-900">${results.totalProjectCost}</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-slate-600">Expected Profit</span>
-                <span class="font-bold ${results.profitStatus === 'profitable' ? 'text-emerald-600' : 'text-red-600'}">
-                  ${results.expectedProfit}
-                </span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-slate-600">Financing Cost</span>
-                <span class="font-bold text-slate-900">${results.financingCost}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-  }, [results]);
+  const handleReset = () => {
+    setInputs({
+      landCost: '500000',
+      constructionCost: '800000',
+      expectedSalePrice: '1500000',
+      holdingPeriod: '12',
+      interestRate: '6',
+      profitMarginTarget: '20'
+    });
+    setHasCalculated(false);
+  };
 
   return (
     <div className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
         <InputField
           label="Land Cost"
-          type="number"
+          type="text"
           value={inputs.landCost}
           onChange={(value) => handleInputChange('landCost', value)}
           prefix="$"
           placeholder="500,000"
-          min={0}
-          step={1000}
+          helpText="Purchase price of the land"
         />
         <InputField
           label="Construction Cost"
-          type="number"
+          type="text"
           value={inputs.constructionCost}
           onChange={(value) => handleInputChange('constructionCost', value)}
           prefix="$"
           placeholder="800,000"
-          min={0}
-          step={1000}
+          helpText="Total construction and development costs"
         />
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <InputField
           label="Expected Sale Price"
-          type="number"
+          type="text"
           value={inputs.expectedSalePrice}
           onChange={(value) => handleInputChange('expectedSalePrice', value)}
           prefix="$"
           placeholder="1,500,000"
-          min={0}
-          step={1000}
+          helpText="Expected market value upon completion"
         />
         <InputField
           label="Holding Period (months)"
-          type="number"
+          type="text"
           value={inputs.holdingPeriod}
           onChange={(value) => handleInputChange('holdingPeriod', value)}
           suffix="months"
           placeholder="12"
-          min={1}
-          max={36}
+          helpText="Time from purchase to sale"
         />
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <InputField
           label="Interest Rate"
-          type="number"
+          type="text"
           value={inputs.interestRate}
           onChange={(value) => handleInputChange('interestRate', value)}
           suffix="%"
           placeholder="6"
-          min={0}
-          max={20}
-          step={0.1}
+          helpText="Annual financing interest rate"
         />
         <InputField
           label="Profit Margin Target"
-          type="number"
+          type="text"
           value={inputs.profitMarginTarget}
           onChange={(value) => handleInputChange('profitMarginTarget', value)}
           suffix="%"
           placeholder="20"
-          min={0}
-          max={100}
-          step={0.1}
+          helpText="Minimum acceptable profit margin"
         />
       </div>
 
+      {/* Example Scenario */}
       <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
         <div className="flex items-center gap-2 mb-2">
           <Target className="w-4 h-4 text-amber-600" />
           <span className="text-sm font-medium text-amber-800">Example Scenario</span>
         </div>
         <p className="text-sm text-amber-700">
-          Typical residential development: $500k land, $800k construction, 12-month hold
+          Typical residential development: $500k land, $800k construction, 12-month hold at 6% interest
         </p>
+        <button
+          onClick={() => {
+            setInputs({
+              landCost: '500000',
+              constructionCost: '800000',
+              expectedSalePrice: '1500000',
+              holdingPeriod: '12',
+              interestRate: '6',
+              profitMarginTarget: '20'
+            });
+          }}
+          className="mt-2 text-sm text-amber-700 hover:text-amber-800 font-medium"
+        >
+          Load this example →
+        </button>
       </div>
 
-      {/* Hidden results container for modal */}
-      <div id="results-feasibility" className="hidden"></div>
+      {/* Action Buttons */}
+      <div className="flex gap-4 pt-4 border-t border-slate-200">
+        <button
+          onClick={calculateAndUpdateResults}
+          className="flex-1 flex items-center justify-center gap-2 bg-cyan-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
+          disabled={!Object.values(inputs).some(val => val)}
+        >
+          <TrendingUp className="w-4 h-4" />
+          Calculate Now
+        </button>
+        <button
+          onClick={handleReset}
+          className="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors"
+        >
+          Reset
+        </button>
+      </div>
+
+      {/* Calculation Status */}
+      {hasCalculated && (
+        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-emerald-800">
+              Results updating in real-time
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

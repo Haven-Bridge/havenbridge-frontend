@@ -1,4 +1,5 @@
 import React from 'react';
+import { Info } from 'lucide-react';
 
 interface InputFieldProps {
   label: string;
@@ -14,6 +15,7 @@ interface InputFieldProps {
   required?: boolean;
   error?: string;
   helpText?: string;
+  disabled?: boolean;
 }
 
 export default function InputField({
@@ -29,7 +31,8 @@ export default function InputField({
   step,
   required = false,
   error,
-  helpText
+  helpText,
+  disabled = false
 }: InputFieldProps) {
   return (
     <div className="space-y-2">
@@ -53,11 +56,14 @@ export default function InputField({
           min={min}
           max={max}
           step={step}
+          disabled={disabled}
           className={`w-full px-4 py-3 rounded-lg border ${
             error ? 'border-red-300' : 'border-slate-300'
           } focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 placeholder:text-slate-500 bg-white ${
             prefix ? 'pl-10' : ''
-          } ${suffix ? 'pr-10' : ''}`}
+          } ${suffix ? 'pr-10' : ''} ${
+            disabled ? 'bg-slate-50 cursor-not-allowed' : ''
+          }`}
         />
         
         {suffix && (
@@ -68,7 +74,10 @@ export default function InputField({
       </div>
       
       {error && (
-        <p className="text-sm text-red-600">{error}</p>
+        <p className="text-sm text-red-600 flex items-center gap-1">
+          <Info className="w-4 h-4" />
+          {error}
+        </p>
       )}
       
       {helpText && !error && (
