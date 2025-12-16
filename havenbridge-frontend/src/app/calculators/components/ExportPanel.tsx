@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Download, Printer, FileText, FileSpreadsheet, Save, Trash2, Clock, X } from 'lucide-react';
 import { CSVLink } from 'react-csv';
-import { generatePDF, generateCSVData, generateCSVHeaders, saveCalculation } from '../utils/exportUtils';
+import { generatePDF } from '../utils/exportUtils';
 
 interface ExportPanelProps {
   calculatorId: string;
@@ -418,3 +418,51 @@ function SavedCalculationsList({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
+function saveCalculation(calculatorId: string, calculatorTitle: string, inputs: Record<string, any>, results: Record<string, any>) {
+    const calculation = {
+        id: Date.now(),
+        calculatorId,
+        title: calculatorTitle,
+        inputs,
+        results,
+        timestamp: new Date().toISOString()
+    };
+    
+    const savedCalculations = JSON.parse(localStorage.getItem('havenbridge_calculations') || '[]');
+    savedCalculations.push(calculation);
+    localStorage.setItem('havenbridge_calculations', JSON.stringify(savedCalculations));
+    window.dispatchEvent(new Event('calculationsUpdated'));
+}
+
+function generateCSVData(inputs: Record<string, any>, results: Record<string, any>) {
+    return [
+        {
+            'Parameter': 'Input Parameters',
+            'Value': ''
+        },
+        ...Object.entries(inputs).map(([key, value]) => ({
+            'Parameter': key,
+            'Value': value
+        })),
+        {
+            'Parameter': '',
+            'Value': ''
+        },
+        {
+            'Parameter': 'Results & Analysis',
+            'Value': ''
+        },
+        ...Object.entries(results).map(([key, value]) => ({
+            'Parameter': key,
+            'Value': value
+        }))
+    ];
+}
+
+function generateCSVHeaders() {
+    return [
+        { label: 'Parameter', key: 'Parameter' },
+        { label: 'Value', key: 'Value' }
+    ];
+}
+

@@ -6,25 +6,50 @@ import { Target, TrendingUp, DollarSign, Percent, Calendar } from 'lucide-react'
 import { formatCurrency, formatPercentage } from '../utils/formatters';
 
 export default function FeasibilityCalculator() {
+  // Initialize with empty strings instead of default values
   const [inputs, setInputs] = useState({
-    landCost: '500000',
-    constructionCost: '800000',
-    expectedSalePrice: '1500000',
-    holdingPeriod: '12',
-    interestRate: '6',
-    profitMarginTarget: '20'
+    landCost: '',
+    constructionCost: '',
+    expectedSalePrice: '',
+    holdingPeriod: '',
+    interestRate: '',
+    profitMarginTarget: ''
   });
 
   const [hasCalculated, setHasCalculated] = useState(false);
 
+  // Reset handler for modal reset button
+  useEffect(() => {
+    const handleReset = () => {
+      setInputs({
+        landCost: '',
+        constructionCost: '',
+        expectedSalePrice: '',
+        holdingPeriod: '',
+        interestRate: '',
+        profitMarginTarget: ''
+      });
+      setHasCalculated(false);
+    };
+
+    window.addEventListener('resetCalculator', handleReset);
+    return () => window.removeEventListener('resetCalculator', handleReset);
+  }, []);
+
   // Calculate whenever inputs change
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Object.values(inputs).some(val => val && parseFloat(val) > 0)) {
+      // Only calculate if at least one input has a value
+      const hasValues = Object.values(inputs).some(val => val && parseFloat(val) > 0);
+      if (hasValues) {
         calculateAndUpdateResults();
         setHasCalculated(true);
+      } else {
+        // Clear results if all inputs are empty
+        setResults(null);
+        setHasCalculated(false);
       }
-    }, 500); // Debounce for 500ms
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [inputs]);
@@ -36,11 +61,14 @@ export default function FeasibilityCalculator() {
     }
   };
 
+  // Add state to store results
+  const [results, setResults] = useState<any>(null);
+
   const calculateAndUpdateResults = () => {
-    // Start calculation event
     window.dispatchEvent(new CustomEvent('calculationStarted'));
 
     const results = calculateResults();
+    setResults(results);
     
     // Dispatch results to parent
     const event = new CustomEvent('calculatorResultsUpdated', {
@@ -64,8 +92,8 @@ export default function FeasibilityCalculator() {
     const financingCost = totalCost * (interestRate / 100) * (holdingPeriod / 12);
     const totalProjectCost = totalCost + financingCost;
     const expectedProfit = expectedSalePrice - totalProjectCost;
-    const profitMargin = (expectedProfit / totalProjectCost) * 100;
-    const roi = (expectedProfit / totalProjectCost) * 100;
+    const profitMargin = totalProjectCost > 0 ? (expectedProfit / totalProjectCost) * 100 : 0;
+    const roi = totalProjectCost > 0 ? (expectedProfit / totalProjectCost) * 100 : 0;
     
     let feasibilityScore = 'Medium';
     let scoreColor = 'warning';
@@ -109,14 +137,15 @@ export default function FeasibilityCalculator() {
 
   const handleReset = () => {
     setInputs({
-      landCost: '500000',
-      constructionCost: '800000',
-      expectedSalePrice: '1500000',
-      holdingPeriod: '12',
-      interestRate: '6',
-      profitMarginTarget: '20'
+      landCost: '',
+      constructionCost: '',
+      expectedSalePrice: '',
+      holdingPeriod: '',
+      interestRate: '',
+      profitMarginTarget: ''
     });
     setHasCalculated(false);
+    window.dispatchEvent(new CustomEvent('resetCalculator'));
   };
 
   return (
@@ -128,7 +157,7 @@ export default function FeasibilityCalculator() {
           value={inputs.landCost}
           onChange={(value) => handleInputChange('landCost', value)}
           prefix="$"
-          placeholder="500,000"
+          placeholder="e.g., 500,000"
           helpText="Purchase price of the land"
         />
         <InputField
@@ -137,7 +166,7 @@ export default function FeasibilityCalculator() {
           value={inputs.constructionCost}
           onChange={(value) => handleInputChange('constructionCost', value)}
           prefix="$"
-          placeholder="800,000"
+          placeholder="e.g., 800,000"
           helpText="Total construction and development costs"
         />
       </div>
@@ -149,7 +178,7 @@ export default function FeasibilityCalculator() {
           value={inputs.expectedSalePrice}
           onChange={(value) => handleInputChange('expectedSalePrice', value)}
           prefix="$"
-          placeholder="1,500,000"
+          placeholder="e.g., 1,500,000"
           helpText="Expected market value upon completion"
         />
         <InputField
@@ -158,7 +187,7 @@ export default function FeasibilityCalculator() {
           value={inputs.holdingPeriod}
           onChange={(value) => handleInputChange('holdingPeriod', value)}
           suffix="months"
-          placeholder="12"
+          placeholder="e.g., 12"
           helpText="Time from purchase to sale"
         />
       </div>
@@ -170,7 +199,7 @@ export default function FeasibilityCalculator() {
           value={inputs.interestRate}
           onChange={(value) => handleInputChange('interestRate', value)}
           suffix="%"
-          placeholder="6"
+          placeholder="e.g., 6"
           helpText="Annual financing interest rate"
         />
         <InputField
@@ -179,7 +208,7 @@ export default function FeasibilityCalculator() {
           value={inputs.profitMarginTarget}
           onChange={(value) => handleInputChange('profitMarginTarget', value)}
           suffix="%"
-          placeholder="20"
+          placeholder="e.g., 20"
           helpText="Minimum acceptable profit margin"
         />
       </div>

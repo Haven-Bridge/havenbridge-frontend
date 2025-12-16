@@ -7,7 +7,7 @@ import { formatCurrency, calculateStampDuty } from '../utils/formatters';
 
 export default function StampDutyCalculator() {
   const [inputs, setInputs] = useState({
-    propertyValue: '800000',
+    propertyValue: '',
     state: 'VIC',
     isFirstHomeBuyer: 'no',
     propertyType: 'established',
@@ -15,12 +15,36 @@ export default function StampDutyCalculator() {
   });
 
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [results, setResults] = useState<any>(null);
 
+  // Reset handler for modal reset button
+  useEffect(() => {
+    const handleReset = () => {
+      setInputs({
+        propertyValue: '',
+        state: 'VIC',
+        isFirstHomeBuyer: 'no',
+        propertyType: 'established',
+        foreignBuyer: 'no'
+      });
+      setHasCalculated(false);
+      setResults(null);
+    };
+
+    window.addEventListener('resetCalculator', handleReset);
+    return () => window.removeEventListener('resetCalculator', handleReset);
+  }, []);
+
+  // Calculate whenever inputs change
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Object.values(inputs).some(val => val && (typeof val === 'string'))) {
+      const hasValues = inputs.propertyValue && parseFloat(inputs.propertyValue) > 0;
+      if (hasValues) {
         calculateAndUpdateResults();
         setHasCalculated(true);
+      } else {
+        setResults(null);
+        setHasCalculated(false);
       }
     }, 500);
 
@@ -28,17 +52,21 @@ export default function StampDutyCalculator() {
   }, [inputs]);
 
   const handleInputChange = (field: string, value: string) => {
-    setInputs(prev => ({ ...prev, [field]: value }));
+    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+      setInputs(prev => ({ ...prev, [field]: value }));
+    }
   };
 
   const calculateAndUpdateResults = () => {
     window.dispatchEvent(new CustomEvent('calculationStarted'));
     const results = calculateResults();
+    setResults(results);
     
     const event = new CustomEvent('calculatorResultsUpdated', {
       detail: {
         calculatorId: 'stamp-duty',
-        results: results
+        results: results,
+        inputs: inputs
       }
     });
     window.dispatchEvent(event);
@@ -58,7 +86,7 @@ export default function StampDutyCalculator() {
     
     const totalCharges = stampDuty + transferFee + registrationFee + foreignSurcharge;
     const totalCost = propertyValue + totalCharges;
-    const chargesPercentage = (totalCharges / propertyValue) * 100;
+    const chargesPercentage = propertyValue > 0 ? (totalCharges / propertyValue) * 100 : 0;
 
     let summary = '';
     if (inputs.isFirstHomeBuyer === 'yes') {
@@ -102,13 +130,14 @@ export default function StampDutyCalculator() {
 
   const handleReset = () => {
     setInputs({
-      propertyValue: '800000',
+      propertyValue: '',
       state: 'VIC',
       isFirstHomeBuyer: 'no',
       propertyType: 'established',
       foreignBuyer: 'no'
     });
     setHasCalculated(false);
+    window.dispatchEvent(new CustomEvent('resetCalculator'));
   };
 
   return (
@@ -120,7 +149,7 @@ export default function StampDutyCalculator() {
           value={inputs.propertyValue}
           onChange={(value) => handleInputChange('propertyValue', value)}
           prefix="$"
-          placeholder="800,000"
+          placeholder="e.g., 800,000"
           helpText="Purchase price or market value"
         />
         
@@ -132,7 +161,7 @@ export default function StampDutyCalculator() {
             <MapPin className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.state}
-              onChange={(e) => handleInputChange('state', e.target.value)}
+              onChange={(e) => setInputs(prev => ({ ...prev, state: e.target.value }))}
               className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
             >
               <option value="VIC">Victoria</option>
@@ -155,7 +184,7 @@ export default function StampDutyCalculator() {
           </label>
           <select
             value={inputs.isFirstHomeBuyer}
-            onChange={(e) => handleInputChange('isFirstHomeBuyer', e.target.value)}
+            onChange={(e) => setInputs(prev => ({ ...prev, isFirstHomeBuyer: e.target.value }))}
             className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
           >
             <option value="no">No</option>
@@ -171,7 +200,7 @@ export default function StampDutyCalculator() {
             <Home className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.propertyType}
-              onChange={(e) => handleInputChange('propertyType', e.target.value)}
+              onChange={(e) => setInputs(prev => ({ ...prev, propertyType: e.target.value }))}
               className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
             >
               <option value="established">Established Home</option>
@@ -189,7 +218,7 @@ export default function StampDutyCalculator() {
           </label>
           <select
             value={inputs.foreignBuyer}
-            onChange={(e) => handleInputChange('foreignBuyer', e.target.value)}
+            onChange={(e) => setInputs(prev => ({ ...prev, foreignBuyer: e.target.value }))}
             className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
           >
             <option value="no">No</option>
@@ -208,12 +237,37 @@ export default function StampDutyCalculator() {
         </div>
       </div>
 
+      {/* Example Scenario */}
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Scale className="w-4 h-4 text-amber-600" />
+          <span className="text-sm font-medium text-amber-800">Example Scenario</span>
+        </div>
+        <p className="text-sm text-amber-700">
+          $800,000 property in Victoria, established home, not first home buyer
+        </p>
+        <button
+          onClick={() => {
+            setInputs({
+              propertyValue: '800000',
+              state: 'VIC',
+              isFirstHomeBuyer: 'no',
+              propertyType: 'established',
+              foreignBuyer: 'no'
+            });
+          }}
+          className="mt-2 text-sm text-amber-700 hover:text-amber-800 font-medium"
+        >
+          Load this example →
+        </button>
+      </div>
+
       {/* Action Buttons */}
       <div className="flex gap-4 pt-4 border-t border-slate-200">
         <button
           onClick={calculateAndUpdateResults}
           className="flex-1 flex items-center justify-center gap-2 bg-cyan-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
-          disabled={!Object.values(inputs).some(val => val)}
+          disabled={!inputs.propertyValue}
         >
           <Scale className="w-4 h-4" />
           Calculate Now

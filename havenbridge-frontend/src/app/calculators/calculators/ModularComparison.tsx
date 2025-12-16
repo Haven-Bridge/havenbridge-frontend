@@ -7,20 +7,45 @@ import { formatCurrency, formatNumber } from '../utils/formatters';
 
 export default function ModularComparisonCalculator() {
   const [inputs, setInputs] = useState({
-    projectValue: '1000000',
-    size: '200',
+    projectValue: '',
+    size: '',
     location: 'metro',
     complexity: 'medium',
     customisation: 'medium'
   });
 
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [results, setResults] = useState<any>(null);
 
+  // Reset handler for modal reset button
+  useEffect(() => {
+    const handleReset = () => {
+      setInputs({
+        projectValue: '',
+        size: '',
+        location: 'metro',
+        complexity: 'medium',
+        customisation: 'medium'
+      });
+      setHasCalculated(false);
+      setResults(null);
+    };
+
+    window.addEventListener('resetCalculator', handleReset);
+    return () => window.removeEventListener('resetCalculator', handleReset);
+  }, []);
+
+  // Calculate whenever inputs change
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Object.values(inputs).some(val => val && (typeof val === 'string'))) {
+      const hasValues = (inputs.projectValue && parseFloat(inputs.projectValue) > 0) || 
+                       (inputs.size && parseFloat(inputs.size) > 0);
+      if (hasValues) {
         calculateAndUpdateResults();
         setHasCalculated(true);
+      } else {
+        setResults(null);
+        setHasCalculated(false);
       }
     }, 500);
 
@@ -28,17 +53,21 @@ export default function ModularComparisonCalculator() {
   }, [inputs]);
 
   const handleInputChange = (field: string, value: string) => {
-    setInputs(prev => ({ ...prev, [field]: value }));
+    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+      setInputs(prev => ({ ...prev, [field]: value }));
+    }
   };
 
   const calculateAndUpdateResults = () => {
     window.dispatchEvent(new CustomEvent('calculationStarted'));
     const results = calculateResults();
+    setResults(results);
     
     const event = new CustomEvent('calculatorResultsUpdated', {
       detail: {
         calculatorId: 'modular-comparison',
-        results: results
+        results: results,
+        inputs: inputs
       }
     });
     window.dispatchEvent(event);
@@ -64,7 +93,7 @@ export default function ModularComparisonCalculator() {
     const traditionalCost = traditionalCostPerSqm * size;
     const modularCost = modularCostPerSqm * size;
     const costSavings = traditionalCost - modularCost;
-    const costSavingsPercent = (costSavings / traditionalCost) * 100;
+    const costSavingsPercent = traditionalCost > 0 ? (costSavings / traditionalCost) * 100 : 0;
     
     // Calculate time savings
     const timeSavingsWeeks = traditionalTimeWeeks - modularTimeWeeks;
@@ -76,7 +105,7 @@ export default function ModularComparisonCalculator() {
     
     // Total savings including financing
     const totalSavings = costSavings + financingSavings;
-    const totalSavingsPercent = (totalSavings / traditionalCost) * 100;
+    const totalSavingsPercent = traditionalCost > 0 ? (totalSavings / traditionalCost) * 100 : 0;
     
     // ROI comparison (earlier completion = earlier income)
     const weeklyRentalValue = 1000; // Example weekly rental value
@@ -113,13 +142,14 @@ export default function ModularComparisonCalculator() {
 
   const handleReset = () => {
     setInputs({
-      projectValue: '1000000',
-      size: '200',
+      projectValue: '',
+      size: '',
       location: 'metro',
       complexity: 'medium',
       customisation: 'medium'
     });
     setHasCalculated(false);
+    window.dispatchEvent(new CustomEvent('resetCalculator'));
   };
 
   return (
@@ -131,7 +161,7 @@ export default function ModularComparisonCalculator() {
           value={inputs.projectValue}
           onChange={(value) => handleInputChange('projectValue', value)}
           prefix="$"
-          placeholder="1,000,000"
+          placeholder="e.g., 1,000,000"
           helpText="Total project budget or value"
         />
         
@@ -141,7 +171,7 @@ export default function ModularComparisonCalculator() {
           value={inputs.size}
           onChange={(value) => handleInputChange('size', value)}
           suffix="sqm"
-          placeholder="200"
+          placeholder="e.g., 200"
           helpText="Total floor area in square meters"
         />
       </div>
@@ -155,7 +185,7 @@ export default function ModularComparisonCalculator() {
             <Home className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.location}
-              onChange={(e) => handleInputChange('location', e.target.value)}
+              onChange={(e) => setInputs(prev => ({ ...prev, location: e.target.value }))}
               className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
             >
               <option value="metro">Metro Area</option>
@@ -173,7 +203,7 @@ export default function ModularComparisonCalculator() {
             <Clock className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.complexity}
-              onChange={(e) => handleInputChange('complexity', e.target.value)}
+              onChange={(e) => setInputs(prev => ({ ...prev, complexity: e.target.value }))}
               className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
             >
               <option value="simple">Simple</option>
@@ -190,7 +220,7 @@ export default function ModularComparisonCalculator() {
         </label>
         <select
           value={inputs.customisation}
-          onChange={(e) => handleInputChange('customisation', e.target.value)}
+          onChange={(e) => setInputs(prev => ({ ...prev, customisation: e.target.value }))}
           className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
         >
           <option value="low">Standard</option>
@@ -199,12 +229,37 @@ export default function ModularComparisonCalculator() {
         </select>
       </div>
 
+      {/* Example Scenario */}
+      <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Factory className="w-4 h-4 text-pink-600" />
+          <span className="text-sm font-medium text-pink-800">Example Scenario</span>
+        </div>
+        <p className="text-sm text-pink-700">
+          $1M project, 200 sqm, metro area, medium complexity, custom design
+        </p>
+        <button
+          onClick={() => {
+            setInputs({
+              projectValue: '1000000',
+              size: '200',
+              location: 'metro',
+              complexity: 'medium',
+              customisation: 'medium'
+            });
+          }}
+          className="mt-2 text-sm text-pink-700 hover:text-pink-800 font-medium"
+        >
+          Load this example →
+        </button>
+      </div>
+
       {/* Action Buttons */}
       <div className="flex gap-4 pt-4 border-t border-slate-200">
         <button
           onClick={calculateAndUpdateResults}
           className="flex-1 flex items-center justify-center gap-2 bg-cyan-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
-          disabled={!Object.values(inputs).some(val => val)}
+          disabled={!inputs.projectValue && !inputs.size}
         >
           <RefreshCw className="w-4 h-4" />
           Calculate Now

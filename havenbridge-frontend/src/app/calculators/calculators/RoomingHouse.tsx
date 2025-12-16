@@ -6,23 +6,50 @@ import { Home, Users, DollarSign, Percent, Bed } from 'lucide-react';
 import { formatCurrency, formatPercentage } from '../utils/formatters';
 
 export default function RoomingHouseCalculator() {
+  // Initialize with empty strings
   const [inputs, setInputs] = useState({
-    propertyPrice: '1000000',
-    numberOfRooms: '8',
-    weeklyRent: '300',
-    occupancyRate: '85',
-    annualExpenses: '25000',
-    managementFee: '8'
+    propertyPrice: '',
+    numberOfRooms: '',
+    weeklyRent: '',
+    occupancyRate: '',
+    annualExpenses: '',
+    managementFee: ''
   });
 
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [results, setResults] = useState<any>(null);
+
+  // Reset handler for modal reset button
+  useEffect(() => {
+    const handleReset = () => {
+      setInputs({
+        propertyPrice: '',
+        numberOfRooms: '',
+        weeklyRent: '',
+        occupancyRate: '',
+        annualExpenses: '',
+        managementFee: ''
+      });
+      setHasCalculated(false);
+      setResults(null);
+    };
+
+    window.addEventListener('resetCalculator', handleReset);
+    return () => window.removeEventListener('resetCalculator', handleReset);
+  }, []);
 
   // Calculate whenever inputs change
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Object.values(inputs).some(val => val && parseFloat(val) > 0)) {
+      // Only calculate if at least one input has a value
+      const hasValues = Object.values(inputs).some(val => val && parseFloat(val) > 0);
+      if (hasValues) {
         calculateAndUpdateResults();
         setHasCalculated(true);
+      } else {
+        // Clear results if all inputs are empty
+        setResults(null);
+        setHasCalculated(false);
       }
     }, 500);
 
@@ -38,6 +65,7 @@ export default function RoomingHouseCalculator() {
   const calculateAndUpdateResults = () => {
     window.dispatchEvent(new CustomEvent('calculationStarted'));
     const results = calculateResults();
+    setResults(results);
     
     const event = new CustomEvent('calculatorResultsUpdated', {
       detail: {
@@ -62,10 +90,10 @@ export default function RoomingHouseCalculator() {
     const totalExpenses = annualExpenses + managementCost;
     const netIncome = annualRent - totalExpenses;
     
-    const grossYield = (annualRent / propertyPrice) * 100;
-    const netYield = (netIncome / propertyPrice) * 100;
+    const grossYield = propertyPrice > 0 ? (annualRent / propertyPrice) * 100 : 0;
+    const netYield = propertyPrice > 0 ? (netIncome / propertyPrice) * 100 : 0;
     const cashFlow = netIncome / 12;
-    const roi = (netIncome / (propertyPrice * 0.3)) * 100;
+    const roi = (propertyPrice * 0.3) > 0 ? (netIncome / (propertyPrice * 0.3)) * 100 : 0;
 
     let summary = '';
     if (netYield >= 6) {
@@ -98,14 +126,15 @@ export default function RoomingHouseCalculator() {
 
   const handleReset = () => {
     setInputs({
-      propertyPrice: '1000000',
-      numberOfRooms: '8',
-      weeklyRent: '300',
-      occupancyRate: '85',
-      annualExpenses: '25000',
-      managementFee: '8'
+      propertyPrice: '',
+      numberOfRooms: '',
+      weeklyRent: '',
+      occupancyRate: '',
+      annualExpenses: '',
+      managementFee: ''
     });
     setHasCalculated(false);
+    window.dispatchEvent(new CustomEvent('resetCalculator'));
   };
 
   return (
@@ -117,7 +146,7 @@ export default function RoomingHouseCalculator() {
           value={inputs.propertyPrice}
           onChange={(value) => handleInputChange('propertyPrice', value)}
           prefix="$"
-          placeholder="1,000,000"
+          placeholder="e.g., 1,000,000"
           helpText="Total purchase price of the property"
         />
         <InputField
@@ -126,7 +155,7 @@ export default function RoomingHouseCalculator() {
           value={inputs.numberOfRooms}
           onChange={(value) => handleInputChange('numberOfRooms', value)}
           suffix="rooms"
-          placeholder="8"
+          placeholder="e.g., 8"
           helpText="Total number of rentable rooms"
         />
       </div>
@@ -138,7 +167,7 @@ export default function RoomingHouseCalculator() {
           value={inputs.weeklyRent}
           onChange={(value) => handleInputChange('weeklyRent', value)}
           prefix="$"
-          placeholder="300"
+          placeholder="e.g., 300"
           helpText="Weekly rent charged per room"
         />
         <InputField
@@ -147,7 +176,7 @@ export default function RoomingHouseCalculator() {
           value={inputs.occupancyRate}
           onChange={(value) => handleInputChange('occupancyRate', value)}
           suffix="%"
-          placeholder="85"
+          placeholder="e.g., 85"
           helpText="Expected occupancy percentage"
         />
       </div>
@@ -159,7 +188,7 @@ export default function RoomingHouseCalculator() {
           value={inputs.annualExpenses}
           onChange={(value) => handleInputChange('annualExpenses', value)}
           prefix="$"
-          placeholder="25,000"
+          placeholder="e.g., 25,000"
           helpText="Annual operating expenses"
         />
         <InputField
@@ -168,15 +197,16 @@ export default function RoomingHouseCalculator() {
           value={inputs.managementFee}
           onChange={(value) => handleInputChange('managementFee', value)}
           suffix="%"
-          placeholder="8"
+          placeholder="e.g., 8"
           helpText="Property management fee percentage"
         />
       </div>
 
+      {/* Example Scenario */}
       <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
         <div className="flex items-center gap-2 mb-2">
           <Home className="w-4 h-4 text-cyan-600" />
-          <span className="text-sm font-medium text-cyan-800">Rooming House Example</span>
+          <span className="text-sm font-medium text-cyan-800">Example Scenario</span>
         </div>
         <p className="text-sm text-cyan-700">
           8-room property with $300/week rent, 85% occupancy, $25k annual expenses

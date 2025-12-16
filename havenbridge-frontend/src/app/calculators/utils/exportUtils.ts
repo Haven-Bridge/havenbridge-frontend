@@ -1,206 +1,160 @@
+// src/app/calculators/utils/exportUtils.ts
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { formatCurrency, formatPercentage } from './formatters';
 
-// Format date for file names
-export const formatDateForFilename = (): string => {
-  const now = new Date();
-  return now.toISOString().split('T')[0].replace(/-/g, '') + 
-         '_' + 
-         now.getHours().toString().padStart(2, '0') + 
-         now.getMinutes().toString().padStart(2, '0');
-};
-
-// Generate PDF
-export const generatePDF = (
-  title: string,
-  inputs: Record<string, any>,
-  results: Record<string, any>,
-  calculatorType: string
-): void => {
+export const generatePDF = (calculatorId: string, inputs: any, results: any, calculatorName: string) => {
   const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.width;
+  const pageHeight = doc.internal.pageSize.height;
   
-  // Add HavenBridge header
-  doc.setFillColor(15, 23, 42); // slate-900
-  doc.rect(0, 0, 210, 40, 'F');
-  
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(24);
-  doc.setFont('helvetica', 'bold');
-  doc.text('HavenBridge Development', 105, 20, { align: 'center' });
+  // Header
+  doc.setFontSize(20);
+  doc.setTextColor(0, 102, 204);
+  doc.text(calculatorName, pageWidth / 2, 20, { align: 'center' });
   
   doc.setFontSize(12);
-  doc.text('Development Calculators', 105, 28, { align: 'center' });
+  doc.setTextColor(100, 100, 100);
+  doc.text(`Generated on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, pageWidth / 2, 30, { align: 'center' });
   
-  // Title
+  // Summary Section
+  doc.setFontSize(16);
   doc.setTextColor(0, 0, 0);
-  doc.setFontSize(18);
-  doc.text(title, 20, 50);
+  doc.text('Summary', 14, 45);
   
-  // Date
-  doc.setFontSize(10);
-  doc.text(`Generated: ${new Date().toLocaleDateString('en-AU', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })}`, 20, 60);
+  doc.setFontSize(12);
+  doc.setTextColor(60, 60, 60);
   
-  // Inputs section
-  doc.setFontSize(14);
-  doc.text('Input Parameters', 20, 75);
+  let yPos = 55;
   
-  const inputRows = Object.entries(inputs).map(([key, value]) => [
-    key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-    typeof value === 'number' ? 
-      key.includes('Rate') || key.includes('Percent') || key.includes('Percentage') ? 
-        `${value.toFixed(1)}%` :
-        `$${value.toLocaleString('en-AU')}` :
-      value.toString()
-  ]);
+  if (results.summary) {
+    doc.text(results.summary, 14, yPos);
+    yPos += 10;
+  }
   
-  autoTable(doc, {
-    startY: 80,
-    head: [['Parameter', 'Value']],
-    body: inputRows,
-    theme: 'grid',
-    headStyles: { fillColor: [59, 130, 246] }, // blue-500
-  });
+  // Key Metrics Table
+  if (results.metrics && Array.isArray(results.metrics)) {
+    doc.setFontSize(14);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Key Metrics', 14, yPos);
+    yPos += 10;
+    
+    const metricsData = results.metrics.map((metric: any) => [
+      metric.label,
+      metric.value + (metric.unit || '')
+    ]);
+    
+    autoTable(doc, {
+      startY: yPos,
+      head: [['Metric', 'Value']],
+      body: metricsData,
+      theme: 'grid',
+      headStyles: { fillColor: [0, 102, 204], textColor: 255 },
+      styles: { fontSize: 11, cellPadding: 5 },
+      margin: { left: 14, right: 14 }
+    });
+    
+    yPos = (doc as any).lastAutoTable.finalY + 10;
+  }
   
-  // Results section
-  const finalY = (doc as any).lastAutoTable.finalY || 100;
-  doc.setFontSize(14);
-  doc.text('Results & Analysis', 20, finalY + 15);
-  
-  const resultRows = Object.entries(results).map(([key, value]) => [
-    key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-    typeof value === 'number' ? 
-      key.includes('Rate') || key.includes('Percent') || key.includes('Percentage') || key.includes('Yield') || key.includes('ROI') ? 
-        `${value.toFixed(1)}%` :
-        `$${value.toLocaleString('en-AU')}` :
-      value.toString()
-  ]);
-  
-  autoTable(doc, {
-    startY: finalY + 20,
-    head: [['Metric', 'Value']],
-    body: resultRows,
-    theme: 'grid',
-    headStyles: { fillColor: [245, 158, 11] }, // amber-500
-  });
+  // Inputs Breakdown
+  if (inputs && Object.keys(inputs).length > 0) {
+    doc.setFontSize(14);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Input Parameters', 14, yPos);
+    yPos += 10;
+    
+    const inputsData = Object.entries(inputs).map(([key, value]) => {
+      const label = key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, str => str.toUpperCase())
+        .replace(/([a-z])([A-Z])/g, '$1 $2');
+      
+      let formattedValue = '';
+      if (typeof value === 'string') {
+        formattedValue = value;
+      } else if (typeof value === 'number') {
+        formattedValue = value.toLocaleString();
+      } else {
+        formattedValue = String(value);
+      }
+      
+      return [label, formattedValue];
+    });
+    
+    autoTable(doc, {
+      startY: yPos,
+      head: [['Parameter', 'Value']],
+      body: inputsData,
+      theme: 'grid',
+      headStyles: { fillColor: [60, 60, 60], textColor: 255 },
+      styles: { fontSize: 10, cellPadding: 4 },
+      margin: { left: 14, right: 14 }
+    });
+    
+    yPos = (doc as any).lastAutoTable.finalY + 10;
+  }
   
   // Footer
-  const finalY2 = (doc as any).lastAutoTable.finalY || finalY + 50;
+  const footerY = pageHeight - 20;
   doc.setFontSize(10);
   doc.setTextColor(100, 100, 100);
-  doc.text('© 2025 HavenBridge Development. All rights reserved.', 105, 280, { align: 'center' });
-  doc.text('Calculations are estimates only. Professional advice recommended.', 105, 285, { align: 'center' });
+  doc.text('Generated by Development Pro Calculators', pageWidth / 2, footerY, { align: 'center' });
+  doc.text('https://developmentpro.com.au/calculators', pageWidth / 2, footerY + 6, { align: 'center' });
   
   // Save PDF
-  doc.save(`HavenBridge_${calculatorType}_${formatDateForFilename()}.pdf`);
+  const fileName = `${calculatorName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+  doc.save(fileName);
 };
 
-// Generate CSV data
-export const generateCSVData = (
-  inputs: Record<string, any>,
-  results: Record<string, any>
-): Array<Record<string, any>> => {
-  const data = [];
+export const generateCSV = (inputs: any, results: any, calculatorName: string) => {
+  const csvData = [];
   
-  // Inputs section
-  data.push({ Category: 'Inputs', Parameter: '', Value: '' });
-  Object.entries(inputs).forEach(([key, value]) => {
-    data.push({
-      Category: 'Inputs',
-      Parameter: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-      Value: value
+  // Header
+  csvData.push([calculatorName]);
+  csvData.push(['Generated on:', new Date().toLocaleString()]);
+  csvData.push([]);
+  
+  // Summary
+  if (results.summary) {
+    csvData.push(['Summary', results.summary]);
+    csvData.push([]);
+  }
+  
+  // Metrics
+  if (results.metrics && Array.isArray(results.metrics)) {
+    csvData.push(['Key Metrics']);
+    results.metrics.forEach((metric: any) => {
+      csvData.push([metric.label, metric.value + (metric.unit || '')]);
     });
-  });
+    csvData.push([]);
+  }
   
-  // Results section
-  data.push({ Category: 'Results', Parameter: '', Value: '' });
-  Object.entries(results).forEach(([key, value]) => {
-    data.push({
-      Category: 'Results',
-      Parameter: key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()),
-      Value: value
+  // Inputs
+  if (inputs && Object.keys(inputs).length > 0) {
+    csvData.push(['Input Parameters']);
+    Object.entries(inputs).forEach(([key, value]) => {
+      const label = key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, str => str.toUpperCase())
+        .replace(/([a-z])([A-Z])/g, '$1 $2');
+      csvData.push([label, String(value)]);
     });
-  });
+  }
   
-  return data;
+  return csvData;
 };
 
-// Generate CSV headers
-export const generateCSVHeaders = () => [
-  { label: 'Category', key: 'Category' },
-  { label: 'Parameter', key: 'Parameter' },
-  { label: 'Value', key: 'Value' },
-];
-
-// Save calculation to localStorage
-export const saveCalculation = (
-  calculatorId: string,
-  title: string,
-  inputs: Record<string, any>,
-  results: Record<string, any>
-): void => {
-  try {
-    const savedCalculations = getSavedCalculations();
-    
-    const newCalculation = {
-      id: Date.now(),
-      calculatorId,
-      title,
-      inputs,
-      results,
-      timestamp: new Date().toISOString(),
-      date: new Date().toLocaleDateString('en-AU')
-    };
-    
-    savedCalculations.unshift(newCalculation); // Add to beginning
-    if (savedCalculations.length > 20) {
-      savedCalculations.length = 20; // Keep only last 20
-    }
-    
-    localStorage.setItem('havenbridge_calculations', JSON.stringify(savedCalculations));
-    
-    // Dispatch event for other components to listen to
-    window.dispatchEvent(new Event('calculationsUpdated'));
-  } catch (error) {
-    console.error('Error saving calculation:', error);
-  }
+export const clearSavedCalculations = () => {
+  localStorage.removeItem('savedCalculations');
 };
 
-// Get saved calculations
-export const getSavedCalculations = (): Array<any> => {
-  try {
-    const saved = localStorage.getItem('havenbridge_calculations');
-    return saved ? JSON.parse(saved) : [];
-  } catch (error) {
-    console.error('Error getting saved calculations:', error);
-    return [];
-  }
+export const getSavedCalculations = () => {
+  const saved = localStorage.getItem('savedCalculations');
+  return saved ? JSON.parse(saved) : [];
 };
 
-// Clear a specific calculation
-export const clearCalculation = (id: number): void => {
-  try {
-    const savedCalculations = getSavedCalculations();
-    const filtered = savedCalculations.filter((calc: any) => calc.id !== id);
-    localStorage.setItem('havenbridge_calculations', JSON.stringify(filtered));
-    window.dispatchEvent(new Event('calculationsUpdated'));
-  } catch (error) {
-    console.error('Error clearing calculation:', error);
-  }
-};
-
-// Clear all calculations
-export const clearAllCalculations = (): void => {
-  try {
-    localStorage.removeItem('havenbridge_calculations');
-    window.dispatchEvent(new Event('calculationsUpdated'));
-  } catch (error) {
-    console.error('Error clearing all calculations:', error);
-  }
+export const formatFilename = (calculatorName: string) => {
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('.')[0];
+  return `${calculatorName.replace(/\s+/g, '_')}_${timestamp}`;
 };

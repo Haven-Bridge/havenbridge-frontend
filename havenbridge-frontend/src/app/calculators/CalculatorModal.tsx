@@ -1,297 +1,365 @@
 "use client";
 
-import React, { ReactNode, useState, useEffect } from 'react';
-import { X, Download, Printer, FileText, Save, Clock, Calculator as CalcIcon } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Download, FileText } from 'lucide-react';
+import { CSVLink } from 'react-csv';
 
 interface CalculatorModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  calculatorId: string;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-// Interface for calculator results
-export interface CalculatorResults {
-  title: string;
-  metrics: Array<{
-    label: string;
-    value: string | number;
-    unit?: string;
-    color?: string;
-  }>;
+interface CalculatorResults {
+  calculatorId?: string;
+  title?: string;
+  metrics?: Array<{ label: string; value: string; unit?: string; color?: string }>;
   summary?: string;
-  breakdown?: Array<{
-    label: string;
-    value: string | number;
-  }>;
-  chartData?: Array<{
-    label: string;
-    value: number;
-  }>;
+  breakdown?: Array<{ label: string; value: string }>;
+  inputs?: Record<string, any>;
 }
 
-export default function CalculatorModal({ 
-  isOpen, 
-  onClose, 
-  title, 
-  calculatorId, 
-  children 
-}: CalculatorModalProps) {
+export default function CalculatorModal({ isOpen, onClose, title, children }: CalculatorModalProps) {
   const [results, setResults] = useState<CalculatorResults | null>(null);
-  const [isCalculating, setIsCalculating] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [exportData, setExportData] = useState<any>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  
+  // Listen for calculation events
   useEffect(() => {
-    // Listen for calculation results from child components
-    const handleResultsUpdate = (e: CustomEvent) => {
-      if (e.detail.calculatorId === calculatorId) {
-        setResults(e.detail.results);
-        setIsCalculating(false);
+    const handleResultsUpdated = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      setResults(customEvent.detail.results);
+      setIsLoading(false);
+      
+      // Store export data
+      if (customEvent.detail.results) {
+        setExportData({
+          calculatorId: customEvent.detail.calculatorId || 'calculator',
+          results: customEvent.detail.results,
+          inputs: customEvent.detail.inputs || {},
+          timestamp: new Date().toISOString()
+        });
       }
     };
 
-    const handleCalculationStart = () => {
-      setIsCalculating(true);
+    const handleCalculationStarted = () => {
+      setIsLoading(true);
     };
 
-    // @ts-ignore
-    window.addEventListener('calculatorResultsUpdated', handleResultsUpdate);
-    // @ts-ignore
-    window.addEventListener('calculationStarted', handleCalculationStart);
+    const handleResetCalculator = () => {
+      setResults(null);
+      setExportData(null);
+      setIsLoading(false);
+    };
+
+    window.addEventListener('calculatorResultsUpdated', handleResultsUpdated as EventListener);
+    window.addEventListener('calculationStarted', handleCalculationStarted);
+    window.addEventListener('resetCalculator', handleResetCalculator);
 
     return () => {
-      // @ts-ignore
-      window.removeEventListener('calculatorResultsUpdated', handleResultsUpdate);
-      // @ts-ignore
-      window.removeEventListener('calculationStarted', handleCalculationStart);
+      window.removeEventListener('calculatorResultsUpdated', handleResultsUpdated as EventListener);
+      window.removeEventListener('calculationStarted', handleCalculationStarted);
+      window.removeEventListener('resetCalculator', handleResetCalculator);
     };
-  }, [calculatorId]);
+  }, []);
+
+  const generatePDF = () => {
+    if (!exportData) return;
+    
+    // Import jsPDF dynamically
+    import('jspdf').then((jsPDFModule) => {
+      import('jspdf-autotable').then((autoTableModule) => {
+        const { jsPDF } = jsPDFModule;
+        const autoTable = autoTableModule.default;
+        
+        const doc = new jsPDF();
+        const pageWidth = doc.internal.pageSize.width;
+        
+        // Header
+        doc.setFontSize(20);
+        doc.setTextColor(0, 102, 204);
+        doc.text(exportData.results.title || title, pageWidth / 2, 20, { align: 'center' });
+        
+        doc.setFontSize(12);
+        doc.setTextColor(100, 100, 100);
+        doc.text(`Generated: ${new Date().toLocaleDateString()}`, pageWidth / 2, 30, { align: 'center' });
+        
+        let yPos = 45;
+        
+        // Summary
+        if (exportData.results.summary) {
+          doc.setFontSize(14);
+          doc.setTextColor(0, 0, 0);
+          doc.text('Summary', 14, yPos);
+          yPos += 10;
+          
+          doc.setFontSize(11);
+          doc.setTextColor(60, 60, 60);
+          const splitSummary = doc.splitTextToSize(exportData.results.summary, pageWidth - 28);
+          doc.text(splitSummary, 14, yPos);
+          yPos += splitSummary.length * 7 + 10;
+        }
+        
+        // Metrics
+        if (exportData.results.metrics && exportData.results.metrics.length > 0) {
+          doc.setFontSize(14);
+          doc.setTextColor(0, 0, 0);
+          doc.text('Key Metrics', 14, yPos);
+          yPos += 10;
+          
+          const metricsData = exportData.results.metrics.map((metric: any) => [
+            metric.label,
+            metric.value + (metric.unit || '')
+          ]);
+          
+          autoTable(doc, {
+            startY: yPos,
+            head: [['Metric', 'Value']],
+            body: metricsData,
+            theme: 'grid',
+            headStyles: { fillColor: [0, 102, 204], textColor: 255 },
+            styles: { fontSize: 11, cellPadding: 5 },
+            margin: { left: 14, right: 14 }
+          });
+          
+          yPos = (doc as any).lastAutoTable.finalY + 15;
+        }
+        
+        // Breakdown
+        if (exportData.results.breakdown && exportData.results.breakdown.length > 0) {
+          doc.setFontSize(14);
+          doc.setTextColor(0, 0, 0);
+          doc.text('Calculation Details', 14, yPos);
+          yPos += 10;
+          
+          const breakdownData = exportData.results.breakdown.map((item: any) => [
+            item.label,
+            item.value
+          ]);
+          
+          autoTable(doc, {
+            startY: yPos,
+            head: [['Item', 'Value']],
+            body: breakdownData,
+            theme: 'grid',
+            headStyles: { fillColor: [60, 60, 60], textColor: 255 },
+            styles: { fontSize: 11, cellPadding: 5 },
+            margin: { left: 14, right: 14 }
+          });
+        }
+        
+        // Footer
+        const pageHeight = doc.internal.pageSize.height;
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Generated by Development Pro Calculators', pageWidth / 2, pageHeight - 10, { align: 'center' });
+        
+        // Save PDF
+        const fileName = `${(exportData.results.title || title).replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+        doc.save(fileName);
+      });
+    }).catch(error => {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    });
+  };
+
+  const generateCSVData = () => {
+    if (!exportData) return [];
+    
+    const csvData = [];
+    
+    // Header
+    csvData.push([exportData.results.title || title]);
+    csvData.push(['Generated on:', new Date().toLocaleString()]);
+    csvData.push([]);
+    
+    // Summary
+    if (exportData.results.summary) {
+      csvData.push(['Summary']);
+      csvData.push([exportData.results.summary]);
+      csvData.push([]);
+    }
+    
+    // Metrics
+    if (exportData.results.metrics && exportData.results.metrics.length > 0) {
+      csvData.push(['Key Metrics']);
+      exportData.results.metrics.forEach((metric: any) => {
+        csvData.push([metric.label, metric.value + (metric.unit || '')]);
+      });
+      csvData.push([]);
+    }
+    
+    // Breakdown
+    if (exportData.results.breakdown && exportData.results.breakdown.length > 0) {
+      csvData.push(['Calculation Details']);
+      exportData.results.breakdown.forEach((item: any) => {
+        csvData.push([item.label, item.value]);
+      });
+    }
+    
+    return csvData;
+  };
+
+  const handleReset = () => {
+    window.dispatchEvent(new CustomEvent('resetCalculator'));
+  };
 
   if (!isOpen) return null;
 
-  const handleExportPDF = () => {
-    // Will be implemented with export functionality
-    alert('PDF export will be available soon');
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const handleSaveCalculation = () => {
-    const event = new CustomEvent('saveCalculation', {
-      detail: { calculatorId, title, results }
-    });
-    window.dispatchEvent(event);
-  };
-
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div 
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-      />
-      
-      {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden">
-          {/* Header */}
-          <div className="sticky top-0 z-10 bg-white border-b border-slate-200 px-6 py-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
-                <p className="text-sm text-slate-600 mt-1">
-                  Enter values on the left, see results on the right
-                </p>
-              </div>
-              
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleSaveCalculation}
-                    className="flex items-center gap-2 px-3 py-2 text-sm bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors"
-                    title="Save calculation"
-                  >
-                    <Save className="w-4 h-4" />
-                    <span className="hidden sm:inline">Save</span>
-                  </button>
-                  <button
-                    onClick={handleExportPDF}
-                    className="flex items-center gap-2 px-3 py-2 text-sm bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
-                    title="Export as PDF"
-                  >
-                    <FileText className="w-4 h-4" />
-                    <span className="hidden sm:inline">PDF</span>
-                  </button>
-                  <button
-                    onClick={handlePrint}
-                    className="flex items-center gap-2 px-3 py-2 text-sm bg-slate-500 text-white rounded-lg hover:bg-slate-600 transition-colors"
-                    title="Print"
-                  >
-                    <Printer className="w-4 h-4" />
-                    <span className="hidden sm:inline">Print</span>
-                  </button>
-                </div>
-                
-                <button
-                  onClick={onClose}
-                  className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-                  title="Close"
-                >
-                  <X className="w-6 h-6 text-slate-600" />
-                </button>
-              </div>
-            </div>
+        ref={modalRef}
+        className="bg-white rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-slate-200 bg-gradient-to-r from-slate-900 to-blue-900 text-white">
+          <div>
+            <h2 className="text-2xl font-bold">{title}</h2>
+            <p className="text-slate-300 text-sm">Interactive calculator with real-time results</p>
           </div>
-          
-          {/* Content */}
-          <div className="flex flex-col lg:flex-row h-[calc(90vh-80px)]">
-            {/* Inputs Panel */}
-            <div className="lg:w-1/2 border-r border-slate-200 overflow-y-auto p-6">
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-4">Input Parameters</h3>
-                <div className="h-1 w-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></div>
-              </div>
-              {children}
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Close calculator"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 flex overflow-hidden">
+          {/* Left Panel - Calculator Inputs */}
+          <div className="w-1/2 border-r border-slate-200 overflow-y-auto p-6">
+            {children}
+          </div>
+
+          {/* Right Panel - Results */}
+          <div className="w-1/2 bg-gradient-to-b from-slate-50 to-white overflow-y-auto p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-slate-900">Results & Analysis</h3>
+              <button
+                onClick={handleReset}
+                className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+              >
+                Reset Calculator
+              </button>
             </div>
-            
-            {/* Results Panel */}
-            <div className="lg:w-1/2 bg-gradient-to-br from-slate-50 to-blue-50 overflow-y-auto p-6">
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-4">Results & Analysis</h3>
-                <div className="h-1 w-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"></div>
+
+            {isLoading ? (
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center">
+                  <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p className="text-slate-600">Calculating results...</p>
+                </div>
               </div>
-              
-              {/* Results Display */}
+            ) : results ? (
               <div className="space-y-6">
-                {isCalculating ? (
-                  <div className="text-center py-12">
-                    <div className="w-16 h-16 mx-auto mb-4">
-                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-500"></div>
-                    </div>
-                    <p className="text-lg font-medium text-slate-900">Calculating...</p>
-                    <p className="text-sm text-slate-600 mt-2">Processing your inputs</p>
-                  </div>
-                ) : results ? (
-                  <>
-                    {/* Summary Card */}
-                    <div className="bg-white rounded-xl p-6 border border-slate-200">
-                      <div className="flex items-center justify-between mb-4">
-                        <h4 className="font-bold text-slate-900">Calculation Summary</h4>
-                        <div className="flex items-center gap-2">
-                          <CalcIcon className="w-4 h-4 text-slate-400" />
-                          <span className="text-sm text-slate-600">Results</span>
-                        </div>
-                      </div>
-                      
-                      {/* Key Metrics */}
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        {results.metrics.slice(0, 4).map((metric, index) => (
-                          <div 
-                            key={index} 
-                            className={`p-4 rounded-lg ${
-                              metric.color === 'positive' ? 'bg-emerald-50' :
-                              metric.color === 'warning' ? 'bg-amber-50' :
-                              metric.color === 'negative' ? 'bg-red-50' : 'bg-slate-50'
-                            }`}
-                          >
-                            <div className="text-sm text-slate-600 mb-1">{metric.label}</div>
-                            <div className="text-2xl font-bold text-slate-900">
-                              {metric.value} {metric.unit || ''}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      {results.summary && (
-                        <div className="mt-4 pt-4 border-t border-slate-200">
-                          <p className="text-slate-700">{results.summary}</p>
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Breakdown Table */}
-                    {results.breakdown && results.breakdown.length > 0 && (
-                      <div className="bg-white rounded-xl p-6 border border-slate-200">
-                        <h4 className="font-bold text-slate-900 mb-4">Detailed Breakdown</h4>
-                        <div className="space-y-3">
-                          {results.breakdown.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
-                              <span className="text-slate-700">{item.label}</span>
-                              <span className="font-bold text-slate-900">{item.value}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    
-                    {/* Recommendations */}
-                    <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
-                      <h4 className="font-bold text-slate-900 mb-3">Recommendations</h4>
-                      <ul className="space-y-2">
-                        <li className="flex items-start gap-2">
-                          <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2"></div>
-                          <span className="text-slate-700">Review all calculated values for accuracy</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2"></div>
-                          <span className="text-slate-700">Consider market conditions and contingencies</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-2 h-2 bg-cyan-500 rounded-full mt-2"></div>
-                          <span className="text-slate-700">Consult with financial advisors for major projects</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-center py-12 text-slate-400">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
-                      <CalcIcon className="w-8 h-8 text-slate-300" />
-                    </div>
-                    <p className="text-lg font-medium">Enter values to see results</p>
-                    <p className="text-sm mt-2">Results will appear here as you input data</p>
+                {/* Summary */}
+                {results.summary && (
+                  <div className="bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-200 rounded-xl p-5">
+                    <h4 className="font-bold text-cyan-800 mb-2">Summary</h4>
+                    <p className="text-cyan-700">{results.summary}</p>
                   </div>
                 )}
-              </div>
 
-              {/* Action Buttons */}
-              <div className="mt-8 pt-8 border-t border-slate-200">
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={handleSaveCalculation}
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-cyan-500 text-white rounded-lg font-medium hover:bg-cyan-600 transition-colors"
-                  >
-                    <Save className="w-4 h-4" />
-                    Save Results
-                  </button>
-                  <button
-                    onClick={() => {
-                      const event = new CustomEvent('viewSavedCalculations');
-                      window.dispatchEvent(event);
-                    }}
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300 transition-colors"
-                  >
-                    <Clock className="w-4 h-4" />
-                    View Saved
-                  </button>
-                </div>
-                
-                <div className="mt-4 text-center">
-                  <button
-                    onClick={() => {
-                      // Reset calculator
-                      const event = new CustomEvent('resetCalculator', { detail: { calculatorId } });
-                      window.dispatchEvent(event);
-                    }}
-                    className="text-sm text-slate-600 hover:text-slate-900 hover:underline"
-                  >
-                    Reset Calculator
-                  </button>
+                {/* Key Metrics */}
+                {results.metrics && results.metrics.length > 0 && (
+                  <div className="grid grid-cols-2 gap-4">
+                    {results.metrics.map((metric, index) => (
+                      <div
+                        key={index}
+                        className={`p-4 rounded-xl border ${
+                          metric.color === 'positive'
+                            ? 'bg-emerald-50 border-emerald-200'
+                            : metric.color === 'negative'
+                            ? 'bg-red-50 border-red-200'
+                            : metric.color === 'warning'
+                            ? 'bg-amber-50 border-amber-200'
+                            : 'bg-white border-slate-200'
+                        }`}
+                      >
+                        <div className="text-sm text-slate-600 mb-1">{metric.label}</div>
+                        <div
+                          className={`text-2xl font-bold ${
+                            metric.color === 'positive'
+                              ? 'text-emerald-700'
+                              : metric.color === 'negative'
+                              ? 'text-red-700'
+                              : metric.color === 'warning'
+                              ? 'text-amber-700'
+                              : 'text-slate-900'
+                          }`}
+                        >
+                          {metric.value}
+                          {metric.unit && <span className="text-sm font-normal ml-1">{metric.unit}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Breakdown */}
+                {results.breakdown && results.breakdown.length > 0 && (
+                  <div className="bg-white rounded-xl border border-slate-200 p-5">
+                    <h4 className="font-bold text-slate-900 mb-4">Calculation Breakdown</h4>
+                    <div className="space-y-3">
+                      {results.breakdown.map((item, index) => (
+                        <div key={index} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
+                          <span className="text-slate-700">{item.label}</span>
+                          <span className="font-bold text-slate-900">{item.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Export Buttons */}
+                <div className="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                  <h4 className="font-bold text-slate-900 mb-4">Export Results</h4>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={generatePDF}
+                      disabled={!exportData}
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-w-[140px]"
+                    >
+                      <Download className="w-4 h-4" />
+                      Export PDF
+                    </button>
+                    
+                    {exportData && (
+                      <CSVLink
+                        data={generateCSVData()}
+                        filename={`${(results.title || title).replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.csv`}
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors min-w-[140px] no-underline"
+                      >
+                        <FileText className="w-4 h-4" />
+                        Export CSV
+                      </CSVLink>
+                    )}
+                  </div>
+                  {!exportData && (
+                    <p className="text-sm text-slate-500 mt-2 text-center">
+                      Enter values to enable export
+                    </p>
+                  )}
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-64 text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg"></div>
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">No Results Yet</h4>
+                <p className="text-slate-600 max-w-md">
+                  Enter values in the calculator to see real-time results and analysis here.
+                  The results will update automatically as you adjust the inputs.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

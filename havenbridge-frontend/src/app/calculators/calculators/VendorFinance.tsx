@@ -7,21 +7,46 @@ import { formatCurrency, formatNumber } from '../utils/formatters';
 
 export default function VendorFinanceCalculator() {
   const [inputs, setInputs] = useState({
-    purchasePrice: '800000',
-    deposit: '20',
-    interestRate: '6',
-    term: '5',
-    balloonPayment: '0',
+    purchasePrice: '',
+    deposit: '',
+    interestRate: '',
+    term: '',
+    balloonPayment: '',
     paymentFrequency: 'monthly'
   });
 
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [results, setResults] = useState<any>(null);
 
+  // Reset handler for modal reset button
+  useEffect(() => {
+    const handleReset = () => {
+      setInputs({
+        purchasePrice: '',
+        deposit: '',
+        interestRate: '',
+        term: '',
+        balloonPayment: '',
+        paymentFrequency: 'monthly'
+      });
+      setHasCalculated(false);
+      setResults(null);
+    };
+
+    window.addEventListener('resetCalculator', handleReset);
+    return () => window.removeEventListener('resetCalculator', handleReset);
+  }, []);
+
+  // Calculate whenever inputs change
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (Object.values(inputs).some(val => val && (typeof val === 'string'))) {
+      const hasValues = inputs.purchasePrice && parseFloat(inputs.purchasePrice) > 0;
+      if (hasValues) {
         calculateAndUpdateResults();
         setHasCalculated(true);
+      } else {
+        setResults(null);
+        setHasCalculated(false);
       }
     }, 500);
 
@@ -37,11 +62,13 @@ export default function VendorFinanceCalculator() {
   const calculateAndUpdateResults = () => {
     window.dispatchEvent(new CustomEvent('calculationStarted'));
     const results = calculateResults();
+    setResults(results);
     
     const event = new CustomEvent('calculatorResultsUpdated', {
       detail: {
         calculatorId: 'vendor-finance',
-        results: results
+        results: results,
+        inputs: inputs
       }
     });
     window.dispatchEvent(event);
@@ -120,14 +147,15 @@ export default function VendorFinanceCalculator() {
 
   const handleReset = () => {
     setInputs({
-      purchasePrice: '800000',
-      deposit: '20',
-      interestRate: '6',
-      term: '5',
-      balloonPayment: '0',
+      purchasePrice: '',
+      deposit: '',
+      interestRate: '',
+      term: '',
+      balloonPayment: '',
       paymentFrequency: 'monthly'
     });
     setHasCalculated(false);
+    window.dispatchEvent(new CustomEvent('resetCalculator'));
   };
 
   return (
@@ -139,7 +167,7 @@ export default function VendorFinanceCalculator() {
           value={inputs.purchasePrice}
           onChange={(value) => handleInputChange('purchasePrice', value)}
           prefix="$"
-          placeholder="800,000"
+          placeholder="e.g., 800,000"
           helpText="Total purchase price of the property"
         />
         
@@ -149,7 +177,7 @@ export default function VendorFinanceCalculator() {
           value={inputs.deposit}
           onChange={(value) => handleInputChange('deposit', value)}
           suffix="%"
-          placeholder="20"
+          placeholder="e.g., 20"
           helpText="Initial deposit as percentage of purchase price"
         />
       </div>
@@ -161,7 +189,7 @@ export default function VendorFinanceCalculator() {
           value={inputs.interestRate}
           onChange={(value) => handleInputChange('interestRate', value)}
           suffix="%"
-          placeholder="6"
+          placeholder="e.g., 6"
           helpText="Annual interest rate charged by vendor"
         />
         
@@ -171,7 +199,7 @@ export default function VendorFinanceCalculator() {
           value={inputs.term}
           onChange={(value) => handleInputChange('term', value)}
           suffix="years"
-          placeholder="5"
+          placeholder="e.g., 5"
           helpText="Length of the vendor finance agreement"
         />
       </div>
@@ -183,7 +211,7 @@ export default function VendorFinanceCalculator() {
           value={inputs.balloonPayment}
           onChange={(value) => handleInputChange('balloonPayment', value)}
           suffix="%"
-          placeholder="0"
+          placeholder="e.g., 0"
           helpText="Percentage of loan due at end of term (optional)"
         />
         
@@ -195,7 +223,7 @@ export default function VendorFinanceCalculator() {
             <Calendar className="w-5 h-5 text-slate-400" />
             <select
               value={inputs.paymentFrequency}
-              onChange={(e) => handleInputChange('paymentFrequency', e.target.value)}
+              onChange={(e) => setInputs(prev => ({ ...prev, paymentFrequency: e.target.value }))}
               className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-900 bg-white"
             >
               <option value="monthly">Monthly</option>
@@ -206,12 +234,38 @@ export default function VendorFinanceCalculator() {
         </div>
       </div>
 
+      {/* Example Scenario */}
+      <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <DollarSign className="w-4 h-4 text-slate-600" />
+          <span className="text-sm font-medium text-slate-800">Example Scenario</span>
+        </div>
+        <p className="text-sm text-slate-700">
+          $800k property, 20% deposit, 6% interest, 5-year term, monthly payments
+        </p>
+        <button
+          onClick={() => {
+            setInputs({
+              purchasePrice: '800000',
+              deposit: '20',
+              interestRate: '6',
+              term: '5',
+              balloonPayment: '0',
+              paymentFrequency: 'monthly'
+            });
+          }}
+          className="mt-2 text-sm text-slate-700 hover:text-slate-800 font-medium"
+        >
+          Load this example →
+        </button>
+      </div>
+
       {/* Action Buttons */}
       <div className="flex gap-4 pt-4 border-t border-slate-200">
         <button
           onClick={calculateAndUpdateResults}
           className="flex-1 flex items-center justify-center gap-2 bg-cyan-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-cyan-600 transition-colors"
-          disabled={!Object.values(inputs).some(val => val)}
+          disabled={!inputs.purchasePrice}
         >
           <DollarSign className="w-4 h-4" />
           Calculate Now
