@@ -48,6 +48,7 @@ import {
   Building as Structure,
   Award as Achievement,
   Target as Goal,
+  Linkedin,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -106,6 +107,7 @@ export default function AboutPage() {
       expertise: ["Government Policy", "Strategic Planning", "Social Outcomes"],
       color: "from-amber-400 to-amber-500",
       image: "/team/John-Kuot.png",
+      linkedin: "https://linkedin.com/in/johnkuot",
     },
     {
       name: "Angok Lueth",
@@ -114,6 +116,7 @@ export default function AboutPage() {
       expertise: ["Project Delivery", "Development Planning", "NDIS/SDA"],
       color: "from-cyan-500 to-blue-500",
       image: "/team/Angok-Lueth.png",
+      linkedin: "https://linkedin.com/in/angoklueth",
     },
     {
       name: "Him Malhotra",
@@ -122,6 +125,7 @@ export default function AboutPage() {
       expertise: ["Land Acquisition", "Deal Structuring", "Market Analysis"],
       color: "from-emerald-500 to-green-500",
       image: "/team/Him.jpg",
+      linkedin: "https://linkedin.com/in/himmalhotra",
     },
   ];
 
@@ -723,9 +727,21 @@ export default function AboutPage() {
 
                       <div className="p-6 sm:p-8 flex-1 flex flex-col">
                         <div className="mb-4 sm:mb-6">
-                          <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
-                            {person.name}
-                          </h3>
+                          <div className="flex justify-between items-start mb-1">
+                            <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                              {person.name}
+                            </h3>
+                            {/* LinkedIn Icon - Added on far right of name */}
+                            <a
+                              href={person.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-slate-400 hover:text-blue-600 transition-colors p-1 hover:bg-blue-50 rounded-md"
+                              aria-label={`Connect with ${person.name} on LinkedIn`}
+                            >
+                              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
+                            </a>
+                          </div>
                           <p className="text-xs sm:text-sm font-semibold text-amber-600 mb-2 sm:mb-3">
                             {person.title}
                           </p>
