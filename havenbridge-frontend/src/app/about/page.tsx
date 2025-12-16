@@ -739,7 +739,7 @@ export default function AboutPage() {
                               className="text-slate-400 hover:text-blue-600 transition-colors p-1 hover:bg-blue-50 rounded-md"
                               aria-label={`Connect with ${person.name} on LinkedIn`}
                             >
-                              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
+                              <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 bg-gray-100 p-1 rounded" />
                             </a>
                           </div>
                           <p className="text-xs sm:text-sm font-semibold text-amber-600 mb-2 sm:mb-3">
