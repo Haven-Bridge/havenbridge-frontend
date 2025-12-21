@@ -377,13 +377,6 @@ export default function HavenBridgeLanding() {
                       </div>
                     )}
 
-                    {/* Icon badge */}
-                    <div
-                      className={`absolute top-4 left-4 p-3 rounded-lg bg-linear-to-br ${service.color}`}
-                    >
-                      <service.icon className="w-6 h-6 text-white" />
-                    </div>
-
                     {/* Stats badge */}
                     <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
                       <span className="text-sm font-bold text-slate-900">
