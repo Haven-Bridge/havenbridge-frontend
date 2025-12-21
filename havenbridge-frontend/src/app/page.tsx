@@ -40,8 +40,7 @@ export default function HavenBridgeLanding() {
       title: "Affordable & Social Housing Development",
       desc: "Community-focused housing solutions aligned with government programs like HAFF and the Big Housing Build.",
       link: "/services",
-      imageUrl:
-        "https://plus.unsplash.com/premium_photo-1676983352797-a12800a05dfb?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageUrl: "/services/affordable-housing.jpg",
       color: "from-amber-400 to-amber-500",
       stats: "500+ Homes",
     },
@@ -50,8 +49,7 @@ export default function HavenBridgeLanding() {
       title: "Rooming Houses & Community Accommodation",
       desc: "High-yield, fully compliant rooming house and community accommodation developments across key growth corridors.",
       link: "/services",
-      imageUrl:
-        "https://media.istockphoto.com/id/1440036658/photo/row-of-townhouses-in-winter.webp?a=1",
+      imageUrl: "/services/rooming-houses.jpg",
       color: "from-cyan-500 to-blue-500",
       stats: "High Yield",
     },
@@ -60,6 +58,7 @@ export default function HavenBridgeLanding() {
       title: "Aged Care & NDIS Housing",
       desc: "Faith- and culturally-aligned aged care, SIL, and SDA housing designed for dignity, safety, and inclusion.",
       link: "/services",
+      imageUrl: "/services/aged-care.jpg",
       color: "from-emerald-500 to-green-500",
       stats: "Specialist Care",
     },
@@ -68,6 +67,7 @@ export default function HavenBridgeLanding() {
       title: "Childcare Centre Development",
       desc: "End-to-end delivery of compliant childcare centres aligned with Victorian Education & Care regulations.",
       link: "/services",
+      imageUrl: "/services/childcare-centre.jpg",
       color: "from-violet-500 to-purple-500",
       stats: "Family Focused",
     },
@@ -76,6 +76,7 @@ export default function HavenBridgeLanding() {
       title: "Cabin Parks & Modular Housing",
       desc: "Modular cabin parks for transitional housing, crisis accommodation, workers villages, and faith-based housing.",
       link: "/services",
+      imageUrl: "/services/cabin-parks.jpg",
       color: "from-orange-500 to-red-500",
       stats: "Flexible Solutions",
     },
@@ -84,6 +85,7 @@ export default function HavenBridgeLanding() {
       title: "End-to-End Development Management",
       desc: "Full lifecycle development and project management from feasibility through delivery and risk management.",
       link: "/services",
+      imageUrl: "/services/development-management.jpg",
       color: "from-indigo-500 to-purple-500",
       stats: "Full Service",
     },
@@ -236,8 +238,9 @@ export default function HavenBridgeLanding() {
         </div>
 
         <div className="container mx-auto px-3 lg:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column - Content */}
+            <div className="lg:col-span-5">
               {/* Animated header */}
               <div className="relative inline-block mb-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
@@ -278,9 +281,9 @@ export default function HavenBridgeLanding() {
               </div>
             </div>
 
-            {/* Right Column - Hero Image (Hidden on Mobile) */}
-            <div className="hidden lg:block relative">
-              <div className="relative h-[420px]  rounded-2xl overflow-hidden">
+            {/* Right Column - Hero Image (Hidden on Mobile) - Takes up 7 columns for more prominence */}
+            <div className="hidden lg:block lg:col-span-7 relative">
+              <div className="relative h-[550px] rounded-2xl overflow-hidden shadow-2xl">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
@@ -289,8 +292,8 @@ export default function HavenBridgeLanding() {
                   src="/hero-images/hero.jpeg"
                   alt="HavenBridge Development - Community-focused housing solutions"
                   fill
-                  className="object-fil"
-                  sizes="(max-width: 1024px) 0px, 50vw"
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 0px, 60vw"
                   priority
                 />
               </div>
