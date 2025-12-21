@@ -1,7 +1,9 @@
 "use client";
-
-import React from "react";
+import Footer from "@/components/Footer";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import React from "react";
+
 import {
   Target,
   Shield,
@@ -50,8 +52,6 @@ import {
   Target as Goal,
   Linkedin,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function AboutPage() {
   const values = [
@@ -218,7 +218,7 @@ export default function AboutPage() {
 
                 {/* Main Image */}
                 <Image
-                  src="/hero-images/about.jpg"
+                  src="/about-images/about-us.jpeg"
                   alt="HavenBridge Development - Community-focused housing solutions"
                   fill
                   className="object-fill"
@@ -358,7 +358,7 @@ export default function AboutPage() {
                   {/* Replace with actual image */}
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-blue-900">
                     <Image
-                      src="/about-images/Chapter-1.jpg"
+                      src="/about-images/values-led.jpeg"
                       alt="Story Image 1"
                       fill
                       className="object-cover opacity-50"
@@ -472,7 +472,7 @@ export default function AboutPage() {
                   {/* Replace with actual image */}
                   <div className="absolute inset-0 bg-linear-to-br from-slate-800 to-blue-900">
                     <Image
-                      src="/about-images/Chapter3.png"
+                      src="/about-images/community.jpeg"
                       alt="Story Image 3"
                       fill
                       className="object-cover opacity-50"

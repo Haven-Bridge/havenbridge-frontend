@@ -1,10 +1,9 @@
 "use client";
-
-import React from 'react';
-import { ArrowRight, MapPin, Building2, Users, TrendingUp, DollarSign, Calendar, CheckCircle, Briefcase, Target, Award, BarChart3, Home, Shield } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Image from 'next/image';
+import Footer from "@/components/Footer";
+import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import React from "react";
+import { ArrowRight, Award, BarChart3, Briefcase, Building2, Calendar, CheckCircle, DollarSign, Home, MapPin, Shield, Target, TrendingUp, Users } from "lucide-react";
 
 export default function ProjectsPage() {
   const projects = [
@@ -16,6 +15,7 @@ export default function ProjectsPage() {
       status: "Completed",
       year: "2024",
       value: "$12.5M",
+      image: "melbourne-modular-village.jpeg", // Added
       roi: "18% IRR",
       desc: "Sustainable modular housing community featuring energy-efficient homes and community spaces with strong rental yields.",
       highlights: ["Government Partnership", "100% Occupied", "ESG Compliant"]
@@ -28,6 +28,7 @@ export default function ProjectsPage() {
       status: "Completed",
       year: "2024",
       value: "$28M",
+      image: "sunrise-care-centre.jpeg", // Added
       roi: "22% IRR",
       desc: "State-of-the-art aged care facility with modern amenities generating stable long-term returns.",
       highlights: ["Federal Funding", "95% Occupancy", "20-Year Lease"]
@@ -40,6 +41,7 @@ export default function ProjectsPage() {
       status: "In Progress",
       year: "2025",
       value: "$15.8M",
+      image: "community-hub-brisbane.jpeg", // Added
       roi: "Est. 20% IRR",
       desc: "Mixed-use development combining affordable housing with community facilities and retail generating multiple revenue streams.",
       highlights: ["Multi-Income", "Council Support", "Q2 2025 Completion"]
@@ -52,6 +54,7 @@ export default function ProjectsPage() {
       status: "Completed",
       year: "2023",
       value: "$8.2M",
+      image: "adelaide-childcare-centre.jpeg", // Added
       roi: "19% IRR",
       desc: "Purpose-built childcare facility with strong demand and stable government-backed income.",
       highlights: ["CCS Approved", "Waitlist Full", "Triple Net Lease"]
@@ -64,6 +67,7 @@ export default function ProjectsPage() {
       status: "Completed",
       year: "2023",
       value: "$4.8M",
+      image: "perth-rooming-house-complex.jpeg", // Added
       roi: "16% IRR",
       desc: "Affordable rooming house providing safe accommodation with consistent cash flow and low vacancy.",
       highlights: ["NRAS Eligible", "Social Impact", "Stable Tenancy"]
@@ -76,6 +80,7 @@ export default function ProjectsPage() {
       status: "In Progress",
       year: "2025",
       value: "$22M",
+      image: "canberra-social-housing-project.jpeg", // Added
       roi: "Est. 17% IRR",
       desc: "Government partnership delivering affordable social housing with guaranteed rental income.",
       highlights: ["Gov't Backed", "NRAS Income", "Long-term Lease"]
@@ -193,15 +198,14 @@ export default function ProjectsPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-blue-900 to-cyan-900">
                    <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
                   
-                                  {/* Main Image */}
-                                  <Image
-                                    src="/project-images/Hero.jpg"
-                                    alt="HavenBridge Development Projects"
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 1024px) 0px, 50vw"
-                                    priority
-                                  />
+                      <Image
+                      src="/project-images/hero.jpeg"
+                      alt="HavenBridge Development Projects"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 0px, 50vw"
+                      priority
+                    />
                 </div>
                 
                 {/* Floating Stats */}
@@ -306,93 +310,93 @@ export default function ProjectsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, i) => (
-              <div 
-                key={i} 
-                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
-              >
-                {/* Project Image */}
-                <div className="aspect-4/3 bg-linear-to-br from-slate-800 to-slate-600 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <Building2 className="w-12 h-12 mx-auto mb-2 opacity-30" />
-                      <p className="text-sm opacity-50">[Project Image]</p>
-                    </div>
-                  </div>
-                  {/* Replace with: <Image src={`/projects/${project.name}.jpg`} ... /> */}
-                  
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-                  
-                  {/* Status Badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold backdrop-blur-sm ${
-                      project.status === "Completed" 
-                        ? "bg-green-500/90 text-white" 
-                        : "bg-amber-500/90 text-slate-900"
-                    }`}>
-                      {project.status}
-                    </span>
-                  </div>
+          {projects.map((project, i) => (
+  <div 
+    key={i} 
+    className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
+  >
+    {/* Project Image */}
+    <div className="aspect-4/3 bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
+      <Image 
+        src={`/projects/${project.image}`}
+        alt={project.name}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+      
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+      
+      {/* Status Badge */}
+      <div className="absolute top-4 right-4 z-10">
+        <span className={`px-3 py-1 rounded-full text-xs font-bold backdrop-blur-sm ${
+          project.status === "Completed" 
+            ? "bg-green-500/90 text-white" 
+            : "bg-amber-500/90 text-slate-900"
+        }`}>
+          {project.status}
+        </span>
+      </div>
 
-                  {/* Financial Metrics Overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <div className="flex gap-2">
-                      <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/20 flex-1">
-                        <div className="text-xs text-gray-200 mb-0.5">Value</div>
-                        <div className="text-sm font-bold text-white">{project.value}</div>
-                      </div>
-                      <div className="bg-emerald-500/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-emerald-400/30 flex-1">
-                        <div className="text-xs text-emerald-200 mb-0.5">IRR</div>
-                        <div className="text-sm font-bold text-emerald-300">{project.roi}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Project Details */}
-                <div className="p-6">
-                  <div className="mb-3">
-                    <span className="bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
-                      {project.type}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-cyan-600 transition-colors">
-                    {project.name}
-                  </h3>
-                  
-                  <div className="flex items-center gap-2 text-gray-600 mb-2">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{project.location}</span>
-                  </div>
-                  
-                  <p className="text-cyan-600 font-semibold mb-3 text-sm">
-                    {project.units} • {project.year}
-                  </p>
-                  
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                    {project.desc}
-                  </p>
+      {/* Financial Metrics Overlay */}
+      <div className="absolute bottom-4 left-4 right-4 z-10">
+        <div className="flex gap-2">
+          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/20 flex-1">
+            <div className="text-xs text-gray-200 mb-0.5">Value</div>
+            <div className="text-sm font-bold text-white">{project.value}</div>
+          </div>
+          <div className="bg-emerald-500/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-emerald-400/30 flex-1">
+            <div className="text-xs text-emerald-200 mb-0.5">IRR</div>
+            <div className="text-sm font-bold text-emerald-300">{project.roi}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {/* Project Details */}
+    <div className="p-6">
+      <div className="mb-3">
+        <span className="bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
+          {project.type}
+        </span>
+      </div>
+      
+      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-cyan-600 transition-colors">
+        {project.name}
+      </h3>
+      
+      <div className="flex items-center gap-2 text-gray-600 mb-2">
+        <MapPin className="w-4 h-4" />
+        <span className="text-sm">{project.location}</span>
+      </div>
+      
+      <p className="text-cyan-600 font-semibold mb-3 text-sm">
+        {project.units} • {project.year}
+      </p>
+      
+      <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+        {project.desc}
+      </p>
 
-                  {/* Highlights */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.highlights.map((highlight, j) => (
-                      <span key={j} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full font-medium">
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <a 
-                    href="/contact"
-                    className="inline-flex items-center text-cyan-500 font-semibold hover:gap-2 transition-all group"
-                  >
-                    View Case Study 
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </div>
-              </div>
-            ))}
+      {/* Highlights */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.highlights.map((highlight, j) => (
+          <span key={j} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full font-medium">
+            {highlight}
+          </span>
+        ))}
+      </div>
+      
+      <a 
+        href="/contact"
+        className="inline-flex items-center text-cyan-500 font-semibold hover:gap-2 transition-all group"
+      >
+        View Case Study 
+        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+  </div>
+))}
           </div>
         </div>
       </section>

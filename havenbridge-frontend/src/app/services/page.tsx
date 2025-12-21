@@ -1,7 +1,9 @@
 "use client";
-
-import React from "react";
+import Footer from "@/components/Footer";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import React from "react";
+
 import {
   Home,
   Building,
@@ -21,8 +23,6 @@ import {
   Target,
   Zap,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function ServicesPage() {
   const services = [
@@ -190,7 +190,7 @@ export default function ServicesPage() {
 
                 {/* Main Image */}
                 <Image
-                  src="/hero-images/services.jpg"
+                  src="/hero-images/service-hero.jpeg"
                   alt="HavenBridge Development Services - Comprehensive property development solutions"
                   fill
                   className="object-cover"

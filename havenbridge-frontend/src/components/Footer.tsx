@@ -1,7 +1,6 @@
 "use client";
-
-import Image from 'next/image';
-import { Home, Heart, Shield, Building2, MapPin, Phone, Mail, Newspaper, FileText, ClipboardCheck, Download, Calculator } from 'lucide-react';
+import Image from "next/image";
+import { Building2, Calculator, ClipboardCheck, Download, FileText, Heart, Home, Mail, MapPin, Newspaper, Phone, Shield } from "lucide-react";
 
 export default function Footer() {
   const services = [
@@ -45,16 +44,16 @@ export default function Footer() {
               <div className="relative w-32 h-32 mx-auto mb-4 group">
                 <div className="absolute inset-0 bg-linear-to-br from-amber-400/10 to-cyan-500/10 rounded-2xl transform group-hover:rotate-3 transition-transform duration-300"></div>
                 <div className="relative w-full h-full flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-4">
-                  <Image
-                    src="/logo2.png"
-                    alt="HavenBridge logo"
-                    fill
-                    className="object-contain p-2 transform group-hover:scale-105 transition-transform duration-300"
-                    sizes="128px"
-                    quality={100}
-                    priority
-                    unoptimized
-                  />
+                <Image
+                  src="/logo2.png"
+                  alt="HavenBridge logo"
+                  fill
+                  className="object-contain p-2 transform group-hover:scale-110 transition-transform duration-500"
+                  sizes="100px"
+                  quality={100}
+                  priority
+                  unoptimized
+                />
                 </div>
                 
                 {/* Decorative corners */}

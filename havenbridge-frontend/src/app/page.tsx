@@ -1,6 +1,8 @@
 "use client";
-
+import Footer from "@/components/Footer";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
+
 import {
   Building2,
   HeartHandshake,
@@ -29,8 +31,6 @@ import {
   TrendingUp as Growth,
   Shield as Protection,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 // Main Landing Page
 export default function HavenBridgeLanding() {
@@ -246,7 +246,7 @@ export default function HavenBridgeLanding() {
                     Communities.
                     <span className="relative ml-3">
                       <p className="text-amber-400">Delivering Impact.</p>
-                      <Sparkles className="absolute -top-2 -right-6 w-6 h-6 text-cyan-500 animate-pulse" />
+                      {/* <Sparkles className="absolute -top-2 -right-6 w-6 h-6 text-cyan-500 animate-pulse" /> */}
                     </span>
                   </span>
                 </h1>
@@ -286,7 +286,7 @@ export default function HavenBridgeLanding() {
 
                 {/* Main Image */}
                 <Image
-                  src="/hero-images/home.jpg"
+                  src="/hero-images/hero.jpeg"
                   alt="HavenBridge Development - Community-focused housing solutions"
                   fill
                   className="object-fil"
