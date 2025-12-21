@@ -39,6 +39,7 @@ export default function ServicesPage() {
       ],
       link: "/contact",
       color: "from-blue-600 to-cyan-500",
+      imageUrl: "/services/affordable-housing.jpg",
     },
     {
       icon: Building,
@@ -53,6 +54,7 @@ export default function ServicesPage() {
       ],
       link: "/contact",
       color: "from-amber-600 to-orange-500",
+      imageUrl: "/services/rooming-houses.jpg",
     },
     {
       icon: Heart,
@@ -67,6 +69,7 @@ export default function ServicesPage() {
       ],
       link: "/contact",
       color: "from-emerald-600 to-teal-500",
+      imageUrl: "/services/aged-care.jpg",
     },
     {
       icon: Baby,
@@ -81,6 +84,7 @@ export default function ServicesPage() {
       ],
       link: "/contact",
       color: "from-pink-600 to-rose-500",
+      imageUrl: "/services/childcare-centre.jpg",
     },
     {
       icon: Trees,
@@ -95,6 +99,7 @@ export default function ServicesPage() {
       ],
       link: "/contact",
       color: "from-green-600 to-lime-500",
+      imageUrl: "/services/cabin-parks.jpg",
     },
     {
       icon: Building2,
@@ -110,6 +115,7 @@ export default function ServicesPage() {
       ],
       link: "/contact",
       color: "from-purple-600 to-violet-500",
+      imageUrl: "/services/development-management.jpg",
     },
   ];
 
@@ -229,34 +235,42 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <div
                 key={i}
-                className="group relative overflow-hidden rounded-2xl bg-white border border-gray-200 p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl bg-white border border-gray-200 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div
-                  className={`inline-flex p-4 rounded-xl bg-linear-to-br ${service.color} mb-6`}
-                >
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-6">{service.desc}</p>
-
-                <div className="space-y-3 mb-8">
-                  {service.features.map((feature, j) => (
-                    <div key={j} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">{feature}</span>
-                    </div>
-                  ))}
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.imageUrl}
+                    alt={service.title}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/40 to-transparent"></div>
                 </div>
 
-                <a
-                  href={service.link}
-                  className="inline-flex items-center font-semibold text-slate-900 hover:text-amber-600 group-hover:gap-2 transition-all border-t border-gray-100 pt-6 w-full justify-between"
-                >
-                  <span>Discuss this service</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+                {/* Content Section */}
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6">{service.desc}</p>
+
+                  <div className="space-y-3 mb-8">
+                    {service.features.map((feature, j) => (
+                      <div key={j} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                        <span className="text-gray-700 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a
+                    href={service.link}
+                    className="inline-flex items-center font-semibold text-slate-900 hover:text-amber-600 group-hover:gap-2 transition-all border-t border-gray-100 pt-6 w-full justify-between"
+                  >
+                    <span>Discuss this service</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             ))}
           </div>

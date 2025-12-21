@@ -238,11 +238,11 @@ export default function HavenBridgeLanding() {
         </div>
 
         <div className="container mx-auto px-3 lg:px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
             {/* Left Column - Content */}
             <div className="lg:col-span-5">
               {/* Animated header */}
-              <div className="relative inline-block mb-4">
+              <div className="relative inline-block mb-6">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                   Building
                   <span className="block">
@@ -254,26 +254,32 @@ export default function HavenBridgeLanding() {
                   </span>
                 </h1>
               </div>
-
+{/* 
               <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-xl">
+                HavenBridge develops community-focused housing that uplifts
+                migrant communities, enables government priorities, and delivers
+                long-term value for partners and investors.
+              </p> */}
+
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                 HavenBridge develops community-focused housing that uplifts
                 migrant communities, enables government priorities, and delivers
                 long-term value for partners and investors.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <a
                   href="/contact"
-                  className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
+                  className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold text-base hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
                 >
                   {/* Glow effect */}
-                  <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
+                  <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
                   <span className="relative z-10">Book a Consultation</span>
-                  <ArrowRight className="relative z-10 w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="relative z-10 w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="/projects"
-                  className="group relative inline-flex items-center justify-center bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all"
+                  className="group relative inline-flex items-center justify-center bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-semibold text-base border border-white/20 hover:bg-white/20 transition-all"
                 >
                   View Projects
                   <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
