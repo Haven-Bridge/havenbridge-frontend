@@ -67,26 +67,26 @@ export default function Footer() {
               <div className="text-center space-y-2">
                 <div className="flex items-center justify-center gap-2">
                   <Home className="w-4 h-4 text-amber-400" />
-                  <span className="text-xs font-semibold text-amber-400 tracking-wider">BUILDING COMMUNITIES</span>
+                  <span className="text-sm font-semibold text-amber-400 tracking-wider">BUILDING COMMUNITIES</span>
                   <Heart className="w-4 h-4 text-amber-400" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
                   <Shield className="w-4 h-4 text-cyan-500" />
-                  <span className="text-xs font-semibold text-cyan-500 tracking-wider">SHAPING FUTURES</span>
+                  <span className="text-sm font-semibold text-cyan-500 tracking-wider">SHAPING FUTURES</span>
                   <Building2 className="w-4 h-4 text-cyan-500" />
                 </div>
               </div>
             </div>
             
             {/* Mission Statement */}
-            <p className="text-gray-400 text-sm leading-relaxed italic border-l-2 border-amber-400/30 pl-4 py-2">
+            <p className="text-gray-400 text-base leading-relaxed italic border-l-2 border-amber-400/30 pl-4 py-2">
               Creating dignified, community-focused housing across Australia through values-led development.
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+            <h4 className="font-bold text-xl mb-6 flex items-center gap-2">
               <div className="w-6 h-6 bg-amber-400/20 rounded flex items-center justify-center">
                 <Building2 className="w-4 h-4 text-amber-400" />
               </div>
@@ -97,20 +97,18 @@ export default function Footer() {
                 <li key={i} className="group">
                   <a 
                     href="/services" 
-                    className="text-gray-400 hover:text-amber-400 text-sm transition-all duration-300 flex items-start gap-2 group-hover:translate-x-1"
+                    className="text-gray-400 hover:text-amber-400 text-base transition-all duration-300 block group-hover:translate-x-1"
                   >
-                    <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>{service}</span>
+                    {service}
                   </a>
                 </li>
               ))}
               <li className="group">
                 <a 
                   href="/services" 
-                  className="text-amber-400 hover:text-amber-300 text-sm font-semibold transition-all duration-300 flex items-center gap-2 group-hover:translate-x-1 mt-4"
+                  className="text-amber-400 hover:text-amber-300 text-base font-semibold transition-all duration-300 block group-hover:translate-x-1 mt-4"
                 >
-                  <div className="w-1.5 h-1.5 bg-amber-400 rounded-full flex-shrink-0"></div>
-                  <span>View All Services →</span>
+                  View All Services →
                 </a>
               </li>
             </ul>
@@ -118,7 +116,7 @@ export default function Footer() {
 
           {/* Quick Links & Resources */}
           <div>
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+            <h4 className="font-bold text-xl mb-6 flex items-center gap-2">
               <div className="w-6 h-6 bg-cyan-500/20 rounded flex items-center justify-center">
                 <svg className="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -131,17 +129,16 @@ export default function Footer() {
                 <li key={i} className="group">
                   <a 
                     href={link.href} 
-                    className="text-gray-400 hover:text-cyan-500 text-sm transition-all duration-300 flex items-center gap-2 group-hover:translate-x-1"
+                    className="text-gray-400 hover:text-cyan-500 text-base transition-all duration-300 block group-hover:translate-x-1"
                   >
-                    <div className={`w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-amber-400' : 'bg-cyan-500'}`}></div>
-                    <span>{link.name}</span>
+                    {link.name}
                   </a>
                 </li>
               ))}
             </ul>
 
             {/* Resources Section */}
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2 mt-8 pt-8 border-t border-gray-800/50">
+            <h4 className="font-bold text-xl mb-6 flex items-center gap-2 mt-8 pt-8 border-t border-gray-800/50">
               <div className="w-6 h-6 bg-amber-400/20 rounded flex items-center justify-center">
                 <FileText className="w-4 h-4 text-amber-400" />
               </div>
@@ -154,9 +151,8 @@ export default function Footer() {
                   <li key={i} className="group">
                     <a 
                       href={resource.href} 
-                      className="text-gray-400 hover:text-amber-400 text-sm transition-all duration-300 flex items-center gap-2 group-hover:translate-x-1"
+                      className="text-gray-400 hover:text-amber-400 text-base transition-all duration-300 flex items-center gap-2 group-hover:translate-x-1"
                     >
-                      <div className={`w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-cyan-500' : 'bg-amber-400'}`}></div>
                       <Icon className="w-4 h-4 flex-shrink-0" />
                       <span>{resource.name}</span>
                     </a>
@@ -166,10 +162,9 @@ export default function Footer() {
               <li className="group">
                 <a 
                   href="/resources" 
-                  className="text-cyan-500 hover:text-cyan-400 text-sm font-semibold transition-all duration-300 flex items-center gap-2 group-hover:translate-x-1 mt-4"
+                  className="text-cyan-500 hover:text-cyan-400 text-base font-semibold transition-all duration-300 block group-hover:translate-x-1 mt-4"
                 >
-                  <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full flex-shrink-0"></div>
-                  <span>Browse All Resources →</span>
+                  Browse All Resources →
                 </a>
               </li>
             </ul>
@@ -177,13 +172,13 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+            <h4 className="font-bold text-xl mb-6 flex items-center gap-2">
               <div className="w-6 h-6 bg-amber-400/20 rounded flex items-center justify-center">
                 <Phone className="w-4 h-4 text-amber-400" />
               </div>
               Contact Us
             </h4>
-            <ul className="space-y-4 text-sm text-gray-400">
+            <ul className="space-y-4 text-base text-gray-400">
               <li className="flex items-start gap-3 group hover:text-amber-400 transition-colors duration-300">
                 <Mail className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                 <div>
@@ -210,7 +205,7 @@ export default function Footer() {
 
             {/* Newsletter Signup */}
             <div className="mt-8 pt-8 border-t border-gray-800/50">
-              <h5 className="font-bold text-sm mb-3 flex items-center gap-2">
+              <h5 className="font-bold text-base mb-3 flex items-center gap-2">
                 <div className="w-5 h-5 bg-cyan-500/20 rounded flex items-center justify-center">
                   <svg className="w-3 h-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -218,7 +213,7 @@ export default function Footer() {
                 </div>
                 Stay Updated
               </h5>
-              <p className="text-gray-400 text-xs mb-3">
+              <p className="text-gray-400 text-sm mb-3">
                 Subscribe to our newsletter for industry insights and updates.
               </p>
               <div className="flex gap-2">
@@ -227,7 +222,7 @@ export default function Footer() {
                   placeholder="Your email" 
                   className="flex-1 px-3 py-2 text-sm bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-transparent text-white"
                 />
-                <button className="px-3 py-2 bg-cyan-600 text-white text-sm font-medium rounded hover:bg-cyan-700 transition-colors">
+                <button className="px-4 py-2 bg-cyan-600 text-white text-sm font-medium rounded hover:bg-cyan-700 transition-colors">
                   Subscribe
                 </button>
               </div>
@@ -243,32 +238,32 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-amber-400 rounded-full"></div>
-              <p className="text-sm text-gray-400">
+              <p className="text-base text-gray-400">
                 © 2025 HavenBridge Development. All rights reserved.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 md:gap-6">
               <a 
                 href="/sitemap" 
-                className="text-sm text-gray-400 hover:text-cyan-500 transition-colors duration-300 hover:underline decoration-cyan-500"
+                className="text-base text-gray-400 hover:text-cyan-500 transition-colors duration-300 hover:underline decoration-cyan-500"
               >
                 Sitemap
               </a>
               <a 
                 href="/privacy" 
-                className="text-sm text-gray-400 hover:text-amber-400 transition-colors duration-300 hover:underline decoration-amber-400"
+                className="text-base text-gray-400 hover:text-amber-400 transition-colors duration-300 hover:underline decoration-amber-400"
               >
                 Privacy Policy
               </a>
               <a 
                 href="/terms" 
-                className="text-sm text-gray-400 hover:text-cyan-500 transition-colors duration-300 hover:underline decoration-cyan-500"
+                className="text-base text-gray-400 hover:text-cyan-500 transition-colors duration-300 hover:underline decoration-cyan-500"
               >
                 Terms of Service
               </a>
               <a 
                 href="/accessibility" 
-                className="text-sm text-gray-400 hover:text-amber-400 transition-colors duration-300 hover:underline decoration-amber-400"
+                className="text-base text-gray-400 hover:text-amber-400 transition-colors duration-300 hover:underline decoration-amber-400"
               >
                 Accessibility
               </a>
