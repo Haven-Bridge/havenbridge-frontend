@@ -1,8 +1,7 @@
 "use client";
-
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { Menu, X, Home, Building2, Briefcase, TrendingUp, Users, Phone } from 'lucide-react';
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { Briefcase, Building2, Home, Menu, Phone, TrendingUp, Users, X } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,7 +17,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/', icon: Home },
+    { name: 'Home', href: '/' },
     { name: 'About', href: '/about', icon: Building2 },
     { name: 'Services', href: '/services', icon: Briefcase },
     { name: 'Projects', href: '/projects', icon: Building2 },
@@ -69,13 +68,13 @@ export default function Navbar() {
                 </span>
               </h1>
               <div className="flex items-center gap-1 mt-0.5">
-                <div className={`h-[2px] w-4 ${scrolled ? 'bg-amber-400' : 'bg-amber-400'}`}></div>
+                {/* <div className={`h-[2px] w-4 ${scrolled ? 'bg-amber-400' : 'bg-amber-400'}`}></div> */}
                 <p className={`text-xs font-semibold tracking-wider ${
                   scrolled ? 'text-slate-600' : 'text-amber-400'
                 }`}>
                   DEVELOPMENTS
                 </p>
-                <div className={`h-[2px] w-4 ${scrolled ? 'bg-cyan-500' : 'bg-cyan-500'}`}></div>
+                {/* <div className={`h-[2px] w-4 ${scrolled ? 'bg-cyan-500' : 'bg-cyan-500'}`}></div> */}
               </div>
             </div>
           </a>
@@ -98,11 +97,11 @@ export default function Navbar() {
                   } bg-gradient-to-r from-amber-400 to-cyan-500 transition-all duration-300`}></div>
                   
                   <div className="flex items-center gap-2">
-                    <Icon className={`w-4 h-4 transition-colors duration-300 ${
+                    {/* <Icon className={`w-4 h-4 transition-colors duration-300 ${
                       scrolled 
                         ? hoveredLink === link.name ? 'text-amber-400' : 'text-slate-600'
                         : hoveredLink === link.name ? 'text-amber-400' : 'text-white'
-                    }`} />
+                    }`} /> */}
                     <span className={`font-medium transition-colors duration-300 ${
                       scrolled 
                         ? hoveredLink === link.name ? 'text-amber-400' : 'text-slate-700'
@@ -126,7 +125,7 @@ export default function Navbar() {
               {/* Button background */}
               <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-lg group-hover/cta:from-amber-500 group-hover/cta:to-amber-400 transition-all duration-500"></div>
               
-              <Phone className="w-4 h-4 relative z-10 text-slate-900" />
+              {/* <Phone className="w-4 h-4 relative z-10 text-slate-900" /> */}
               <span className="relative z-10 text-slate-900">Get in Touch</span>
               
               {/* Animated arrow */}
@@ -185,9 +184,9 @@ export default function Navbar() {
                         ? 'bg-gradient-to-br from-amber-400/20 to-cyan-500/20' 
                         : 'bg-gradient-to-br from-amber-400/10 to-cyan-500/10'
                     }`}>
-                      <Icon className={`w-5 h-5 ${
+                      {/* <Icon className={`w-5 h-5 ${
                         scrolled ? 'text-amber-400' : 'text-amber-400'
-                      }`} />
+                      }`} /> */}
                     </div>
                     <span className={`font-medium text-lg ${
                       scrolled ? 'text-slate-900' : 'text-white'

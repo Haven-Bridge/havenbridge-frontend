@@ -1,8 +1,9 @@
 "use client";
+import Footer from "@/components/Footer";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import React, { useState } from "react";
 
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { 
   Shield, 
   FileText, 
@@ -23,7 +24,6 @@ import {
   Target,
   Zap
 } from 'lucide-react';
-import Link from 'next/link';
 
 export default function CompliancePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -178,7 +178,7 @@ export default function CompliancePage() {
     <div className="bg-white font-sans">
       <Navbar />
 
-      {/* Hero Section */}
+
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
@@ -186,7 +186,7 @@ export default function CompliancePage() {
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Text Content */}
+         
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
                 <Shield className="w-4 h-4 text-amber-400" />
@@ -204,7 +204,7 @@ export default function CompliancePage() {
                 to ensure your projects meet all legal and quality requirements.
               </p>
 
-              {/* Search Bar */}
+            
               <div className="max-w-xl mb-8">
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -236,7 +236,7 @@ export default function CompliancePage() {
               </div>
             </div>
 
-            {/* Right Column - Hero Image */}
+         
             <div className="hidden lg:block relative">
               <div className="relative h-[420px] rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
@@ -261,7 +261,7 @@ export default function CompliancePage() {
         </div>
       </section>
 
-      {/* Quick Links */}
+    
       <section id="quick-links" className="py-20 bg-slate-50">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
@@ -307,11 +307,11 @@ export default function CompliancePage() {
         </div>
       </section>
 
-      {/* Compliance Documents */}
+     
       <section id="documents" className="py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
-            {/* Categories Filter */}
+          
             <div className="mb-12">
               <div className="flex items-center justify-between mb-8">
                 <div>
@@ -350,18 +350,18 @@ export default function CompliancePage() {
               </div>
             </div>
 
-            {/* Documents Grid */}
+          
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredBySearch.map((doc) => (
                 <div 
                   key={doc.id}
                   className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1"
                 >
-                  {/* Document Header */}
+                  
                   <div className={`h-3 bg-gradient-to-r ${doc.color}`}></div>
                   
                   <div className="p-6">
-                    {/* Category & Version */}
+                 
                     <div className="flex items-center justify-between mb-4">
                       <span className="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">
                         {doc.category}
@@ -369,17 +369,17 @@ export default function CompliancePage() {
                       <span className="text-sm text-slate-500">v{doc.version}</span>
                     </div>
                     
-                    {/* Title */}
+               
                     <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors leading-tight">
                       {doc.title}
                     </h3>
                     
-                    {/* Description */}
+                   
                     <p className="text-slate-600 text-sm mb-4 leading-relaxed">
                       {doc.description}
                     </p>
                     
-                    {/* Tags */}
+                   
                     <div className="flex flex-wrap gap-2 mb-6">
                       {doc.tags.map((tag, index) => (
                         <span key={index} className="px-2 py-1 bg-cyan-50 text-cyan-700 text-xs rounded">
@@ -388,7 +388,7 @@ export default function CompliancePage() {
                       ))}
                     </div>
                     
-                    {/* Document Details */}
+                 
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       <div className="text-center p-3 bg-slate-50 rounded-lg">
                         <div className="text-sm text-slate-600 mb-1">Pages</div>
@@ -400,13 +400,13 @@ export default function CompliancePage() {
                       </div>
                     </div>
                     
-                    {/* Effective Date */}
+                   
                     <div className="text-sm text-slate-500 mb-6 flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       Effective: {doc.effective}
                     </div>
                     
-                    {/* Action Buttons */}
+                   
                     <div className="flex gap-3">
                       <a 
                         href={doc.downloadLink}
@@ -428,7 +428,7 @@ export default function CompliancePage() {
               ))}
             </div>
 
-            {/* No Results */}
+         
             {filteredBySearch.length === 0 && (
               <div className="text-center py-16">
                 <Shield className="w-16 h-16 text-slate-300 mx-auto mb-6" />
@@ -439,7 +439,7 @@ export default function CompliancePage() {
               </div>
             )}
 
-            {/* Load More */}
+         
             {filteredBySearch.length > 0 && (
               <div className="text-center mt-12">
                 <button className="px-8 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors">
@@ -451,13 +451,13 @@ export default function CompliancePage() {
         </div>
       </section>
 
-      {/* Compliance Assurance */}
+    
       <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="bg-white rounded-2xl overflow-hidden border border-slate-200">
               <div className="grid lg:grid-cols-2">
-                {/* Left Column - Content */}
+              
                 <div className="p-8 md:p-12">
                   <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-emerald-500 to-green-500 mb-6">
                     <Shield className="w-8 h-8 text-white" />
@@ -486,7 +486,7 @@ export default function CompliancePage() {
                   </div>
                 </div>
 
-                {/* Right Column - CTA */}
+               
                 <div className="bg-linear-to-br from-slate-900 to-blue-900 p-8 md:p-12 text-white">
                   <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
                     <Sparkles className="w-6 h-6 text-amber-400" />

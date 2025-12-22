@@ -23,57 +23,65 @@ export default function Footer() {
 
   const resources = [
     { name: 'Calculators', href: '/calculators', icon: Calculator },
-    { name: 'News & Insights', href: '/resources/news', icon: Newspaper },
-    { name: 'Project Planning Guides', href: '/resources/guides', icon: FileText },
-    { name: 'Compliance Resources', href: '/resources/compliance', icon: ClipboardCheck },
-    { name: 'Downloadable Templates', href: '/resources/templates', icon: Download },
+    // { name: 'News & Insights', href: '/resources/news', icon: Newspaper },
+    // { name: 'Project Planning Guides', href: '/resources/guides', icon: FileText },
+    // { name: 'Compliance Resources', href: '/resources/compliance', icon: ClipboardCheck },
+    // { name: 'Downloadable Templates', href: '/resources/templates', icon: Download },
   ];
 
   return (
     <footer className="bg-slate-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Logo Section - Creative Design */}
+          {/* Logo Section - Simplified to match Navbar */}
           <div className="md:col-span-1">
-            <div className="relative mb-6">
-              {/* Decorative background elements */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 border border-amber-400/20 rounded-full"></div>
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 border border-cyan-500/20 rounded-full"></div>
-              
-              {/* Main Logo Container */}
-              <div className="relative w-32 h-32 mx-auto mb-4 group">
-                <div className="absolute inset-0 bg-linear-to-br from-amber-400/10 to-cyan-500/10 rounded-2xl transform group-hover:rotate-3 transition-transform duration-300"></div>
-                <div className="relative w-full h-full flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-4">
-                <Image
-                  src="/logo2.png"
-                  alt="HavenBridge logo"
-                  fill
-                  className="object-contain p-2 transform group-hover:scale-110 transition-transform duration-500"
-                  sizes="100px"
-                  quality={100}
-                  priority
-                  unoptimized
-                />
-                </div>
+            <div className="flex flex-col items-center mb-6">
+              {/* Logo Container - Matching Navbar Style */}
+              <div className="relative group mb-4">
+                <div className="absolute -inset-2 rounded-lg bg-linear-to-br from-amber-400/20 to-cyan-500/10 blur-sm group-hover:blur-md transition-all duration-500"></div>
                 
-                {/* Decorative corners */}
-                <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-amber-400/40 rounded-tl"></div>
-                <div className="absolute -top-2 -right-2 w-4 h-4 border-t border-r border-cyan-500/40 rounded-tr"></div>
-                <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b border-l border-cyan-500/40 rounded-bl"></div>
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-amber-400/40 rounded-br"></div>
+                <div className="relative w-20 h-20 rounded-lg overflow-hidden border border-amber-400/30 group-hover:border-amber-400/50 transition-all duration-300">
+                  <div className="absolute inset-0 bg-white/90"></div>
+                  <Image
+                    src="/logo2.png"
+                    alt="HavenBridge logo"
+                    fill
+                    className="object-contain p-3 transform group-hover:scale-110 transition-transform duration-500"
+                    sizes="80px"
+                    quality={100}
+                    priority
+                    unoptimized
+                  />
+                </div>
+              </div>
+              
+              {/* Company Name */}
+              <div className="text-center mb-4">
+                <h2 className="text-2xl font-bold tracking-tight">
+                  <span className="bg-clip-text bg-linear-to-r from-amber-400 to-cyan-500 text-transparent">
+                    HavenBridge
+                  </span>
+                </h2>
+                <div className="flex items-center justify-center gap-2 mt-1">
+                  <div className="h-[2px] w-4 bg-amber-400"></div>
+                  <p className="text-xs font-semibold tracking-wider text-amber-400">
+                    DEVELOPMENTS
+                  </p>
+                  <div className="h-[2px] w-4 bg-cyan-500"></div>
+                </div>
               </div>
               
               {/* Tagline with icons */}
               <div className="text-center space-y-2">
                 <div className="flex items-center justify-center gap-2">
-                  <Home className="w-4 h-4 text-amber-400" />
+                  {/* <Home className="w-4 h-4 text-amber-400" /> */}
                   <span className="text-sm font-semibold text-amber-400 tracking-wider">BUILDING COMMUNITIES</span>
-                  <Heart className="w-4 h-4 text-amber-400" />
+                  {/* <Heart className="w-4 h-4 text-amber-400" /> */}
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <Shield className="w-4 h-4 text-cyan-500" />
+                  {/* <Shield className="w-4 h-4 text-cyan-500" /> */}
                   <span className="text-sm font-semibold text-cyan-500 tracking-wider">SHAPING FUTURES</span>
-                  <Building2 className="w-4 h-4 text-cyan-500" />
+                  {/* <Building2 className="w-4 h-4 text-cyan-500" /> */}
                 </div>
               </div>
             </div>
@@ -159,14 +167,6 @@ export default function Footer() {
                   </li>
                 );
               })}
-              <li className="group">
-                <a 
-                  href="/resources" 
-                  className="text-cyan-500 hover:text-cyan-400 text-base font-semibold transition-all duration-300 block group-hover:translate-x-1 mt-4"
-                >
-                  Browse All Resources →
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -197,8 +197,8 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block mb-1">Address</strong>
-                  Level 8, 90 Collins Street<br />
-                  Melbourne, Victoria, Australia
+                  Level 31, 120 Collins Street<br />
+                  Melbourne, VIC, 3000, Australia
                 </div>
               </li>
             </ul>
@@ -235,39 +235,10 @@ export default function Footer() {
           {/* Decorative line */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
           
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-amber-400 rounded-full"></div>
-              <p className="text-base text-gray-400">
-                © 2025 HavenBridge Development. All rights reserved.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-4 md:gap-6">
-              <a 
-                href="/sitemap" 
-                className="text-base text-gray-400 hover:text-cyan-500 transition-colors duration-300 hover:underline decoration-cyan-500"
-              >
-                Sitemap
-              </a>
-              <a 
-                href="/privacy" 
-                className="text-base text-gray-400 hover:text-amber-400 transition-colors duration-300 hover:underline decoration-amber-400"
-              >
-                Privacy Policy
-              </a>
-              <a 
-                href="/terms" 
-                className="text-base text-gray-400 hover:text-cyan-500 transition-colors duration-300 hover:underline decoration-cyan-500"
-              >
-                Terms of Service
-              </a>
-              <a 
-                href="/accessibility" 
-                className="text-base text-gray-400 hover:text-amber-400 transition-colors duration-300 hover:underline decoration-amber-400"
-              >
-                Accessibility
-              </a>
-            </div>
+          <div className="flex justify-center items-center">
+            <p className="text-base text-gray-400">
+              © 2025 HavenBridge Development. All rights reserved.
+            </p>
           </div>
         </div>
       </div>

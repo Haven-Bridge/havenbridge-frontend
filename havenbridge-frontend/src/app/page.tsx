@@ -435,7 +435,7 @@ export default function HavenBridgeLanding() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-amber-400/10 rounded-full">
-              <Star className="w-4 h-4 text-amber-400" />
+              {/* <Star className="w-4 h-4 text-amber-400" /> */}
               <span className="text-sm font-semibold text-amber-600">
                 WHY CHOOSE US
               </span>
