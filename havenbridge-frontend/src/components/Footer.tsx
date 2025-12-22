@@ -63,11 +63,11 @@ export default function Footer() {
                   </span>
                 </h2>
                 <div className="flex items-center justify-center gap-2 mt-1">
-                  <div className="h-[2px] w-4 bg-amber-400"></div>
+                  {/* <div className="h-[2px] w-4 bg-amber-400"></div> */}
                   <p className="text-xs font-semibold tracking-wider text-amber-400">
                     DEVELOPMENTS
                   </p>
-                  <div className="h-[2px] w-4 bg-cyan-500"></div>
+                  {/* <div className="h-[2px] w-4 bg-cyan-500"></div> */}
                 </div>
               </div>
               
