@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { projectsData } from "@/data/projects";
+import { servicesData } from "@/data/services";
 
 import {
   Building2,
@@ -27,63 +28,8 @@ import {
 } from "lucide-react";
 
 export default function HavenBridgeLanding() {
-  const services = [
-    {
-      icon: Home,
-      title: "Affordable & Social Housing Development",
-      desc: "Community-focused housing solutions aligned with government programs like HAFF and the Big Housing Build.",
-      link: "/services",
-      imageUrl: "/services/affordable-housing.jpg",
-      color: "from-amber-400 to-amber-500",
-      stats: "500+ Homes",
-    },
-    {
-      icon: Building,
-      title: "Rooming Houses & Community Accommodation",
-      desc: "High-yield, fully compliant rooming house and community accommodation developments across key growth corridors.",
-      link: "/services",
-      imageUrl: "/services/rooming-houses.jpg",
-      color: "from-cyan-500 to-blue-500",
-      stats: "High Yield",
-    },
-    {
-      icon: Heart,
-      title: "Aged Care & NDIS Housing",
-      desc: "Faith- and culturally-aligned aged care, SIL, and SDA housing designed for dignity, safety, and inclusion.",
-      link: "/services",
-      imageUrl: "/services/aged-care.jpg",
-      color: "from-emerald-500 to-green-500",
-      stats: "Specialist Care",
-    },
-    {
-      icon: Baby,
-      title: "Childcare Centre Development",
-      desc: "End-to-end delivery of compliant childcare centres aligned with Victorian Education & Care regulations.",
-      link: "/services",
-      imageUrl: "/services/childcare-centre.jpg",
-      color: "from-violet-500 to-purple-500",
-      stats: "Family Focused",
-    },
-    {
-      icon: HeartHandshake,
-      title: "Cabin Parks & Modular Housing",
-      desc: "Modular cabin parks for transitional housing, crisis accommodation, workers villages, and faith-based housing.",
-      link: "/services",
-      imageUrl: "/services/cabin-parks.jpg",
-      color: "from-orange-500 to-red-500",
-      stats: "Flexible Solutions",
-    },
-    {
-      icon: Handshake,
-      title: "End-to-End Development Management",
-      desc: "Full lifecycle development and project management from feasibility through delivery and risk management.",
-      link: "/services",
-      imageUrl: "/services/development-management.jpg",
-      color: "from-indigo-500 to-purple-500",
-      stats: "Full Service",
-    },
-  ];
-
+  // Use shared services and projects data
+  const services = servicesData;
   const featuredProjects = projectsData.slice(0, 3);
 
   const stats = [
@@ -263,59 +209,65 @@ export default function HavenBridgeLanding() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, i) => (
-              <div key={i} className="group relative">
-                <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+            {services.map((service, i) => {
+              // Map icon string to actual icon component
+              const iconMap: any = { Home, Building, Heart, Baby, HeartHandshake, Handshake };
+              const IconComponent = iconMap[service.icon];
+              
+              return (
+                <div key={i} className="group relative">
+                  <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
 
-                <a
-                  href={service.link}
-                  className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 p-6 hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
-                >
-                  <div className="aspect-video mb-6 rounded-xl overflow-hidden relative">
-                    {service.imageUrl ? (
-                      <>
-                        <img
-                          src={service.imageUrl}
-                          alt={service.title}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent"></div>
-                      </>
-                    ) : (
-                      <div
-                        className={`w-full h-full bg-linear-to-br ${service.color} flex items-center justify-center`}
-                      >
-                        <service.icon className="w-16 h-16 text-white/80" />
+                  <a
+                    href={`/services/${service.id}`}
+                    className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 p-6 hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
+                  >
+                    <div className="aspect-video mb-6 rounded-xl overflow-hidden relative">
+                      {service.imageUrl ? (
+                        <>
+                          <img
+                            src={service.imageUrl}
+                            alt={service.title}
+                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                        </>
+                      ) : (
+                        <div
+                          className={`w-full h-full bg-linear-to-br ${service.color} flex items-center justify-center`}
+                        >
+                          <IconComponent className="w-16 h-16 text-white/80" />
+                        </div>
+                      )}
+
+                      <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
+                        <span className="text-sm font-bold text-slate-900">
+                          {service.stats}
+                        </span>
                       </div>
-                    )}
+                    </div>
 
-                    <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
-                      <span className="text-sm font-bold text-slate-900">
-                        {service.stats}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-600 mb-4 line-clamp-3">
+                        {service.desc}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <span className="inline-flex items-center text-cyan-600 font-semibold group-hover:gap-2 transition-all">
+                        Learn More <ArrowRight className="w-4 h-4 ml-1" />
                       </span>
+                      <div className="text-xs font-medium px-2 py-1 rounded bg-gray-100 text-gray-700">
+                        Explore →
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">
-                      {service.desc}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <span className="inline-flex items-center text-cyan-600 font-semibold group-hover:gap-2 transition-all">
-                      Learn More <ArrowRight className="w-4 h-4 ml-1" />
-                    </span>
-                    <div className="text-xs font-medium px-2 py-1 rounded bg-gray-100 text-gray-700">
-                      Explore →
-                    </div>
-                  </div>
-                </a>
-              </div>
-            ))}
+                  </a>
+                </div>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
@@ -472,7 +424,7 @@ export default function HavenBridgeLanding() {
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
           <div className="max-w-3xl mx-auto">
-            {/* <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" /> */}
+            <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" />
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Let&apos;s Build Something
               <br />
