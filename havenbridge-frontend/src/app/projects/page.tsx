@@ -4,88 +4,11 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import React from "react";
 import { ArrowRight, Award, BarChart3, Briefcase, Building2, Calendar, CheckCircle, DollarSign, Home, MapPin, Shield, Target, TrendingUp, Users } from "lucide-react";
+import { projectsData } from "@/data/projects";
 
 export default function ProjectsPage() {
-  const projects = [
-    { 
-      name: "Melbourne Modular Village", 
-      location: "Melbourne, VIC", 
-      type: "Residential", 
-      units: "48 Homes",
-      status: "Completed",
-      year: "2024",
-      value: "$12.5M",
-      image: "melbourne-modular-village.jpeg", // Added
-      roi: "18% IRR",
-      desc: "Sustainable modular housing community featuring energy-efficient homes and community spaces with strong rental yields.",
-      highlights: ["Government Partnership", "100% Occupied", "ESG Compliant"]
-    },
-    { 
-      name: "Sunrise Care Centre", 
-      location: "Sydney, NSW", 
-      type: "Aged Care", 
-      units: "80 Beds",
-      status: "Completed",
-      year: "2024",
-      value: "$28M",
-      image: "sunrise-care-centre.jpeg", // Added
-      roi: "22% IRR",
-      desc: "State-of-the-art aged care facility with modern amenities generating stable long-term returns.",
-      highlights: ["Federal Funding", "95% Occupancy", "20-Year Lease"]
-    },
-    { 
-      name: "Community Hub Brisbane", 
-      location: "Brisbane, QLD", 
-      type: "Mixed Use", 
-      units: "35 Units",
-      status: "In Progress",
-      year: "2025",
-      value: "$15.8M",
-      image: "community-hub-brisbane.jpeg", // Added
-      roi: "Est. 20% IRR",
-      desc: "Mixed-use development combining affordable housing with community facilities and retail generating multiple revenue streams.",
-      highlights: ["Multi-Income", "Council Support", "Q2 2025 Completion"]
-    },
-    { 
-      name: "Adelaide Childcare Centre", 
-      location: "Adelaide, SA", 
-      type: "Childcare", 
-      units: "120 Places",
-      status: "Completed",
-      year: "2023",
-      value: "$8.2M",
-      image: "adelaide-childcare-centre.jpeg", // Added
-      roi: "19% IRR",
-      desc: "Purpose-built childcare facility with strong demand and stable government-backed income.",
-      highlights: ["CCS Approved", "Waitlist Full", "Triple Net Lease"]
-    },
-    { 
-      name: "Perth Rooming House Complex", 
-      location: "Perth, WA", 
-      type: "Rooming House", 
-      units: "24 Rooms",
-      status: "Completed",
-      year: "2023",
-      value: "$4.8M",
-      image: "perth-rooming-house-complex.jpeg", // Added
-      roi: "16% IRR",
-      desc: "Affordable rooming house providing safe accommodation with consistent cash flow and low vacancy.",
-      highlights: ["NRAS Eligible", "Social Impact", "Stable Tenancy"]
-    },
-    { 
-      name: "Canberra Social Housing Project", 
-      location: "Canberra, ACT", 
-      type: "Social Housing", 
-      units: "60 Units",
-      status: "In Progress",
-      year: "2025",
-      value: "$22M",
-      image: "canberra-social-housing-project.jpeg", // Added
-      roi: "Est. 17% IRR",
-      desc: "Government partnership delivering affordable social housing with guaranteed rental income.",
-      highlights: ["Gov't Backed", "NRAS Income", "Long-term Lease"]
-    }
-  ];
+  // Use shared projects data
+  const projects = projectsData;
 
   const stats = [
     { number: "$95M+", label: "Total Development Value", icon: DollarSign, color: "text-emerald-500" },
@@ -293,7 +216,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Projects Portfolio */}
+      {/* Projects Portfolio - Simplified Cards */}
       <section id="portfolio" className="py-20 bg-linear-to-br from-slate-50 to-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
@@ -310,93 +233,44 @@ export default function ProjectsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, i) => (
-  <div 
-    key={i} 
-    className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
-  >
-    {/* Project Image */}
-    <div className="aspect-4/3 bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
-      <Image 
-        src={`/projects/${project.image}`}
-        alt={project.name}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-      
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-      
-      {/* Status Badge */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={`px-3 py-1 rounded-full text-xs font-bold backdrop-blur-sm ${
-          project.status === "Completed" 
-            ? "bg-green-500/90 text-white" 
-            : "bg-amber-500/90 text-slate-900"
-        }`}>
-          {project.status}
-        </span>
-      </div>
+            {projects.map((project, i) => (
+              <a 
+                key={i} 
+                href={`/projects/${project.id}`}
+                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
+              >
+                {/* Project Image */}
+                <div className="aspect-4/3 bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
+                  <Image 
+                    src={`/projects/${project.image}`}
+                    alt={project.name}
+                    fill
+                    className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent"></div>
+                  
+                  {/* Project Name Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                      {project.name}
+                    </h3>
+                    <p className="text-gray-200 text-sm">
+                      {project.location}
+                    </p>
+                  </div>
 
-      {/* Financial Metrics Overlay */}
-      <div className="absolute bottom-4 left-4 right-4 z-10">
-        <div className="flex gap-2">
-          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/20 flex-1">
-            <div className="text-xs text-gray-200 mb-0.5">Value</div>
-            <div className="text-sm font-bold text-white">{project.value}</div>
-          </div>
-          <div className="bg-emerald-500/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-emerald-400/30 flex-1">
-            <div className="text-xs text-emerald-200 mb-0.5">IRR</div>
-            <div className="text-sm font-bold text-emerald-300">{project.roi}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    {/* Project Details */}
-    <div className="p-6">
-      <div className="mb-3">
-        <span className="bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
-          {project.type}
-        </span>
-      </div>
-      
-      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-cyan-600 transition-colors">
-        {project.name}
-      </h3>
-      
-      <div className="flex items-center gap-2 text-gray-600 mb-2">
-        <MapPin className="w-4 h-4" />
-        <span className="text-sm">{project.location}</span>
-      </div>
-      
-      <p className="text-cyan-600 font-semibold mb-3 text-sm">
-        {project.units} • {project.year}
-      </p>
-      
-      <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-        {project.desc}
-      </p>
-
-      {/* Highlights */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.highlights.map((highlight, j) => (
-          <span key={j} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full font-medium">
-            {highlight}
-          </span>
-        ))}
-      </div>
-      
-      <a 
-        href="/contact"
-        className="inline-flex items-center text-cyan-500 font-semibold hover:gap-2 transition-all group"
-      >
-        View Case Study 
-        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-      </a>
-    </div>
-  </div>
-))}
+                  {/* Hover Arrow */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                    <div className="bg-white/90 backdrop-blur-sm p-4 rounded-full">
+                      <ArrowRight className="w-8 h-8 text-slate-900" />
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
