@@ -112,24 +112,20 @@ export default function ProjectsPage() {
             </div>
 
             {/* Right Column - Hero Image */}
-            <div className="hidden lg:block relative">
-              <div className="relative h-[420px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="hidden lg:block relative h-full">
+              <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
                 {/* Main Image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-blue-900 to-cyan-900">
-                   <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
-                  
-                      <Image
-                      src="/project-images/hero.jpeg"
-                      alt="HavenBridge Development Projects"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 0px, 50vw"
-                      priority
-                    />
-                </div>
+                <Image
+                  src="/project-images/hero.jpeg"
+                  alt="HavenBridge Development Projects"
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                  priority
+                />
                 
                 {/* Floating Stats */}
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
@@ -185,7 +181,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Investment Highlights */}
-      <section className="py-16 bg-white">
+      {/* <section className="py-16 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -214,7 +210,7 @@ export default function ProjectsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Projects Portfolio - Simplified Cards */}
       <section id="portfolio" className="py-20 bg-linear-to-br from-slate-50 to-white">

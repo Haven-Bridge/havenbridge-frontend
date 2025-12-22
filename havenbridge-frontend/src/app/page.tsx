@@ -193,7 +193,7 @@ export default function HavenBridgeLanding() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-cyan-500/10 rounded-full">
-              <Sparkles className="w-4 h-4 text-cyan-500" />
+              {/* <Sparkles className="w-4 h-4 text-cyan-500" /> */}
               <span className="text-sm font-semibold text-cyan-600">
                 WHAT WE DO
               </span>
@@ -270,7 +270,7 @@ export default function HavenBridgeLanding() {
             })}
           </div>
 
-          <div className="text-center mt-12">
+          {/* <div className="text-center mt-12">
             <p className="text-gray-600 mb-4">
               Not sure which pathway is right for you?
             </p>
@@ -281,7 +281,7 @@ export default function HavenBridgeLanding() {
               <span className="relative z-10">Contact Our Experts</span>
               <ArrowRight className="relative z-10 w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -424,7 +424,7 @@ export default function HavenBridgeLanding() {
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
           <div className="max-w-3xl mx-auto">
-            <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" />
+            {/* <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" /> */}
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Let&apos;s Build Something
               <br />

@@ -146,14 +146,20 @@ export default function ProjectDetailPage() {
             {/* Right Column - Hero Image */}
             <div className="hidden lg:block relative">
               <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src={project.heroImage || `/projects/${project.image}`}
-                  alt={project.name}
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                  priority
-                />
+                {(project.heroImage || project.image) ? (
+                  <Image
+                    src={project.heroImage || `/projects/${project.image}`}
+                    alt={project.name}
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full bg-linear-to-br from-slate-800 to-slate-600 flex items-center justify-center">
+                    <Building2 className="w-32 h-32 text-white/20" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
               </div>
             </div>
