@@ -151,38 +151,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Why Work With Us */}
-      {/* <section className="py-16 bg-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 rounded-full border border-emerald-500/20 mb-4">
-                <Sparkles className="w-4 h-4 text-emerald-500" />
-                <span className="text-sm font-semibold text-emerald-600">WHY CHOOSE US</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Why Work With HavenBridge
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {whyWorkWithUs.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <div key={i} className="bg-linear-to-br from-slate-50 to-white rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all">
-                    <div className="p-3 bg-gradient-to-br from-amber-400 to-amber-500 rounded-xl w-fit mb-4">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.desc}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Services List */}
       <section id="services-list" className="py-20 bg-linear-to-br from-slate-50 to-white">
         <div className="container mx-auto px-6 lg:px-12">
