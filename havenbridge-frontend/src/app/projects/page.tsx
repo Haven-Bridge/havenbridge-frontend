@@ -112,14 +112,14 @@ export default function ProjectsPage() {
             </div>
 
             {/* Right Column - Hero Image */}
-            <div className="hidden lg:block relative h-full">
-              <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+            <div className="hidden lg:block relative">
+              <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
                 {/* Main Image */}
                 <Image
-                  src="/project-images/hero.jpeg"
+                  src="/hero-images/project-hero.jpeg"
                   alt="HavenBridge Development Projects"
                   fill
                   className="object-cover"
@@ -181,7 +181,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Investment Highlights */}
-      {/* <section className="py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -210,7 +210,7 @@ export default function ProjectsPage() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Projects Portfolio - Simplified Cards */}
       <section id="portfolio" className="py-20 bg-linear-to-br from-slate-50 to-white">
@@ -228,40 +228,40 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {projects.map((project, i) => (
               <a 
                 key={i} 
                 href={`/projects/${project.id}`}
-                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
+                className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
               >
                 {/* Project Image */}
-                <div className="aspect-4/3 bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
+                <div className="aspect-[4/5] bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
                   <Image 
                     src={`/projects/${project.image}`}
                     alt={project.name}
                     fill
                     className="object-cover transform group-hover:scale-110 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                   
                   {/* Project Name Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
+                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">
                       {project.name}
                     </h3>
-                    <p className="text-gray-200 text-sm">
+                    <p className="text-gray-200 text-base md:text-lg">
                       {project.location}
                     </p>
                   </div>
 
                   {/* Hover Arrow */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                    <div className="bg-white/90 backdrop-blur-sm p-4 rounded-full">
-                      <ArrowRight className="w-8 h-8 text-slate-900" />
+                    <div className="bg-white/90 backdrop-blur-sm p-5 rounded-full">
+                      <ArrowRight className="w-10 h-10 text-slate-900" />
                     </div>
                   </div>
                 </div>
