@@ -129,7 +129,7 @@ export default function HavenBridgeLanding() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+                  href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold text-base hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
@@ -264,9 +264,7 @@ export default function HavenBridgeLanding() {
                       <span className="inline-flex items-center text-cyan-600 font-semibold text-base group-hover:gap-2 transition-all">
                         Learn More <ArrowRight className="w-5 h-5 ml-1" />
                       </span>
-                      <div className="text-sm font-medium px-3 py-1.5 rounded bg-gray-100 text-gray-700">
-                        Explore →
-                      </div>
+                      
                     </div>
                   </a>
                 </div>
@@ -279,7 +277,7 @@ export default function HavenBridgeLanding() {
               Not sure which pathway is right for you?
             </p>
             <a
-              href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+              href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center bg-linear-to-r from-slate-900 to-slate-800 text-white px-8 py-3 rounded-lg font-bold hover:from-slate-800 hover:to-slate-700 transition-all shadow-lg"
@@ -446,7 +444,7 @@ export default function HavenBridgeLanding() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+                href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-xl hover:from-amber-500 hover:to-amber-400 transition-all shadow-2xl"

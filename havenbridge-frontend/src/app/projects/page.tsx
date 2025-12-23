@@ -294,7 +294,7 @@ export default function ProjectsPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="https://forms.gle/hk7cz5PuQtyzJcHZ9"
+                href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white px-12 py-5 text-xl font-bold rounded-xl hover:bg-white hover:text-slate-900 transition-all"

@@ -1,6 +1,9 @@
 "use client";
+import Footer from "@/components/Footer";
+import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import React, { useState } from "react";
 
-import React, { useState } from 'react';
 import { 
   Mail, 
   Phone, 
@@ -18,9 +21,6 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Image from 'next/image';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -165,7 +165,8 @@ export default function ContactPage() {
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href="#inquiry-form"
+                  href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
+                  target="_"
                   className="group relative inline-flex items-center justify-center gap-3 bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
                 >
                   <span className="relative z-10">Send Message</span>
@@ -173,7 +174,8 @@ export default function ContactPage() {
                   <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </a>
                 <a 
-                  href="#consultation"
+                  href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
+                  target="_"
                   className="group relative inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all"
                 >
                   <span className="relative z-10">Book Consultation</span>
