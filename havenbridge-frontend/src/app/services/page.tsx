@@ -96,18 +96,12 @@ export default function ServicesPage() {
                   <span className="relative z-10">Explore Services</span>
                   <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
-                <a
-                  href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all"
-                >
-                  Get in Touch
-                  <Briefcase className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </a>
               </div>
             </div>
 
             {/* Right Column - Hero Image */}
-            <div className="hidden lg:block relative h-full">
+           
+<div className="hidden lg:block relative h-full">
 <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
   <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
   <Image
@@ -274,7 +268,9 @@ export default function ServicesPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="/contact"
+                href="https://forms.gle/WDJe8Bo7vLaGBje97"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-3 bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-xl hover:shadow-2xl hover:scale-105 transition-all shadow-xl"
               >
                 <span className="relative z-10">Get Started</span>

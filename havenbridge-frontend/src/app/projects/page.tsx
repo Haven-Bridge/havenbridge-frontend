@@ -100,53 +100,47 @@ export default function ProjectsPage() {
                   <span className="relative z-10">View Portfolio</span>
                   <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </a>
-                <a
-                  href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all"
-                >
-                  Partner With Us
-                  <Briefcase className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </a>
+                </a>   
               </div>
             </div>
 
             {/* Right Column - Hero Image */}
             <div className="hidden lg:block relative h-full">
-<div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
-  {/* Gradient Overlay */}
-  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+              <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
-  {/* Main Image */}
-  <Image
-    src="/project-images/hero.jpeg"
-    alt="HavenBridge Development Projects"
-    fill
-    className="object-cover"
-    sizes="50vw"
-    priority
-  />
-  
-  {/* Floating Stats */}
-  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
-    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
-      <div className="text-2xl font-bold text-emerald-400">95%</div>
-      <div className="text-xs text-gray-300">Avg Occupancy</div>
-    </div>
-    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
-      <div className="text-2xl font-bold text-amber-400">6</div>
-      <div className="text-xs text-gray-300">Active Projects</div>
-    </div>
-  </div>
+                {/* Main Image */}
+                <Image
+                  src="/project-images/hero.jpeg"
+                  alt="HavenBridge Development Projects"
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                  priority
+                />
+                
+                {/* Floating Stats */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+                  <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                    <div className="text-2xl font-bold text-emerald-400">95%</div>
+                    <div className="text-xs text-gray-300">Avg Occupancy</div>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                    <div className="text-2xl font-bold text-amber-400">6</div>
+                    <div className="text-xs text-gray-300">Active Projects</div>
+                  </div>
+                </div>
 
-  {/* Corner Icons */}
-  <div className="absolute top-6 right-6 z-20">
-    <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
-      <Award className="w-6 h-6 text-amber-400" />
-    </div>
-  </div>
-</div>
-</div>
+                {/* Corner Icons */}
+                <div className="absolute top-6 right-6 z-20">
+                  <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
+                    <Award className="w-6 h-6 text-amber-400" />
+                  </div>
+                </div>
+              </div>
+              </div>
+
           </div>
         </div>
       </section>
@@ -300,15 +294,9 @@ export default function ProjectsPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="/contact"
-                className="group relative inline-flex items-center justify-center gap-3 bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-xl hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
-              >
-                <span className="relative z-10">Request Project Info</span>
-                <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </a>
-              <a 
-                href="/contact"
+                href="https://forms.gle/hk7cz5PuQtyzJcHZ9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white px-12 py-5 text-xl font-bold rounded-xl hover:bg-white hover:text-slate-900 transition-all"
               >
                 <span className="relative z-10">Schedule Call</span>
