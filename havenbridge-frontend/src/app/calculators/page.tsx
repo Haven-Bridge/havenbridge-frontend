@@ -94,7 +94,7 @@ export default function CalculatorsPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
         {/* Animated background orbs */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -116,21 +116,17 @@ export default function CalculatorsPage() {
                 <span className="block">Calculators</span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl">
-                Make informed investment decisions with real-time feasibility analysis, cost estimation, and yield projections tailored for property developers.
-              </p>
-
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
                   onClick={() =>
                     document.querySelector('#calculators-grid')?.scrollIntoView({ behavior: 'smooth' })
                   }
-                  className="group relative inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-semibold text-lg hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
+                  className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-semibold text-lg hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
                 >
                   <span className="relative z-10">Explore Calculators</span>
                   <ArrowRight className="relative z-10 w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
+                  <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
                 </button>
 
                 <a
@@ -162,7 +158,7 @@ export default function CalculatorsPage() {
             {/* Right Column - Hero Image (desktop only) */}
             <div className="hidden lg:block relative">
               <div className="relative h-[560px] w-full rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
                 <Image
                   src="/hero-images/calculators-hero.jpeg" // Update path if needed
                   alt="Property development calculators and financial analysis tools"
@@ -226,7 +222,7 @@ export default function CalculatorsPage() {
                   { step: '03', title: 'Export Results', desc: 'Download PDF or CSV reports' },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-slate-900 text-white rounded-lg flex items-center justify-center font-bold flex-shrink-0">
+                    <div className="w-10 h-10 bg-slate-900 text-white rounded-lg flex items-center justify-center font-bold shrink-0">
                       {item.step}
                     </div>
                     <div>
