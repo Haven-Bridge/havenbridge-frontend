@@ -79,9 +79,8 @@ export default function ServicesPage() {
               </div>
 
               {/* Main Title */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                <span className="block">Our</span>
-                <span className="block text-amber-400">Services</span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                <span className="block text-white">Our <span className="text-amber-400">Services</span></span>
               </h1>
 
               <p className="text-xl text-gray-200 mb-8 leading-relaxed">
@@ -97,30 +96,24 @@ export default function ServicesPage() {
                   <span className="relative z-10">Explore Services</span>
                   <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
-                <a
-                  href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all"
-                >
-                  Get in Touch
-                  <Briefcase className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </a>
               </div>
             </div>
 
             {/* Right Column - Hero Image */}
-            <div className="hidden lg:block relative h-full">
-              <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
-                <Image
-                  src="/hero-images/service-hero.jpeg"
-                  alt="HavenBridge Services"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                  priority
-                />
-              </div>
-            </div>
+           
+<div className="hidden lg:block relative h-full">
+<div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+  <Image
+    src="/hero-images/service-hero.jpeg"
+    alt="HavenBridge Services"
+    fill
+    className="object-cover"
+    sizes="50vw"
+    priority
+  />
+</div>
+</div>
           </div>
         </div>
       </section>
@@ -152,7 +145,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Why Work With Us */}
-      {/* <section className="py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -181,7 +174,7 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Services List */}
       <section id="services-list" className="py-20 bg-linear-to-br from-slate-50 to-white">
@@ -199,7 +192,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {services.map((service, i) => {
               // Map icon string to actual icon component
               const iconMap: any = { Home, Building, Heart, Baby, HeartHandshake, Handshake };
@@ -209,39 +202,39 @@ export default function ServicesPage() {
                 <a
                   key={i}
                   href={`/services/${service.id}`}
-                  className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
+                  className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 bg-white"
                 >
                   {/* Service Image */}
-                  <div className="aspect-4/3 bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
+                  <div className="aspect-[4/5] bg-gradient-to-br from-slate-800 to-slate-600 relative overflow-hidden">
                     <Image 
                       src={service.imageUrl}
                       alt={service.title}
                       fill
                       className="object-cover transform group-hover:scale-110 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
                     
                     {/* Service Name Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                    <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
+                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">
                         {service.shortTitle}
                       </h3>
-                      <p className="text-gray-200 text-sm line-clamp-2">
+                      <p className="text-gray-200 text-base md:text-lg line-clamp-3">
                         {service.desc}
                       </p>
                     </div>
 
                     {/* Stats Badge */}
-                    <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full z-10">
-                      <span className="text-sm font-bold text-slate-900">{service.stats}</span>
+                    <div className="absolute top-6 right-6 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full z-10">
+                      <span className="text-base font-bold text-slate-900">{service.stats}</span>
                     </div>
 
                     {/* Hover Arrow */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                      <div className="bg-white/90 backdrop-blur-sm p-4 rounded-full">
-                        <ArrowRight className="w-8 h-8 text-slate-900" />
+                      <div className="bg-white/90 backdrop-blur-sm p-5 rounded-full">
+                        <ArrowRight className="w-10 h-10 text-slate-900" />
                       </div>
                     </div>
                   </div>
@@ -275,7 +268,9 @@ export default function ServicesPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="/contact"
+                href="https://forms.gle/WDJe8Bo7vLaGBje97"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-3 bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-xl hover:shadow-2xl hover:scale-105 transition-all shadow-xl"
               >
                 <span className="relative z-10">Get Started</span>

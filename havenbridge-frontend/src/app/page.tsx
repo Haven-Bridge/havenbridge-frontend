@@ -129,7 +129,9 @@ export default function HavenBridgeLanding() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="/contact"
+                  href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold text-base hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
                 >
                   <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
@@ -146,8 +148,8 @@ export default function HavenBridgeLanding() {
               </div>
             </div>
 
-            {/* Right Column - Hero Image */}
-            <div className="hidden lg:block relative">
+           {/* Right Column - Hero Image */}
+              <div className="hidden lg:block relative">
               <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
                 <Image
@@ -159,7 +161,7 @@ export default function HavenBridgeLanding() {
                   priority
                 />
               </div>
-            </div>
+              </div>
           </div>
         </div>
       </section>
@@ -193,7 +195,7 @@ export default function HavenBridgeLanding() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-cyan-500/10 rounded-full">
-              {/* <Sparkles className="w-4 h-4 text-cyan-500" /> */}
+              <Sparkles className="w-4 h-4 text-cyan-500" />
               <span className="text-sm font-semibold text-cyan-600">
                 WHAT WE DO
               </span>
@@ -208,7 +210,7 @@ export default function HavenBridgeLanding() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {services.map((service, i) => {
               // Map icon string to actual icon component
               const iconMap: any = { Home, Building, Heart, Baby, HeartHandshake, Handshake };
@@ -216,19 +218,21 @@ export default function HavenBridgeLanding() {
               
               return (
                 <div key={i} className="group relative">
-                  <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                  <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
 
                   <a
                     href={`/services/${service.id}`}
-                    className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 p-6 hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
+                    className="relative overflow-hidden rounded-3xl bg-white border border-gray-100 p-8 hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
                   >
-                    <div className="aspect-video mb-6 rounded-xl overflow-hidden relative">
+                    <div className="aspect-[4/3] mb-8 rounded-2xl overflow-hidden relative">
                       {service.imageUrl ? (
                         <>
-                          <img
+                          <Image
                             src={service.imageUrl}
                             alt={service.title}
-                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            fill
+                            className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                           <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         </>
@@ -236,31 +240,31 @@ export default function HavenBridgeLanding() {
                         <div
                           className={`w-full h-full bg-linear-to-br ${service.color} flex items-center justify-center`}
                         >
-                          <IconComponent className="w-16 h-16 text-white/80" />
+                          <IconComponent className="w-20 h-20 text-white/80" />
                         </div>
                       )}
 
-                      <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
-                        <span className="text-sm font-bold text-slate-900">
+                      <div className="absolute top-6 right-6 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full">
+                        <span className="text-base font-bold text-slate-900">
                           {service.stats}
                         </span>
                       </div>
                     </div>
 
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
+                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 group-hover:text-cyan-600 transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-gray-600 mb-4 line-clamp-3">
+                      <p className="text-gray-600 text-base mb-6 line-clamp-3">
                         {service.desc}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <span className="inline-flex items-center text-cyan-600 font-semibold group-hover:gap-2 transition-all">
-                        Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                    <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+                      <span className="inline-flex items-center text-cyan-600 font-semibold text-base group-hover:gap-2 transition-all">
+                        Learn More <ArrowRight className="w-5 h-5 ml-1" />
                       </span>
-                      <div className="text-xs font-medium px-2 py-1 rounded bg-gray-100 text-gray-700">
+                      <div className="text-sm font-medium px-3 py-1.5 rounded bg-gray-100 text-gray-700">
                         Explore →
                       </div>
                     </div>
@@ -270,18 +274,20 @@ export default function HavenBridgeLanding() {
             })}
           </div>
 
-          {/* <div className="text-center mt-12">
+          <div className="text-center mt-12">
             <p className="text-gray-600 mb-4">
               Not sure which pathway is right for you?
             </p>
             <a
-              href="/contact"
+              href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center bg-linear-to-r from-slate-900 to-slate-800 text-white px-8 py-3 rounded-lg font-bold hover:from-slate-800 hover:to-slate-700 transition-all shadow-lg"
             >
               <span className="relative z-10">Contact Our Experts</span>
               <ArrowRight className="relative z-10 w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
-          </div> */}
+          </div>
         </div>
       </section>
 
@@ -360,42 +366,44 @@ export default function HavenBridgeLanding() {
             </a>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {featuredProjects.map((project, i) => (
               <a
                 key={i}
                 href={`/projects/${project.id}`}
-                className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
+                className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500"
               >
                 <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
 
-                <div className="relative overflow-hidden rounded-2xl">
-                  <div className="aspect-4/3 relative overflow-hidden">
+                <div className="relative overflow-hidden rounded-3xl">
+                  <div className="aspect-[4/5] relative overflow-hidden">
                     {project.heroImage ? (
-                      <img
+                      <Image
                         src={project.heroImage}
                         alt={project.name}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        fill
+                        className="object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
                       <div className="w-full h-full bg-linear-to-br from-slate-800 to-slate-600" />
                     )}
                     
-                    <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/30 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 to-transparent" />
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
-                    <h3 className="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-10">
+                    <h3 className="text-3xl md:text-4xl font-bold mb-3 group-hover:text-amber-400 transition-colors">
                       {project.name}
                     </h3>
-                    <p className="text-gray-200 text-sm">
+                    <p className="text-gray-200 text-base md:text-lg">
                       {project.location}
                     </p>
                   </div>
 
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                    <div className="bg-white/90 backdrop-blur-sm p-4 rounded-full">
-                      <ArrowRight className="w-8 h-8 text-slate-900" />
+                    <div className="bg-white/90 backdrop-blur-sm p-5 rounded-full">
+                      <ArrowRight className="w-10 h-10 text-slate-900" />
                     </div>
                   </div>
                 </div>
@@ -424,7 +432,7 @@ export default function HavenBridgeLanding() {
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
           <div className="max-w-3xl mx-auto">
-            {/* <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" /> */}
+            <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" />
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Let&apos;s Build Something
               <br />
@@ -438,7 +446,9 @@ export default function HavenBridgeLanding() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/contact"
+                href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-xl hover:from-amber-500 hover:to-amber-400 transition-all shadow-2xl"
               >
                 <span className="relative z-10">Book a Consultation</span>

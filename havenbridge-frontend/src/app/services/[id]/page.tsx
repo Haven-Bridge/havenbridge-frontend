@@ -79,10 +79,10 @@ export default function ServiceDetailPage() {
             {/* Left Column - Service Info */}
             <div>
               {/* Icon Badge */}
-              <div className={`inline-flex items-center gap-3 px-6 py-3 bg-linear-to-br ${service.color} rounded-2xl mb-6`}>
+              {/* <div className={`inline-flex items-center gap-3 px-6 py-3 bg-linear-to-br ${service.color} rounded-2xl mb-6`}>
                 <IconComponent className="w-8 h-8 text-white" />
                 <span className="text-lg font-bold text-white">{service.stats}</span>
-              </div>
+              </div> */}
 
               {/* Service Title */}
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -90,9 +90,9 @@ export default function ServiceDetailPage() {
               </h1>
 
               {/* Short Description */}
-              <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+              {/* <p className="text-xl text-gray-200 mb-8 leading-relaxed">
                 {service.desc}
-              </p>
+              </p> */}
 
               {/* Key Metrics Grid */}
               <div className="grid grid-cols-2 gap-4 mb-8">
