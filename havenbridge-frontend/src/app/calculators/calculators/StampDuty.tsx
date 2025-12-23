@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import InputField from '../components/InputField';
 import { Scale, MapPin, Home, Shield } from 'lucide-react';
-import { formatCurrency, calculateStampDuty } from '../utils/formatters';
+import { formatCurrency, calculateStampDuty, calculateAdditionalFees } from '../utils/formatters';
 
 export default function StampDutyCalculator() {
   const [inputs, setInputs] = useState({
@@ -75,31 +75,56 @@ export default function StampDutyCalculator() {
   const calculateResults = () => {
     const propertyValue = parseFloat(inputs.propertyValue) || 0;
     const isFirstHome = inputs.isFirstHomeBuyer === 'yes';
+    const isForeignBuyer = inputs.foreignBuyer === 'yes';
     
-    // Calculate stamp duty
-    const stampDuty = calculateStampDuty(propertyValue, inputs.state, isFirstHome);
+    // Calculate stamp duty using the updated function signature
+    const stampDuty = calculateStampDuty(
+      propertyValue, 
+      inputs.state, 
+      isFirstHome,
+      inputs.propertyType as "established" | "new" | "vacant"
+    );
     
-    // Additional charges (simplified)
-    const transferFee = propertyValue * 0.0002;
-    const registrationFee = 200;
-    const foreignSurcharge = inputs.foreignBuyer === 'yes' ? propertyValue * 0.08 : 0;
+    // Calculate additional fees using state-specific rules
+    const additionalFees = calculateAdditionalFees(
+      propertyValue, 
+      inputs.state, 
+      isForeignBuyer
+    );
+    
+    const { transferFee, registrationFee, foreignSurcharge } = additionalFees;
     
     const totalCharges = stampDuty + transferFee + registrationFee + foreignSurcharge;
     const totalCost = propertyValue + totalCharges;
     const chargesPercentage = propertyValue > 0 ? (totalCharges / propertyValue) * 100 : 0;
 
+    // Improved summary logic with state-specific information
     let summary = '';
-    if (inputs.isFirstHomeBuyer === 'yes') {
-      summary = 'First home buyers may qualify for additional concessions or exemptions';
-    } else if (inputs.foreignBuyer === 'yes') {
-      summary = 'Foreign buyers pay additional surcharge of 8% in most states';
+    if (isFirstHome) {
+      if (inputs.state === 'SA' || inputs.state === 'NT') {
+        summary = 'No first home buyer concessions available in this state';
+      } else {
+        summary = 'First home buyer concessions applied based on state rules';
+      }
+    } else if (isForeignBuyer) {
+      const surchargeRates: Record<string, string> = {
+        'VIC': '8%',
+        'NSW': '8%', 
+        'QLD': '7%',
+        'SA': '7%',
+        'WA': '7%',
+        'TAS': '8%',
+        'ACT': '8%',
+        'NT': '8%'
+      };
+      summary = `Foreign buyer surcharge applied (${surchargeRates[inputs.state] || 'varies'} rate)`;
     } else {
       summary = `Total government charges are ${chargesPercentage.toFixed(2)}% of property value`;
     }
 
     const stateLabels: Record<string, string> = {
       'VIC': 'Victoria',
-      'NSW': 'New South Wales',
+      'NSW': 'New South Wales', 
       'QLD': 'Queensland',
       'SA': 'South Australia',
       'WA': 'Western Australia',
@@ -111,19 +136,62 @@ export default function StampDutyCalculator() {
     return {
       title: 'Stamp Duty & Government Charges',
       metrics: [
-        { label: 'Total Charges', value: formatCurrency(totalCharges), unit: '', color: 'info' },
-        { label: 'Stamp Duty', value: formatCurrency(stampDuty), unit: '' },
-        { label: 'As Percentage', value: `${chargesPercentage.toFixed(2)}%`, unit: '' },
-        { label: 'Total Cost', value: formatCurrency(totalCost), unit: '' }
+        { 
+          label: 'Total Charges', 
+          value: formatCurrency(totalCharges), 
+          unit: '', 
+          color: 'info' 
+        },
+        { 
+          label: 'Stamp Duty', 
+          value: formatCurrency(stampDuty), 
+          unit: '',
+          color: stampDuty === 0 && isFirstHome ? 'positive' : undefined
+        },
+        { 
+          label: 'As Percentage', 
+          value: `${chargesPercentage.toFixed(2)}%`, 
+          unit: '' 
+        },
+        { 
+          label: 'Total Cost', 
+          value: formatCurrency(totalCost), 
+          unit: '' 
+        }
       ],
       summary: summary,
       breakdown: [
         { label: 'Property Value', value: formatCurrency(propertyValue) },
         { label: 'State/Territory', value: stateLabels[inputs.state] || inputs.state },
-        { label: 'First Home Buyer', value: inputs.isFirstHomeBuyer === 'yes' ? 'Yes' : 'No' },
-        { label: 'Property Type', value: inputs.propertyType === 'established' ? 'Established Home' : inputs.propertyType === 'new' ? 'New Home' : 'Vacant Land' },
-        { label: 'Foreign Buyer', value: inputs.foreignBuyer === 'yes' ? 'Yes' : 'No' },
-        { label: 'Foreign Surcharge', value: formatCurrency(foreignSurcharge) }
+        { 
+          label: 'First Home Buyer', 
+          value: isFirstHome ? 'Yes' : 'No'
+        },
+        { 
+          label: 'Property Type', 
+          value: inputs.propertyType === 'established' ? 'Established Home' : 
+                 inputs.propertyType === 'new' ? 'New Home' : 'Vacant Land' 
+        },
+        { 
+          label: 'Foreign Buyer', 
+          value: isForeignBuyer ? 'Yes' : 'No' 
+        },
+        { 
+          label: 'Stamp Duty Calculation', 
+          value: stampDuty === 0 && isFirstHome ? 'Exempt (First Home)' : 'Applied' 
+        },
+        { 
+          label: 'Transfer Fee', 
+          value: formatCurrency(transferFee) 
+        },
+        { 
+          label: 'Registration Fee', 
+          value: formatCurrency(registrationFee) 
+        },
+        { 
+          label: 'Foreign Surcharge', 
+          value: formatCurrency(foreignSurcharge) 
+        }
       ]
     };
   };
@@ -237,29 +305,55 @@ export default function StampDutyCalculator() {
         </div>
       </div>
 
-      {/* Example Scenario */}
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-        <div className="flex items-center gap-2 mb-2">
-          <Scale className="w-4 h-4 text-amber-600" />
-          <span className="text-sm font-medium text-amber-800">Example Scenario</span>
+      {/* Example Scenarios */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Scale className="w-4 h-4 text-amber-600" />
+            <span className="text-sm font-medium text-amber-800">Example 1: VIC First Home</span>
+          </div>
+          <p className="text-sm text-amber-700">
+            $550,000 in Victoria, established home, first home buyer
+          </p>
+          <button
+            onClick={() => {
+              setInputs({
+                propertyValue: '550000',
+                state: 'VIC',
+                isFirstHomeBuyer: 'yes',
+                propertyType: 'established',
+                foreignBuyer: 'no'
+              });
+            }}
+            className="mt-2 text-sm text-amber-700 hover:text-amber-800 font-medium"
+          >
+            Load Example →
+          </button>
         </div>
-        <p className="text-sm text-amber-700">
-          $800,000 property in Victoria, established home, not first home buyer
-        </p>
-        <button
-          onClick={() => {
-            setInputs({
-              propertyValue: '800000',
-              state: 'VIC',
-              isFirstHomeBuyer: 'no',
-              propertyType: 'established',
-              foreignBuyer: 'no'
-            });
-          }}
-          className="mt-2 text-sm text-amber-700 hover:text-amber-800 font-medium"
-        >
-          Load this example →
-        </button>
+        
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Scale className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-medium text-blue-800">Example 2: NSW Standard</span>
+          </div>
+          <p className="text-sm text-blue-700">
+            $800,000 in NSW, established home, not first home buyer
+          </p>
+          <button
+            onClick={() => {
+              setInputs({
+                propertyValue: '800000',
+                state: 'NSW',
+                isFirstHomeBuyer: 'no',
+                propertyType: 'established',
+                foreignBuyer: 'no'
+              });
+            }}
+            className="mt-2 text-sm text-blue-700 hover:text-blue-800 font-medium"
+          >
+            Load Example →
+          </button>
+        </div>
       </div>
 
       {/* Action Buttons */}

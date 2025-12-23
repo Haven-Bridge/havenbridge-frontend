@@ -216,7 +216,7 @@ export default function CalculatorModal({ isOpen, onClose, title, children }: Ca
         className="bg-white rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden shadow-2xl"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-slate-200 bg-gradient-to-r from-slate-900 to-blue-900 text-white">
+        <div className="flex items-center justify-between p-6 border-b border-slate-200 bg-linear-to-r from-slate-900 to-blue-900 text-white">
           <div>
             <h2 className="text-2xl font-bold">{title}</h2>
             <p className="text-slate-300 text-sm">Interactive calculator with real-time results</p>
