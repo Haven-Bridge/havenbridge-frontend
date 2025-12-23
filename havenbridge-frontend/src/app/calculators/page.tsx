@@ -1,9 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Calculator, TrendingUp, Home, Scale, DollarSign, Building2, Percent, Sparkles } from 'lucide-react';
+import Image from 'next/image';
+import {
+  Calculator,
+  TrendingUp,
+  Home,
+  Scale,
+  DollarSign,
+  Building2,
+  Percent,
+  Sparkles,
+  ArrowRight,
+  ChevronRight,
+} from 'lucide-react';
 import CalculatorModal from './CalculatorModal';
 import CalculatorCard from './components/CalculatorCard';
 import FeasibilityCalculator from './calculators/Feasibility';
@@ -23,7 +35,7 @@ export default function CalculatorsPage() {
       description: 'Analyze project viability and ROI for residential developments',
       icon: TrendingUp,
       color: 'from-amber-500 to-orange-500',
-      component: FeasibilityCalculator
+      component: FeasibilityCalculator,
     },
     {
       id: 'rooming-house',
@@ -31,7 +43,7 @@ export default function CalculatorsPage() {
       description: 'Calculate rental yields and cash flow for rooming house investments',
       icon: Home,
       color: 'from-cyan-500 to-blue-500',
-      component: RoomingHouseCalculator
+      component: RoomingHouseCalculator,
     },
     {
       id: 'stamp-duty',
@@ -39,7 +51,7 @@ export default function CalculatorsPage() {
       description: 'Estimate government taxes and charges for property purchases',
       icon: Scale,
       color: 'from-emerald-500 to-green-500',
-      component: StampDutyCalculator
+      component: StampDutyCalculator,
     },
     {
       id: 'construction-cost',
@@ -47,7 +59,7 @@ export default function CalculatorsPage() {
       description: 'Calculate building costs per square meter and total project cost',
       icon: Building2,
       color: 'from-violet-500 to-purple-500',
-      component: ConstructionCostCalculator
+      component: ConstructionCostCalculator,
     },
     {
       id: 'modular-comparison',
@@ -55,7 +67,7 @@ export default function CalculatorsPage() {
       description: 'Compare costs, timelines, and ROI between construction methods',
       icon: Percent,
       color: 'from-pink-500 to-rose-500',
-      component: ModularComparisonCalculator
+      component: ModularComparisonCalculator,
     },
     {
       id: 'vendor-finance',
@@ -63,8 +75,8 @@ export default function CalculatorsPage() {
       description: 'Calculate repayment schedules for vendor finance arrangements',
       icon: DollarSign,
       color: 'from-slate-600 to-gray-600',
-      component: VendorFinanceCalculator
-    }
+      component: VendorFinanceCalculator,
+    },
   ];
 
   const handleOpenCalculator = (calculatorId: string) => {
@@ -75,7 +87,7 @@ export default function CalculatorsPage() {
     setActiveCalculator(null);
   };
 
-  const activeCalculatorData = calculators.find(calc => calc.id === activeCalculator);
+  const activeCalculatorData = calculators.find((calc) => calc.id === activeCalculator);
 
   return (
     <div className="bg-white font-sans">
@@ -83,46 +95,95 @@ export default function CalculatorsPage() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        {/* Animated background orbs */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-3/4 left-1/3 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
         </div>
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
-              <Calculator className="w-4 h-4 text-amber-400" />
-              <span className="text-sm font-semibold text-white">
-                DEVELOPMENT TOOLS
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Development <span className="text-amber-400">Calculators</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-              Professional tools to analyze, plan, and optimize your construction projects
-            </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Content */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
+                <Calculator className="w-4 h-4 text-amber-400" />
+                <span className="text-sm font-semibold text-white">DEVELOPMENT TOOLS</span>
+              </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mt-12">
-              {[
-                { value: '6', label: 'Calculators' },
-                { value: 'Real-time', label: 'Results' },
-                { value: 'Export', label: 'Reports' }
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                Professional <span className="text-amber-400">Development</span>
+                <span className="block">Calculators</span>
+              </h1>
+
+              <p className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl">
+                Make informed investment decisions with real-time feasibility analysis, cost estimation, and yield projections tailored for property developers.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <button
+                  onClick={() =>
+                    document.querySelector('#calculators-grid')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                  className="group relative inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-semibold text-lg hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
+                >
+                  <span className="relative z-10">Explore Calculators</span>
+                  <ArrowRight className="relative z-10 w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
+                </button>
+
+                <a
+                  href="https://forms.gle/hxvDpBwLLFqJV3qEA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all"
+                >
+                  Book a Consultation
+                  <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0 mt-16">
+                {[
+                  { value: '6', label: 'Professional Tools' },
+                  { value: 'Real-time', label: 'Calculations' },
+                  { value: 'PDF/CSV', label: 'Export Reports' },
+                ].map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
+                    <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column - Hero Image (desktop only) */}
+            <div className="hidden lg:block relative">
+              <div className="relative h-[560px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+                <Image
+                  src="/hero-images/calculators-hero.jpeg" // Update path if needed
+                  alt="Property development calculators and financial analysis tools"
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                  priority
+                />
+                <div className="absolute bottom-8 left-8 z-20">
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
+                    <p className="text-white font-medium">Data-driven development decisions</p>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Calculators Grid */}
-      <section className="py-20 bg-slate-50">
+      <section id="calculators-grid" className="py-20 bg-slate-50">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -162,7 +223,7 @@ export default function CalculatorsPage() {
                 {[
                   { step: '01', title: 'Select Calculator', desc: 'Choose the tool that matches your needs' },
                   { step: '02', title: 'Input Data', desc: 'Enter project-specific information' },
-                  { step: '03', title: 'Export Results', desc: 'Download PDF or CSV reports' }
+                  { step: '03', title: 'Export Results', desc: 'Download PDF or CSV reports' },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-slate-900 text-white rounded-lg flex items-center justify-center font-bold flex-shrink-0">
