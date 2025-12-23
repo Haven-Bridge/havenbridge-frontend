@@ -112,41 +112,41 @@ export default function ProjectsPage() {
             </div>
 
             {/* Right Column - Hero Image */}
-            <div className="hidden lg:block relative">
-              <div className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl">
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+            <div className="hidden lg:block relative h-full">
+<div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+  {/* Gradient Overlay */}
+  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
-                {/* Main Image */}
-                <Image
-                  src="/hero-images/project-hero.jpeg"
-                  alt="HavenBridge Development Projects"
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                  priority
-                />
-                
-                {/* Floating Stats */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
-                  <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
-                    <div className="text-2xl font-bold text-emerald-400">95%</div>
-                    <div className="text-xs text-gray-300">Avg Occupancy</div>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
-                    <div className="text-2xl font-bold text-amber-400">6</div>
-                    <div className="text-xs text-gray-300">Active Projects</div>
-                  </div>
-                </div>
+  {/* Main Image */}
+  <Image
+    src="/project-images/hero.jpeg"
+    alt="HavenBridge Development Projects"
+    fill
+    className="object-cover"
+    sizes="50vw"
+    priority
+  />
+  
+  {/* Floating Stats */}
+  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+      <div className="text-2xl font-bold text-emerald-400">95%</div>
+      <div className="text-xs text-gray-300">Avg Occupancy</div>
+    </div>
+    <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+      <div className="text-2xl font-bold text-amber-400">6</div>
+      <div className="text-xs text-gray-300">Active Projects</div>
+    </div>
+  </div>
 
-                {/* Corner Icons */}
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
-                    <Award className="w-6 h-6 text-amber-400" />
-                  </div>
-                </div>
-              </div>
-            </div>
+  {/* Corner Icons */}
+  <div className="absolute top-6 right-6 z-20">
+    <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
+      <Award className="w-6 h-6 text-amber-400" />
+    </div>
+  </div>
+</div>
+</div>
           </div>
         </div>
       </section>
