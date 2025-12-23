@@ -520,35 +520,35 @@ export default function FeasibilityCalculator() {
         />
         
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Target className="w-4 h-4 text-amber-600" />
-            <span className="text-sm font-medium text-amber-800">Industry Benchmark</span>
-          </div>
-          <p className="text-sm text-amber-700">
-            Residential projects typically target 15-25% profit margin. 
-            Commercial may be 10-20%.
-          </p>
-          <div className="flex gap-2 mt-2">
-            <button
-              onClick={() => handleInputChange('profitMarginTarget', '15')}
-              className="text-xs px-3 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200"
-            >
-              15% (Conservative)
-            </button>
-            <button
-              onClick={() => handleInputChange('profitMarginTarget', '20')}
-              className="text-xs px-3 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200"
-            >
-              20% (Standard)
-            </button>
-            <button
-              onClick={() => handleInputChange('profitMarginTarget', '25')}
-              className="text-xs px-3 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200"
-            >
-              25% (Aggressive)
-            </button>
-          </div>
-        </div>
+  <div className="flex items-center gap-2 mb-2">
+    <Target className="w-4 h-4 text-amber-600" />
+    <span className="text-sm font-medium text-amber-800">Industry Benchmark</span>
+  </div>
+  <p className="text-sm text-amber-700">
+    Residential projects typically target 15-25% profit margin. 
+    Commercial may be 10-20%.
+  </p>
+  <div className="flex flex-wrap gap-2 mt-2">
+    <button
+      onClick={() => handleInputChange('profitMarginTarget', '15')}
+      className="text-[11px] px-2 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 whitespace-nowrap"
+    >
+      15% (Conservative)
+    </button>
+    <button
+      onClick={() => handleInputChange('profitMarginTarget', '20')}
+      className="text-[11px] px-2 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 whitespace-nowrap"
+    >
+      20% (Standard)
+    </button>
+    <button
+      onClick={() => handleInputChange('profitMarginTarget', '25')}
+      className="text-[11px] px-2 py-1 bg-amber-100 text-amber-700 rounded hover:bg-amber-200 whitespace-nowrap"
+    >
+      25% (Aggressive)
+    </button>
+  </div>
+</div>
       </div>
 
       {/* Example Scenarios */}
