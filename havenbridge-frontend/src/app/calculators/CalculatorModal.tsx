@@ -238,7 +238,7 @@ export default function CalculatorModal({ isOpen, onClose, title, children }: Ca
           </div>
 
           {/* Right Panel - Results */}
-          <div className="w-1/2 bg-gradient-to-b from-slate-50 to-white overflow-y-auto p-6">
+          <div className="w-1/2 bg-linear-to-b from-slate-50 to-white overflow-y-auto p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-slate-900">Results & Analysis</h3>
               <button
@@ -260,7 +260,7 @@ export default function CalculatorModal({ isOpen, onClose, title, children }: Ca
               <div className="space-y-6">
                 {/* Summary */}
                 {results.summary && (
-                  <div className="bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-200 rounded-xl p-5">
+                  <div className="bg-linear-to-r from-cyan-50 to-blue-50 border border-cyan-200 rounded-xl p-5">
                     <h4 className="font-bold text-cyan-800 mb-2">Summary</h4>
                     <p className="text-cyan-700">{results.summary}</p>
                   </div>
@@ -350,8 +350,8 @@ export default function CalculatorModal({ isOpen, onClose, title, children }: Ca
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-64 text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-full flex items-center justify-center mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg"></div>
+                <div className="w-16 h-16 bg-linear-to-r from-cyan-100 to-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-8 h-8 bg-linear-to-r from-cyan-500 to-blue-500 rounded-lg"></div>
                 </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">No Results Yet</h4>
                 <p className="text-slate-600 max-w-md">
