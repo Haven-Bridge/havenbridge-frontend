@@ -75,6 +75,46 @@ export default function CareersPage() {
     },
   ];
 
+  // Job opportunities - easily update or connect to CMS later
+  const openPositions = [
+    {
+      title: "Project Manager",
+      location: "Melbourne, VIC",
+      type: "Full-time",
+      department: "Project Management",
+      desc: "Lead property development projects from conception to completion. Experience in residential or commercial development preferred.",
+      salary: "Competitive + Super",
+      featured: true,
+    },
+    {
+      title: "Development Coordinator",
+      location: "Sydney, NSW / Melbourne, VIC",
+      type: "Full-time",
+      department: "Development",
+      desc: "Support project delivery and coordinate with stakeholders, contractors, and government agencies. Strong organizational skills essential.",
+      salary: "Competitive + Super",
+      featured: true,
+    },
+    {
+      title: "Community Engagement Officer",
+      location: "Melbourne, VIC",
+      type: "Full-time",
+      department: "Community Relations",
+      desc: "Build relationships with communities and stakeholders for development projects. Experience with multicultural communities highly valued.",
+      salary: "Competitive + Super",
+      featured: false,
+    },
+    {
+      title: "Finance & Administration",
+      location: "Melbourne, VIC",
+      type: "Full-time / Part-time",
+      department: "Finance",
+      desc: "Support financial operations, reporting, and administrative functions. Property development experience preferred.",
+      salary: "Competitive + Super",
+      featured: false,
+    },
+  ];
+
   const values = [
     {
       icon: Lightbulb,
@@ -185,12 +225,10 @@ export default function CareersPage() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
-                  href="https://forms.gle/J5m9v9o466tT8mbD9"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#open-positions"
                   className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
                 >
-                  <span className="relative z-10">Apply Now</span>
+                  <span className="relative z-10">View Open Roles</span>
                   <ArrowRight className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                   <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </a>
@@ -388,6 +426,128 @@ export default function CareersPage() {
                     </span>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Open Positions Section */}
+      <section id="open-positions" className="py-16 sm:py-20 md:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-16 sm:mb-20">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-400/10 rounded-full border border-amber-400/20 mb-4 sm:mb-6">
+                <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
+                <span className="text-xs sm:text-sm font-semibold text-amber-600">
+                  CURRENT OPPORTUNITIES
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 px-4">
+                Open Positions
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+                Join our team and help shape the future of inclusive property development in Australia.
+              </p>
+            </div>
+
+            {/* Positions Grid */}
+            <div className="space-y-6">
+              {openPositions.map((position, i) => (
+                <div
+                  key={i}
+                  className={`group relative bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border transition-all duration-300 hover:shadow-2xl ${
+                    position.featured
+                      ? "border-amber-400 shadow-lg ring-2 ring-amber-400/20"
+                      : "border-gray-100 shadow-lg hover:border-cyan-200"
+                  }`}
+                >
+                  {/* Featured Badge */}
+                  {position.featured && (
+                    <div className="absolute top-4 right-4">
+                      <div className="inline-flex items-center gap-1 px-3 py-1 bg-amber-400 text-slate-900 rounded-full text-xs font-bold">
+                        <Star className="w-3 h-3" />
+                        FEATURED
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="grid lg:grid-cols-3 gap-6">
+                    {/* Left - Main Info */}
+                    <div className="lg:col-span-2">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
+                        {position.title}
+                      </h3>
+
+                      <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4">
+                        <span className="inline-flex items-center gap-1.5 text-sm text-gray-600">
+                          <MapPin className="w-4 h-4 text-cyan-500" />
+                          {position.location}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 text-sm text-gray-600">
+                          <Clock className="w-4 h-4 text-emerald-500" />
+                          {position.type}
+                        </span>
+                        <span className="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold">
+                          {position.department}
+                        </span>
+                      </div>
+
+                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
+                        {position.desc}
+                      </p>
+
+                      <div className="flex items-center gap-2 text-sm font-semibold text-amber-600">
+                        <CircleDollarSign className="w-4 h-4" />
+                        {position.salary}
+                      </div>
+                    </div>
+
+                    {/* Right - Action */}
+                    <div className="flex flex-col justify-between">
+                      <div className="hidden lg:block">
+                        <div className="text-sm text-gray-500 mb-2">
+                          Apply by:
+                        </div>
+                        <div className="text-lg font-bold text-slate-900">
+                          Rolling basis
+                        </div>
+                      </div>
+
+                      <a
+                        href="https://forms.gle/J5m9v9o466tT8mbD9"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/btn inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3 rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all mt-4 lg:mt-0"
+                      >
+                        Apply Now
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* General Application CTA */}
+            <div className="mt-12 bg-gradient-to-br from-slate-50 to-cyan-50 rounded-2xl p-8 border border-gray-100">
+              <div className="text-center">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+                  Don't See the Perfect Role?
+                </h3>
+                <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                  We're always looking for talented individuals who share our mission. Submit your resume and we'll keep you in mind for future opportunities.
+                </p>
+                <a
+                  href="https://forms.gle/J5m9v9o466tT8mbD9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-8 py-3 rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all"
+                >
+                  Submit General Application
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
