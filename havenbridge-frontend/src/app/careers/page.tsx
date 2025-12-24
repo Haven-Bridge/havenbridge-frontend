@@ -1,7 +1,9 @@
 "use client";
-
-import React from "react";
+import Footer from "@/components/Footer";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import React from "react";
+
 import {
   Briefcase,
   Users,
@@ -32,8 +34,6 @@ import {
   Target as Bullseye,
   Building,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function CareersPage() {
   const benefits = [
@@ -72,63 +72,6 @@ export default function CareersPage() {
       title: "Meaningful Impact",
       desc: "Work on projects that create lasting positive change in communities",
       color: "from-orange-500 to-red-500",
-    },
-  ];
-
-  const openPositions = [
-    {
-      title: "Senior Project Manager",
-      location: "Melbourne, VIC",
-      type: "Full-time",
-      department: "Project Management",
-      desc: "Lead and manage multiple property development projects from conception to completion. Requires 8+ years experience in property development.",
-      salary: "$120k - $150k + Super",
-      featured: true,
-    },
-    {
-      title: "Construction Manager",
-      location: "Sydney, NSW",
-      type: "Full-time",
-      department: "Construction",
-      desc: "Oversee construction operations and ensure quality delivery of development projects. Experience with residential developments essential.",
-      salary: "$110k - $140k + Super",
-      featured: true,
-    },
-    {
-      title: "Business Development Manager",
-      location: "Brisbane, QLD",
-      type: "Full-time",
-      department: "Business Development",
-      desc: "Develop new partnerships and opportunities in the property development sector. Strong network in QLD property market required.",
-      salary: "$100k - $130k + Commission",
-      featured: false,
-    },
-    {
-      title: "Architectural Designer",
-      location: "Melbourne, VIC",
-      type: "Full-time",
-      department: "Design",
-      desc: "Create innovative and sustainable design solutions for residential and commercial projects. Proficiency in ArchiCAD and Revit required.",
-      salary: "$85k - $110k + Super",
-      featured: false,
-    },
-    {
-      title: "Finance Analyst",
-      location: "Sydney, NSW",
-      type: "Full-time",
-      department: "Finance",
-      desc: "Analyze financial data and support investment decision-making processes. CPA qualification and property experience preferred.",
-      salary: "$90k - $115k + Super",
-      featured: false,
-    },
-    {
-      title: "Community Engagement Coordinator",
-      location: "Perth, WA",
-      type: "Full-time",
-      department: "Community Relations",
-      desc: "Build relationships with communities and stakeholders for development projects. Experience with multicultural communities highly valued.",
-      salary: "$75k - $95k + Super",
-      featured: false,
     },
   ];
 
@@ -234,13 +177,20 @@ export default function CareersPage() {
                 </span>
                 <span className="block mt-2 sm:mt-4">With Purpose</span>
               </h1>
+
+              <p className="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl">
+                Join a team that's building more than properties—we're creating inclusive, community-focused housing solutions that shape Australia's future.
+              </p>
+
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
-                  href="#open-positions"
+                  href="https://forms.gle/J5m9v9o466tT8mbD9"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
                 >
-                  <span className="relative z-10">View Open Roles</span>
+                  <span className="relative z-10">Apply Now</span>
                   <ArrowRight className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                   <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </a>
@@ -302,8 +252,8 @@ export default function CareersPage() {
         {/* Mobile Alternative Image */}
         <div className="lg:hidden container mx-auto px-4 sm:px-6 relative z-10 mt-8">
           <div className="relative h-[250px] rounded-xl overflow-hidden shadow-xl">
-            <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent z-10"></div>
-            <div className="relative w-full h-full bg-linear-to-br from-slate-800 via-blue-900 to-slate-900">
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent z-10"></div>
+            <div className="relative w-full h-full bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900">
               <Image
                 src="/careers-images/hero-mobile.jpg"
                 alt="HavenBridge Careers"
@@ -331,7 +281,7 @@ export default function CareersPage() {
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 px-4">
                 Why Work at{" "}
-                <span className="bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-cyan-500">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-cyan-500">
                   HavenBridge?
                 </span>
               </h2>
@@ -350,13 +300,13 @@ export default function CareersPage() {
                     <div className="relative bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col overflow-hidden">
                       {/* Top Accent */}
                       <div
-                        className={`absolute top-0 left-0 right-0 h-1 bg-linear-to-r ${benefit.color}`}
+                        className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${benefit.color}`}
                       ></div>
 
                       {/* Icon */}
                       <div className="mb-4 sm:mb-6">
                         <div
-                          className={`inline-flex p-3 rounded-xl bg-linear-to-br ${benefit.color}`}
+                          className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${benefit.color}`}
                         >
                           <Icon className="w-6 h-6 text-white" />
                         </div>
@@ -439,106 +389,6 @@ export default function CareersPage() {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Open Positions - Enhanced Design */}
-      <section id="open-positions" className="py-16 sm:py-20 md:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-16 sm:mb-20">
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-400/10 rounded-full border border-amber-400/20 mb-4 sm:mb-6">
-                <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
-                <span className="text-xs sm:text-sm font-semibold text-amber-600">
-                  CURRENT OPPORTUNITIES
-                </span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 px-4">
-                Open Positions
-              </h2>
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-                Join our team and help shape the future of inclusive property
-                development in Australia.
-              </p>
-            </div>
-
-            {/* Positions Grid */}
-            <div className="space-y-6">
-              {openPositions.map((position, i) => (
-                <div
-                  key={i}
-                  className={`group relative bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border transition-all duration-300 hover:shadow-2xl ${
-                    position.featured
-                      ? "border-amber-400 shadow-lg ring-2 ring-amber-400/20"
-                      : "border-gray-100 shadow-lg hover:border-cyan-200"
-                  }`}
-                >
-                  {/* Featured Badge */}
-                  {position.featured && (
-                    <div className="absolute top-4 right-4">
-                      <div className="inline-flex items-center gap-1 px-3 py-1 bg-amber-400 text-slate-900 rounded-full text-xs font-bold">
-                        <Star className="w-3 h-3" />
-                        FEATURED
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="grid lg:grid-cols-3 gap-6">
-                    {/* Left - Main Info */}
-                    <div className="lg:col-span-2">
-                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 group-hover:text-cyan-600 transition-colors">
-                        {position.title}
-                      </h3>
-
-                      <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4">
-                        <span className="inline-flex items-center gap-1.5 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 text-cyan-500" />
-                          {position.location}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 text-emerald-500" />
-                          {position.type}
-                        </span>
-                        <span className="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold">
-                          {position.department}
-                        </span>
-                      </div>
-
-                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                        {position.desc}
-                      </p>
-
-                      <div className="flex items-center gap-2 text-sm font-semibold text-amber-600">
-                        <CircleDollarSign className="w-4 h-4" />
-                        {position.salary}
-                      </div>
-                    </div>
-
-                    {/* Right - Action */}
-                    <div className="flex flex-col justify-between">
-                      <div className="hidden lg:block">
-                        <div className="text-sm text-gray-500 mb-2">
-                          Apply by:
-                        </div>
-                        <div className="text-lg font-bold text-slate-900">
-                          Rolling basis
-                        </div>
-                      </div>
-
-                      <a
-                        href="/contact"
-                        className="group/btn inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3 rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all mt-4 lg:mt-0"
-                      >
-                        Apply Now
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -651,36 +501,43 @@ export default function CareersPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-4 sm:mb-6">
-              <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400" />
               <span className="text-xs sm:text-sm font-semibold text-white">
-                CONNECT WITH US
+                JOIN OUR TEAM
               </span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-              Don't See a{" "}
+              Ready to Build{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-cyan-500">
-                Perfect Fit?
-              </span>
+                Your Future
+              </span>{" "}
+              With Us?
             </h2>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-12 sm:mb-16">
+            <p className="text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+              Join a team that's passionate about creating inclusive, community-focused housing solutions across Australia.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
-                href="/contact"
+                href="https://forms.gle/J5m9v9o466tT8mbD9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl"
               >
-                <span>Submit Your Resume</span>
+                <span>Submit Your Application</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="mailto:careers@havenbridge.com.au"
-                className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 bg-transparent border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg hover:bg-white hover:text-slate-900 transition-all"
+                className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg hover:bg-white hover:text-slate-900 transition-all"
               >
                 <Mail className="w-4 h-4" />
                 <span>Email Careers Team</span>
               </a>
             </div>
-</div>
+          </div>
         </div>
       </section>
 
@@ -688,4 +545,3 @@ export default function CareersPage() {
     </div>
   );
 }
-
