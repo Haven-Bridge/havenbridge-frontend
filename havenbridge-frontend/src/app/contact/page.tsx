@@ -46,15 +46,17 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Inquiry Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you within 24 hours.');
+    // Open Google Form in new tab
+    window.open('https://forms.gle/hHLnMLZ8Arnc1dcB9', '_blank');
+    // Reset form
     setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
   };
 
   const handleConsultationSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Consultation booked:', consultationData);
-    alert('Thank you for booking a consultation! We will confirm your appointment within 2 business hours.');
+    // Open Google Form in new tab
+    window.open('https://forms.gle/hHLnMLZ8Arnc1dcB9', '_blank');
+    // Reset form
     setConsultationData({
       name: '',
       email: '',
@@ -133,7 +135,7 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Hero Section with Split Layout */}
-      <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-32 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-32 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
         {/* Grid Background */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
@@ -155,7 +157,7 @@ export default function ContactPage() {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 leading-tight">
                 <span className="block">
                   Let's Start
-                  <span className="bg-clip-text text-transparent bg-linear-to-r from-amber-400 via-white to-cyan-500 ml-2 sm:ml-4">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-white to-cyan-500 ml-2 sm:ml-4">
                     Your Project
                   </span>
                 </span>
@@ -166,16 +168,18 @@ export default function ContactPage() {
               <div className="flex flex-wrap gap-4">
                 <a 
                   href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
-                  target="_"
-                  className="group relative inline-flex items-center justify-center gap-3 bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
                 >
                   <span className="relative z-10">Send Message</span>
                   <MessageSquare className="relative z-10 w-5 h-5 group-hover:scale-110 transition-transform" />
-                  <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </a>
                 <a 
                   href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
-                  target="_"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all"
                 >
                   <span className="relative z-10">Book Consultation</span>
@@ -188,7 +192,7 @@ export default function ContactPage() {
             <div className="hidden lg:block relative">
               <div className="relative h-[420px] rounded-2xl overflow-hidden">
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
                 {/* Decorative Elements */}
                 <div className="absolute top-6 left-6 z-20">
@@ -276,7 +280,7 @@ export default function ContactPage() {
             </div>
 
             {/* Inquiry Form */}
-            <div id="inquiry-form" className="scroll-mt-20">
+            {/* <div id="inquiry-form" className="scroll-mt-20">
               <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-3xl p-8 md:p-12 mb-20 border border-blue-100">
                 <div className="max-w-3xl mx-auto">
                   <div className="text-center mb-12">
@@ -396,12 +400,12 @@ export default function ContactPage() {
                   </form>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Book a Consultation */}
-            <div id="consultation" className="scroll-mt-20">
+            {/* <div id="consultation" className="scroll-mt-20">
               <div className="bg-gradient-to-br from-slate-900 to-blue-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
-                {/* Decorative elements */}
+             
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full -translate-y-32 translate-x-32" />
                 <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/5 rounded-full translate-y-48 -translate-x-48" />
                 
@@ -574,13 +578,13 @@ export default function ContactPage() {
                   </form>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 overflow-hidden bg-linear-to-br from-slate-900 via-blue-900 to-slate-800">
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -597,7 +601,7 @@ export default function ContactPage() {
             </div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Let's Build Something <span className="bg-clip-text text-transparent bg-linear-to-r from-amber-400 to-cyan-500">Remarkable</span> Together
+              Let's Build Something <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-cyan-500">Remarkable</span> Together
             </h2>
             
             <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
@@ -607,19 +611,21 @@ export default function ContactPage() {
             <div className="flex flex-wrap justify-center gap-6">
               <a 
                 href="#inquiry-form"
-                className="group relative inline-flex items-center justify-center gap-3 bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-10 py-5 text-xl font-bold rounded-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
+                className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-10 py-5 text-xl font-bold rounded-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl overflow-hidden"
               >
                 <span className="relative z-10">Start Your Project</span>
                 <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                <div className="absolute inset-0 bg-linear-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </a>
               <a 
-                href="#consultation"
-                className="group relative inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white px-10 py-5 text-xl font-bold rounded-lg hover:bg-white hover:text-slate-900 transition-all overflow-hidden"
-              >
-                <span className="relative z-10">Book Consultation</span>
-                <Calendar className="relative z-10 w-5 h-5" />
-              </a>
+                  href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all"
+                >
+                  <span className="relative z-10">Book Consultation</span>
+                  <Calendar className="relative z-10 w-5 h-5" />
+                </a>
             </div>
           </div>
         </div>
