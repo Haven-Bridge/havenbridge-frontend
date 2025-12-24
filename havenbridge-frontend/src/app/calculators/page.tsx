@@ -15,6 +15,7 @@ import {
   Sparkles,
   ArrowRight,
   ChevronRight,
+  Award,
 } from "lucide-react";
 import CalculatorModal from "./CalculatorModal";
 import CalculatorCard from "./components/CalculatorCard";
@@ -151,43 +152,78 @@ export default function CalculatorsPage() {
                   <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0 mt-5">
-                {[
-                  { value: "6", label: "Professional Tools" },
-                  
-                  { value: "PDF/CSV", label: "Export Reports" },
-                ].map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-[14px] md:text-[20px] font-bold text-white mb-2">
-                      {stat.value}
-                    </div>
-                    <div className="text-[12px] text-gray-400 uppercase tracking-wider">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
 
-            {/* Right Column - Hero Image (desktop only) */}
-            <div className="hidden lg:block relative">
-              <div className="relative h-[420px]  rounded-2xl overflow-hidden">
+            {/* Right Column - Hero Image with Floating Stats */}
+            <div className="relative h-full">
+              <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
 
                 {/* Main Image */}
                 <Image
                   src="/hero-images/calc.png"
-                  alt="HavenBridge Development - Community-focused housing solutions"
+                  alt="HavenBridge Development Calculators - Professional property development tools"
                   fill
-                  className="object-fill"
-                  sizes="(max-width: 1024px) 0px, 50vw"
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
+                
+                {/* Floating Stats - Exactly like Projects page */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+                  <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                    <div className="text-2xl font-bold text-amber-400">6</div>
+                    <div className="text-xs text-gray-300">Professional Tools</div>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
+                    <div className="text-2xl font-bold text-emerald-400">PDF/CSV</div>
+                    <div className="text-xs text-gray-300">Export Formats</div>
+                  </div>
+                </div>
+
+                {/* Corner Icon */}
+                <div className="absolute top-6 right-6 z-20">
+                  <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20">
+                    <Award className="w-6 h-6 text-amber-400" />
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section - Same as Projects page */}
+      <section className="py-16 bg-linear-to-br from-slate-50 to-cyan-50 -mt-8 relative z-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { number: "6", label: "Professional Tools", icon: Calculator, color: "text-amber-500" },
+              { number: "PDF/CSV", label: "Export Formats", icon: Building2, color: "text-cyan-500" },
+              { number: "100%", label: "Free Access", icon: Award, color: "text-emerald-500" },
+              { number: "24/7", label: "Accessible", icon: Sparkles, color: "text-violet-500" },
+            ].map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <div key={i} className="group">
+                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-cyan-100">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`p-3 rounded-xl ${stat.color.replace('text', 'bg')}/10`}>
+                        <Icon className={`w-6 h-6 ${stat.color}`} />
+                      </div>
+                      <div>
+                        <div className="text-3xl font-bold text-slate-900">{stat.number}</div>
+                        <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                      </div>
+                    </div>
+                    <div className="h-1 w-full bg-gray-100 overflow-hidden rounded-full">
+                      <div className={`h-full ${stat.color.replace('text', 'bg')} rounded-full group-hover:animate-progress`}></div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
