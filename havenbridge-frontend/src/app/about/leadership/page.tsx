@@ -14,6 +14,11 @@ import {
   Sparkles,
   ArrowLeft,
   ChevronRight,
+  CheckCircle,
+  ArrowRight,
+  Target,
+  TrendingUp,
+  Heart,
 } from "lucide-react";
 
 export default function LeadershipPage() {
@@ -50,44 +55,44 @@ export default function LeadershipPage() {
     },
   ];
 
-  const boardMembers = [
-    {
-      name: "Dr. Sarah Chen",
-      title: "Independent Chair",
-      bio: "30+ years in urban planning and social housing policy. Former Director at Victorian Department of Families. PhD in Urban Development.",
-      expertise: ["Urban Planning", "Social Policy", "Governance"],
-      color: "from-violet-500 to-purple-500",
-      image: "/board/placeholder-1.jpg", // You'll add actual images
-      linkedin: "https://linkedin.com/in/sarahchen",
-    },
-    {
-      name: "Michael Torres",
-      title: "Non-Executive Director",
-      bio: "Former CFO of major construction firm. Brings 25 years of financial expertise in property development and infrastructure projects.",
-      expertise: ["Finance", "Risk Management", "Construction"],
-      color: "from-orange-500 to-red-500",
-      image: "/board/placeholder-2.jpg",
-      linkedin: "https://linkedin.com/in/michaeltorres",
-    },
-    {
-      name: "Amina Hassan",
-      title: "Non-Executive Director",
-      bio: "Community development specialist with focus on multicultural housing. Former CEO of Settlement Services International.",
-      expertise: ["Community Development", "Migration Services", "Social Impact"],
-      color: "from-pink-500 to-rose-500",
-      image: "/board/placeholder-3.jpg",
-      linkedin: "https://linkedin.com/in/aminahassan",
-    },
-    {
-      name: "David Park",
-      title: "Non-Executive Director",
-      bio: "Legal expert in property law and development approvals. Partner at major Melbourne law firm. 20+ years experience.",
-      expertise: ["Property Law", "Planning Approvals", "Compliance"],
-      color: "from-blue-500 to-indigo-500",
-      image: "/board/placeholder-4.jpg",
-      linkedin: "https://linkedin.com/in/davidpark",
-    },
-  ];
+//   const boardMembers = [
+//     {
+//       name: "Dr. Sarah Chen",
+//       title: "Independent Chair",
+//       bio: "30+ years in urban planning and social housing policy. Former Director at Victorian Department of Families. PhD in Urban Development.",
+//       expertise: ["Urban Planning", "Social Policy", "Governance"],
+//       color: "from-violet-500 to-purple-500",
+//       image: "/board/placeholder-1.jpg", 
+//       linkedin: "https://linkedin.com/in/sarahchen",
+//     },
+//     {
+//       name: "Michael Torres",
+//       title: "Non-Executive Director",
+//       bio: "Former CFO of major construction firm. Brings 25 years of financial expertise in property development and infrastructure projects.",
+//       expertise: ["Finance", "Risk Management", "Construction"],
+//       color: "from-orange-500 to-red-500",
+//       image: "/board/placeholder-2.jpg",
+//       linkedin: "https://linkedin.com/in/michaeltorres",
+//     },
+//     {
+//       name: "Amina Hassan",
+//       title: "Non-Executive Director",
+//       bio: "Community development specialist with focus on multicultural housing. Former CEO of Settlement Services International.",
+//       expertise: ["Community Development", "Migration Services", "Social Impact"],
+//       color: "from-pink-500 to-rose-500",
+//       image: "/board/placeholder-3.jpg",
+//       linkedin: "https://linkedin.com/in/aminahassan",
+//     },
+//     {
+//       name: "David Park",
+//       title: "Non-Executive Director",
+//       bio: "Legal expert in property law and development approvals. Partner at major Melbourne law firm. 20+ years experience.",
+//       expertise: ["Property Law", "Planning Approvals", "Compliance"],
+//       color: "from-blue-500 to-indigo-500",
+//       image: "/board/placeholder-4.jpg",
+//       linkedin: "https://linkedin.com/in/davidpark",
+//     },
+//   ];
 
   return (
     <div className="bg-white font-sans">
@@ -236,10 +241,10 @@ export default function LeadershipPage() {
       </section>
 
       {/* Board of Directors */}
-      <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-slate-50 to-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
+      {/* <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-slate-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12"> */}
+          {/* <div className="max-w-6xl mx-auto">
+           
             <div className="mb-12 sm:mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 rounded-full border border-cyan-500/20 mb-4">
                 <Shield className="w-4 h-4 text-cyan-500" />
@@ -253,30 +258,30 @@ export default function LeadershipPage() {
               <p className="text-lg text-gray-600 max-w-3xl">
                 Independent advisors providing governance, oversight, and strategic guidance to ensure we deliver on our mission with integrity and excellence.
               </p>
-            </div>
+            </div> */}
 
             {/* Board Grid */}
-            <div className="grid sm:grid-cols-2 gap-8">
+            {/* <div className="grid sm:grid-cols-2 gap-8">
               {boardMembers.map((member, i) => {
                 const expertise = member.expertise;
                 return (
                   <div key={i} className="group">
                     <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 h-full">
-                      {/* Top accent */}
+                     
                       <div className={`h-1.5 bg-gradient-to-r ${member.color}`}></div>
 
                       <div className="p-8">
                         <div className="flex gap-6 mb-6">
-                          {/* Image */}
+                         
                           <div className="relative h-24 w-24 rounded-xl overflow-hidden flex-shrink-0 bg-gradient-to-br from-slate-200 to-slate-300">
-                            {/* Placeholder - replace with actual images */}
+                      
                             <div className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-20`}></div>
                             <div className="absolute inset-0 flex items-center justify-center">
                               <Users className="w-10 h-10 text-slate-400" />
                             </div>
                           </div>
 
-                          {/* Info */}
+                        
                           <div className="flex-1">
                             <div className="flex justify-between items-start mb-2">
                               <div>
@@ -299,7 +304,7 @@ export default function LeadershipPage() {
                           </div>
                         </div>
 
-                        {/* Expertise tags */}
+                     
                         <div className="flex flex-wrap gap-2 mb-4">
                           {expertise.map((skill, j) => (
                             <span
@@ -319,6 +324,242 @@ export default function LeadershipPage() {
                   </div>
                 );
               })}
+            </div> */}
+          {/* </div>
+        </div>
+      </section> */}
+
+      {/* Join Our Board */}
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 rounded-full border border-emerald-500/20 mb-4">
+                <Users className="w-4 h-4 text-emerald-500" />
+                <span className="text-sm font-semibold text-emerald-600">
+                  BOARD OPPORTUNITIES
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                Join Our Board of Directors
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                We're seeking experienced leaders to provide strategic oversight and governance expertise
+              </p>
+            </div>
+
+            {/* Opportunity Card */}
+            <div className="bg-gradient-to-br from-slate-900 to-blue-900 rounded-3xl overflow-hidden shadow-2xl mb-12">
+              <div className="grid lg:grid-cols-2">
+                {/* Left - Image */}
+                <div className="relative h-64 lg:h-auto lg:min-h-[500px]">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/60 z-10"></div>
+                  <Image
+                    src="/about-images/community.jpeg"
+                    alt="Join Our Board"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+
+                {/* Right - Content */}
+                <div className="p-8 sm:p-12 text-white">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/20 mb-6">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
+                    <span className="text-xs font-bold uppercase tracking-wide">
+                      Board Director (Independent)
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-6">
+                    The Opportunity
+                  </h3>
+
+                  <p className="text-gray-200 leading-relaxed mb-6">
+                    This is an opportunity for experienced leaders to contribute strategic oversight, governance expertise, and independent judgment to a growing organisation operating at the intersection of housing policy, infrastructure delivery, finance, and community impact.
+                  </p>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-400 mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">3-year term</p>
+                        <p className="text-sm text-gray-300">Renewable by mutual agreement</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-400 mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">4 meetings per year</p>
+                        <p className="text-sm text-gray-300">Plus ad-hoc meetings as required</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-400 mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Voluntary position</p>
+                        <p className="text-sm text-gray-300">Reasonable expenses reimbursed</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-400 mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">Virtual meetings</p>
+                        <p className="text-sm text-gray-300">Primarily online (Australia-based)</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href="mailto:board@havenbridge.com.au?subject=Board Director – Expression of Interest"
+                    className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl"
+                  >
+                    Express Interest
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Details Grid */}
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {/* Skills & Experience */}
+              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-cyan-500 rounded-xl">
+                    <Award className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Skills & Experience Sought
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  We're particularly interested in candidates with senior experience in:
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Government, public policy, or statutory authorities",
+                    "Property development, infrastructure, or construction",
+                    "Finance, investment, banking, or institutional capital",
+                    "Planning, housing policy, or urban development",
+                    "Community housing, social impact, or not-for-profit governance",
+                    "Legal, regulatory, or risk oversight roles",
+                  ].map((skill, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{skill}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-gray-600 mt-4 italic">
+                  Previous board or executive leadership experience is highly regarded.
+                </p>
+              </div>
+
+              {/* Responsibilities */}
+              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-violet-500 rounded-xl">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Role & Responsibilities
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  As a Board Director, you will:
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Provide strategic guidance and oversight to support sustainable growth",
+                    "Contribute to governance, risk, and compliance across projects",
+                    "Support engagement with government, councils, and institutional stakeholders",
+                    "Provide independent challenge on project selection and delivery",
+                    "Ensure financial sustainability and capital structuring",
+                    "Uphold highest standards of integrity and fiduciary responsibility",
+                    "Act as an ambassador for HavenBridge's mission and values",
+                  ].map((responsibility, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-500 mt-2 flex-shrink-0"></div>
+                      <span className="text-gray-700 text-sm">{responsibility}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Why Join */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 sm:p-12 border border-amber-100">
+              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 text-center">
+                Why Join the HavenBridge Board?
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-6">
+                {[
+                  {
+                    icon: Target,
+                    title: "Contribute to nationally significant housing outcomes",
+                  },
+                  {
+                    icon: Users,
+                    title: "Work alongside experienced professionals from government, finance, and industry",
+                  },
+                  {
+                    icon: TrendingUp,
+                    title: "Influence scalable solutions to Australia's housing challenges",
+                  },
+                  {
+                    icon: Heart,
+                    title: "Apply your expertise in a mission-driven, impact-focused environment",
+                  },
+                ].map((benefit, i) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="p-2 bg-amber-500 rounded-lg flex-shrink-0">
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="text-gray-700 leading-relaxed">{benefit.title}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* How to Apply */}
+            <div className="mt-12 bg-white rounded-2xl p-8 sm:p-12 border border-gray-200 shadow-lg">
+              <div className="max-w-3xl mx-auto text-center">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+                  How to Express Interest
+                </h3>
+                <p className="text-gray-600 mb-8">
+                  Please submit a Register of Interest including a brief cover note outlining your interest and a current CV or LinkedIn profile.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+                  <a
+                    href="mailto:board@havenbridge.com.au?subject=Board Director – Expression of Interest"
+                    className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-xl"
+                  >
+                    <Mail className="w-5 h-5" />
+                    board@havenbridge.com.au
+                  </a>
+                </div>
+
+                <p className="text-sm text-gray-500">
+                  Subject line: <span className="font-semibold">Board Director – Expression of Interest</span>
+                </p>
+
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <p className="text-sm text-gray-600 italic">
+                    <strong>Equal Opportunity Statement:</strong> HavenBridge is committed to diversity, inclusion, and equal opportunity. We encourage applications from individuals of all backgrounds, including women, First Nations peoples, and culturally and linguistically diverse communities.
+                  </p>
+                  <p className="text-xs text-gray-500 mt-4">
+                    All expressions of interest will be treated confidentially.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
