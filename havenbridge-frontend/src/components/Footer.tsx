@@ -190,7 +190,7 @@ export default function Footer() {
                 <Phone className="w-5 h-5 text-cyan-500 flex-shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block mb-1">Phone</strong>
-                  +61 (0) 3 XXXX XXXX
+                  +61 (0) 399999999
                 </div>
               </li>
               <li className="flex items-start gap-3 group hover:text-amber-400 transition-colors duration-300">

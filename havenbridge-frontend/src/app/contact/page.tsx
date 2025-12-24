@@ -105,7 +105,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "Office",
-      content: "Level 31, 120 Collins Street Melbourne, VIC, 3000, Australia",
+      content: "Level 31, 120 Collins Street Melbourne, VIC, 3000, Australia.",
       description: "By appointment only",
       link: "https://maps.google.com",
       color: "bg-emerald-500"
