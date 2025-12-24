@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Image from 'next/image';
+import React, { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Image from "next/image";
 import {
   Calculator,
   TrendingUp,
@@ -15,66 +15,72 @@ import {
   Sparkles,
   ArrowRight,
   ChevronRight,
-} from 'lucide-react';
-import CalculatorModal from './CalculatorModal';
-import CalculatorCard from './components/CalculatorCard';
-import FeasibilityCalculator from './calculators/Feasibility';
-import RoomingHouseCalculator from './calculators/RoomingHouse';
-import StampDutyCalculator from './calculators/StampDuty';
-import ConstructionCostCalculator from './calculators/ConstructionCost';
-import ModularComparisonCalculator from './calculators/ModularComparison';
-import VendorFinanceCalculator from './calculators/VendorFinance';
+} from "lucide-react";
+import CalculatorModal from "./CalculatorModal";
+import CalculatorCard from "./components/CalculatorCard";
+import FeasibilityCalculator from "./calculators/Feasibility";
+import RoomingHouseCalculator from "./calculators/RoomingHouse";
+import StampDutyCalculator from "./calculators/StampDuty";
+import ConstructionCostCalculator from "./calculators/ConstructionCost";
+import ModularComparisonCalculator from "./calculators/ModularComparison";
+import VendorFinanceCalculator from "./calculators/VendorFinance";
 
 export default function CalculatorsPage() {
   const [activeCalculator, setActiveCalculator] = useState<string | null>(null);
 
   const calculators = [
     {
-      id: 'feasibility',
-      title: 'Development Feasibility Calculator',
-      description: 'Analyze project viability and ROI for residential developments',
+      id: "feasibility",
+      title: "Development Feasibility Calculator",
+      description:
+        "Analyze project viability and ROI for residential developments",
       icon: TrendingUp,
-      color: 'from-amber-500 to-orange-500',
+      color: "from-amber-500 to-orange-500",
       component: FeasibilityCalculator,
     },
     {
-      id: 'rooming-house',
-      title: 'Rooming House Yield Calculator',
-      description: 'Calculate rental yields and cash flow for rooming house investments',
+      id: "rooming-house",
+      title: "Rooming House Yield Calculator",
+      description:
+        "Calculate rental yields and cash flow for rooming house investments",
       icon: Home,
-      color: 'from-cyan-500 to-blue-500',
+      color: "from-cyan-500 to-blue-500",
       component: RoomingHouseCalculator,
     },
     {
-      id: 'stamp-duty',
-      title: 'Stamp Duty Estimator',
-      description: 'Estimate government taxes and charges for property purchases',
+      id: "stamp-duty",
+      title: "Stamp Duty Estimator",
+      description:
+        "Estimate government taxes and charges for property purchases",
       icon: Scale,
-      color: 'from-emerald-500 to-green-500',
+      color: "from-emerald-500 to-green-500",
       component: StampDutyCalculator,
     },
     {
-      id: 'construction-cost',
-      title: 'Construction Cost Estimator',
-      description: 'Calculate building costs per square meter and total project cost',
+      id: "construction-cost",
+      title: "Construction Cost Estimator",
+      description:
+        "Calculate building costs per square meter and total project cost",
       icon: Building2,
-      color: 'from-violet-500 to-purple-500',
+      color: "from-violet-500 to-purple-500",
       component: ConstructionCostCalculator,
     },
     {
-      id: 'modular-comparison',
-      title: 'Modular vs Traditional Comparison',
-      description: 'Compare costs, timelines, and ROI between construction methods',
+      id: "modular-comparison",
+      title: "Modular vs Traditional Comparison",
+      description:
+        "Compare costs, timelines, and ROI between construction methods",
       icon: Percent,
-      color: 'from-pink-500 to-rose-500',
+      color: "from-pink-500 to-rose-500",
       component: ModularComparisonCalculator,
     },
     {
-      id: 'vendor-finance',
-      title: 'Vendor Finance Calculator',
-      description: 'Calculate repayment schedules for vendor finance arrangements',
+      id: "vendor-finance",
+      title: "Vendor Finance Calculator",
+      description:
+        "Calculate repayment schedules for vendor finance arrangements",
       icon: DollarSign,
-      color: 'from-slate-600 to-gray-600',
+      color: "from-slate-600 to-gray-600",
       component: VendorFinanceCalculator,
     },
   ];
@@ -87,7 +93,9 @@ export default function CalculatorsPage() {
     setActiveCalculator(null);
   };
 
-  const activeCalculatorData = calculators.find((calc) => calc.id === activeCalculator);
+  const activeCalculatorData = calculators.find(
+    (calc) => calc.id === activeCalculator
+  );
 
   return (
     <div className="bg-white font-sans">
@@ -108,10 +116,12 @@ export default function CalculatorsPage() {
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
                 <Calculator className="w-4 h-4 text-amber-400" />
-                <span className="text-sm font-semibold text-white">DEVELOPMENT TOOLS</span>
+                <span className="text-sm font-semibold text-white">
+                  DEVELOPMENT TOOLS
+                </span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 leading-tight">
                 Professional <span className="text-amber-400">Development</span>
                 <span className="block">Calculators</span>
               </h1>
@@ -120,7 +130,9 @@ export default function CalculatorsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
                   onClick={() =>
-                    document.querySelector('#calculators-grid')?.scrollIntoView({ behavior: 'smooth' })
+                    document
+                      .querySelector("#calculators-grid")
+                      ?.scrollIntoView({ behavior: "smooth" })
                   }
                   className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-4 rounded-lg font-semibold text-lg hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
                 >
@@ -141,15 +153,19 @@ export default function CalculatorsPage() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0 mt-16">
+              <div className="grid grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0 mt-5">
                 {[
-                  { value: '6', label: 'Professional Tools' },
-                  { value: 'Real-time', label: 'Calculations' },
-                  { value: 'PDF/CSV', label: 'Export Reports' },
+                  { value: "6", label: "Professional Tools" },
+                  
+                  { value: "PDF/CSV", label: "Export Reports" },
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                    <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
+                    <div className="text-[14px] md:text-[20px] font-bold text-white mb-2">
+                      {stat.value}
+                    </div>
+                    <div className="text-[12px] text-gray-400 uppercase tracking-wider">
+                      {stat.label}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -157,21 +173,19 @@ export default function CalculatorsPage() {
 
             {/* Right Column - Hero Image (desktop only) */}
             <div className="hidden lg:block relative">
-              <div className="relative h-[560px] w-full rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative h-[420px]  rounded-2xl overflow-hidden">
+                {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
+
+                {/* Main Image */}
                 <Image
-                  src="/hero-images/calculators-hero.jpeg" // Update path if needed
-                  alt="Property development calculators and financial analysis tools"
+                  src="/hero-images/calc.png"
+                  alt="HavenBridge Development - Community-focused housing solutions"
                   fill
-                  className="object-cover"
-                  sizes="50vw"
+                  className="object-fill"
+                  sizes="(max-width: 1024px) 0px, 50vw"
                   priority
                 />
-                <div className="absolute bottom-8 left-8 z-20">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
-                    <p className="text-white font-medium">Data-driven development decisions</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -211,22 +225,40 @@ export default function CalculatorsPage() {
                   <Sparkles className="w-6 h-6 text-amber-600" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">How to Use</h3>
-                  <p className="text-slate-600">Get the most accurate results</p>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    How to Use
+                  </h3>
+                  <p className="text-slate-600">
+                    Get the most accurate results
+                  </p>
                 </div>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  { step: '01', title: 'Select Calculator', desc: 'Choose the tool that matches your needs' },
-                  { step: '02', title: 'Input Data', desc: 'Enter project-specific information' },
-                  { step: '03', title: 'Export Results', desc: 'Download PDF or CSV reports' },
+                  {
+                    step: "01",
+                    title: "Select Calculator",
+                    desc: "Choose the tool that matches your needs",
+                  },
+                  {
+                    step: "02",
+                    title: "Input Data",
+                    desc: "Enter project-specific information",
+                  },
+                  {
+                    step: "03",
+                    title: "Export Results",
+                    desc: "Download PDF or CSV reports",
+                  },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-slate-900 text-white rounded-lg flex items-center justify-center font-bold shrink-0">
                       {item.step}
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 mb-1">{item.title}</h4>
+                      <h4 className="font-bold text-slate-900 mb-1">
+                        {item.title}
+                      </h4>
                       <p className="text-sm text-slate-600">{item.desc}</p>
                     </div>
                   </div>
