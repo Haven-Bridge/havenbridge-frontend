@@ -27,7 +27,7 @@ export default function ServicesPage() {
   const stats = [
     { number: "6", label: "Core Services", icon: Briefcase, color: "text-amber-500" },
     { number: "$95M+", label: "Portfolio Value", icon: TrendingUp, color: "text-emerald-500" },
-    { number: "500+", label: "Homes Delivered", icon: Home, color: "text-cyan-500" },
+    { number: "50+", label: "Homes Delivered", icon: Home, color: "text-cyan-500" },
     { number: "100%", label: "Client Satisfaction", icon: CheckCircle, color: "text-green-500" }
   ];
 

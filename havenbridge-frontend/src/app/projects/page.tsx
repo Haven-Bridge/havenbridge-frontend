@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   const stats = [
     { number: "$95M+", label: "Total Development Value", icon: DollarSign, color: "text-emerald-500" },
     { number: "19.2%", label: "Avg. Project IRR", icon: TrendingUp, color: "text-amber-500" },
-    { number: "200+", label: "Homes Delivered", icon: Home, color: "text-cyan-500" },
+    { number: "50+", label: "Homes Delivered", icon: Home, color: "text-cyan-500" },
     { number: "100%", label: "On-Time Delivery", icon: CheckCircle, color: "text-green-500" }
   ];
 
