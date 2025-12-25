@@ -11,7 +11,7 @@ export const servicesData = [
     imageUrl: "/services/affordable-housing.jpg",
     heroImage: "/services/affordable-housing.jpg",
     color: "from-amber-400 to-amber-500",
-    stats: "500+ Homes",
+    stats: "50+ Homes",
     keyBenefits: [
       "Government-backed funding and guarantees",
       "Stable long-term rental income",
