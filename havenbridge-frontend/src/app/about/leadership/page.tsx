@@ -30,7 +30,7 @@ export default function LeadershipPage() {
       expertise: ["Government Policy", "Strategic Planning", "Social Outcomes"],
       color: "from-amber-400 to-amber-500",
       image: "/team/John-Kuot.png",
-      linkedin: "https://linkedin.com/in/johnkuot",
+      linkedin: "https://www.linkedin.com/in/john-kuot-a1925279/",
       email: "john@havenbridge.com.au",
     },
     {
@@ -40,7 +40,7 @@ export default function LeadershipPage() {
       expertise: ["Project Delivery", "Development Planning", "NDIS/SDA"],
       color: "from-cyan-500 to-blue-500",
       image: "/team/Angok-Lueth.png",
-      linkedin: "https://linkedin.com/in/angoklueth",
+      linkedin: "https://www.linkedin.com/in/angok-lueth/",
       email: "angok@havenbridge.com.au",
     },
     {
@@ -50,7 +50,7 @@ export default function LeadershipPage() {
       expertise: ["Land Acquisition", "Deal Structuring", "Market Analysis"],
       color: "from-emerald-500 to-green-500",
       image: "/team/Him.jpg",
-      linkedin: "https://linkedin.com/in/himmalhotra",
+      linkedin: "https://www.linkedin.com/in/him-malhotra-407a88245/",
       email: "him@havenbridge.com.au",
     },
   ];
