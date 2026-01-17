@@ -157,14 +157,15 @@ export default function InvestorsPage() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <a
-            href="/documents/investor-brief.pdf"
-            className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-600 transition-colors gap-2"
-            download
-          >
-            <Download className="w-4 h-4" />
-            Download Investor Brief
-          </a>
+        <a
+  href="/documents/investor-brief.pdf"  // Update this path
+  className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-600 transition-colors gap-2"
+  download
+>
+  <Download className="w-4 h-4" />
+  Download Investor Brief
+</a>
+
           <a
             href="/contact?type=investor"
             className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors"
@@ -352,14 +353,15 @@ export default function InvestorsPage() {
             Access our comprehensive investor package and speak with our investor relations team
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/documents/investor-brief.pdf"
-              className="bg-cyan-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-cyan-600 transition-colors inline-flex items-center gap-2"
-              download
-            >
-              <Download className="w-5 h-5" />
-              Investor Brief (PDF)
-            </a>
+          <a
+  href="/documents/investor-brief.pdf"  // Update this path
+  className="bg-cyan-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-cyan-600 transition-colors inline-flex items-center gap-2"
+  download
+>
+  <Download className="w-5 h-5" />
+  Investor Brief (PDF)
+</a>
+
             <a
               href="/contact?type=investor"
               className="bg-white/10 text-white px-8 py-4 rounded-lg font-bold border border-white/20 hover:bg-white/20 transition-colors"

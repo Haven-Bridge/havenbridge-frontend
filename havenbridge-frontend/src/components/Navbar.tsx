@@ -172,7 +172,7 @@ export default function Navbar() {
               
               <div className="pt-4 space-y-3">
                 <a 
-                  href="/capability-statement.pdf"
+                  href="/documents/capability-statement.pdf"
                   className="flex items-center justify-center gap-2 py-3 text-cyan-600 font-medium border border-cyan-200 rounded-lg"
                 >
                   <Download className="w-4 h-4" />

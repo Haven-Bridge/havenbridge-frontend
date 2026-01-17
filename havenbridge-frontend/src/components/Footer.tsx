@@ -124,7 +124,7 @@ export default function Footer() {
                 </a>
               </div>
               
-              {/* Add real phone number when available */}
+             
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span className="text-sm text-gray-300">

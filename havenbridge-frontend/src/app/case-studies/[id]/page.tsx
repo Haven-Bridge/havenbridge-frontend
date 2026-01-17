@@ -120,14 +120,15 @@ export default function CaseStudyDetailPage() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="/documents/capability-statement.pdf"
-                  className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-600 transition-colors gap-2"
-                  download
-                >
-                  <Download className="w-4 h-4" />
-                  Download Case Study
-                </a>
+              <a
+  href="/documents/capability-statement.pdf"  // Update this path
+  className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-600 transition-colors gap-2"
+  download
+>
+  <Download className="w-4 h-4" />
+  Download Case Study
+</a>
+
                 <a
                   href="/contact?type=government"
                   className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors"

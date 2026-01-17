@@ -311,13 +311,14 @@ export default function HavenBridgeLanding() {
             Complete overview of our governance framework, delivery models, and institutional capabilities
           </p>
           <a
-            href="/downloads/havenbridge-capability-statement.pdf"
-            download
-            className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-cyan-600 transition-colors gap-2"
-          >
-            <Download className="w-5 h-5" />
-            Download PDF (2.4 MB)
-          </a>
+  href="/documents/capability-statement.pdf"  // Update this path
+  download
+  className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-cyan-600 transition-colors gap-2"
+>
+  <Download className="w-5 h-5" />
+  Download PDF (2.4 MB)
+</a>
+
         </div>
       </section>
 

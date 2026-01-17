@@ -98,13 +98,14 @@ export default function CaseStudiesPage() {
                   View Case Studies
                 </a>
                 <a
-                  href="/documents/capability-statement.pdf"
-                  className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors gap-2"
-                  download
-                >
-                  <Download className="w-4 h-4" />
-                  Capability Statement
-                </a>
+              href="/documents/capability-statement.pdf"  // Update this path
+              className="inline-flex items-center justify-center bg-white/10 text-white px-8 py-3 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors gap-2"
+              download
+            >
+              <Download className="w-4 h-4" />
+              Capability Statement
+            </a>
+
               </div>
             </div>
 
@@ -283,13 +284,14 @@ export default function CaseStudiesPage() {
               Request Case Studies
             </a>
             <a
-              href="/documents/governance-framework.pdf"
-              className="bg-white/10 text-white px-8 py-4 rounded-lg font-bold border border-white/20 hover:bg-white/20 transition-colors inline-flex items-center gap-2"
-              download
-            >
-              <Download className="w-5 h-5" />
-              Governance Framework
-            </a>
+  href="/documents/governance-framework.pdf"  // Update this path
+  className="bg-white/10 text-white px-8 py-4 rounded-lg font-bold border border-white/20 hover:bg-white/20 transition-colors inline-flex items-center gap-2"
+  download
+>
+  <Download className="w-5 h-5" />
+  Governance Framework
+</a>
+
           </div>
         </div>
       </section>
