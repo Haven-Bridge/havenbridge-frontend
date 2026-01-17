@@ -3,98 +3,100 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { projectsData } from "@/data/projects";
-import { servicesData } from "@/data/services";
 
 import {
-  Building2,
-  HeartHandshake,
   Home,
-  Building,
-  Baby,
-  Heart,
-  Handshake,
-  Target,
-  Award,
   TrendingUp,
   Shield,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Zap,
   ChevronRight,
-  Users,
-  Globe,
-  Award as Trophy,
+  Download,
+  FileText,
+  ClipboardCheck,
+  BarChart3,
+  Building2,
+  Handshake,
 } from "lucide-react";
 
 export default function HavenBridgeLanding() {
-  // Use shared services and projects data
-  const services = servicesData;
   const featuredProjects = projectsData.slice(0, 3);
 
+  // Simplified stats with auditable metrics
   const stats = [
     {
-      value: "500+",
+      value: "375",
       label: "Homes Delivered",
+      footnote: "completed + under contract (Dec 2025)",
       icon: Home,
-      color: "text-amber-400",
     },
     {
-      value: "$150M+",
+      value: "$210M",
       label: "Project Value",
+      footnote: "delivered + pipeline (Dec 2025)",
       icon: TrendingUp,
-      color: "text-cyan-500",
     },
     {
-      value: "95%",
-      label: "Client Satisfaction",
-      icon: Heart,
-      color: "text-emerald-500",
+      value: "98%",
+      label: "Stage Gate Compliance",
+      footnote: "on-time approvals",
+      icon: ClipboardCheck,
     },
     {
-      value: "25+",
-      label: "Industry Awards",
-      icon: Trophy,
-      color: "text-violet-500",
+      value: "100%",
+      label: "Probity Compliance",
+      footnote: "audit-ready governance",
+      icon: Shield,
     },
   ];
 
-  const whyChooseUs = [
+  // Simplified governance framework
+  const governanceFramework = [
     {
-      title: "A Developer with Dual Advantage",
-      desc: "Our team has been trained by major global institutions, bringing world-class standards in finance, governance, planning, and project delivery. At the same time, our lived experience keeps us deeply connected to the communities we serve.",
-      icon: Globe,
-      color: "from-amber-400 to-orange-500",
+      title: "Stage-Gate Approvals",
+      desc: "Documented decision gates for each project phase",
+      icon: ClipboardCheck,
     },
     {
-      title: "We Understand the Communities",
-      desc: "We come from migrant backgrounds, multicultural communities, and real lived experiences of housing insecurity. That authenticity ensures our developments are grounded, relevant, and human-centred.",
-      icon: Users,
-      color: "from-cyan-500 to-blue-500",
-    },
-    {
-      title: "Value Aligned With Government Priorities",
-      desc: "From affordable housing to multicultural engagement, social impact investment, and community infrastructure, our projects directly support federal, state, and local government objectives.",
+      title: "Risk & Assurance",
+      desc: "Risk registers and probity controls",
       icon: Shield,
-      color: "from-emerald-500 to-green-500",
     },
     {
-      title: "Agile Delivery with High-Standard Governance",
-      desc: "We operate like an agile startup but carry the governance discipline of a major property institution. This makes us fast, reliable, and accountable—ideal partners for government and impact investors.",
-      icon: Zap,
-      color: "from-violet-500 to-purple-500",
+      title: "Monthly Reporting",
+      desc: "Budget and program dashboards",
+      icon: BarChart3,
     },
     {
-      title: "We Build Trust Through Transparency",
-      desc: "Clear financial models, realistic timelines, community consultations, and honest conversations. We are building a reputation as a developer that puts clarity before complexity.",
-      icon: CheckCircle2,
-      color: "from-indigo-500 to-blue-500",
+      title: "Full Compliance",
+      desc: "Planning, building, and safety standards",
+      icon: FileText,
+    },
+  ];
+
+  // Simplified partner pathways
+  const partnerPathways = [
+    {
+      title: "Government",
+      desc: "HAFF and Big Housing Build delivery",
+      cta: "Download Statement",
+      link: "/government",
+      color: "bg-blue-50",
     },
     {
-      title: "Developments Strengthen Social Cohesion",
-      desc: "Housing is not just infrastructure—it is nation-building. Our work ensures multicultural communities are not left behind but are uplifted through access to safe, affordable, and dignified homes.",
-      icon: HeartHandshake,
-      color: "from-pink-500 to-rose-500",
+      title: "Investors",
+      desc: "Governance-first investment pipeline",
+      cta: "Request Brief",
+      link: "/investors",
+      color: "bg-emerald-50",
+    },
+    {
+      title: "Landowners",
+      desc: "Site partnering and joint ventures",
+      cta: "Submit Site",
+      link: "/landowners",
+      color: "bg-amber-50",
     },
   ];
 
@@ -102,6 +104,7 @@ export default function HavenBridgeLanding() {
     <div className="bg-white font-sans">
       <Navbar />
 
+      {/* Hero Section with Image */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -113,43 +116,34 @@ export default function HavenBridgeLanding() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div>
-              <div className="relative inline-block mb-6">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Building
-                  <span className="block">Communities.</span>
-                  <span className="block text-amber-400">Delivering Impact.</span>
-                </h1>
-              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                Institutional-Grade
+                <span className="block text-amber-400">Housing Delivery</span>
+              </h1>
 
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                HavenBridge develops community-focused housing that uplifts
-                migrant communities, enables government priorities, and delivers
-                long-term value for partners and investors.
+              <p className="text-lg text-gray-300 mb-8">
+                Partnering with government and CHPs to deliver affordable and specialist housing through disciplined governance.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-6 py-3 rounded-lg font-semibold text-base hover:from-amber-500 hover:to-amber-400 transition-all shadow-xl overflow-hidden"
+                  href="#capability-statement"
+                  className="inline-flex items-center justify-center bg-amber-400 text-slate-900 px-6 py-3 rounded-lg font-semibold hover:bg-amber-500 transition-colors gap-2"
                 >
-                  <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-lg blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
-                  <span className="relative z-10">Book a Consultation</span>
-                  <ArrowRight className="relative z-10 w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <Download className="w-4 h-4" />
+                  Capability Statement
                 </a>
                 <a
-                  href="/projects"
-                  className="group relative inline-flex items-center justify-center bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-semibold text-base border border-white/20 hover:bg-white/20 transition-all"
+                  href="/contact?type=government"
+                  className="inline-flex items-center justify-center bg-white/10 text-white px-6 py-3 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors"
                 >
-                  View Projects
-                  <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  Speak to Partnerships
                 </a>
               </div>
             </div>
 
-           {/* Right Column - Hero Image */}
-              <div className="hidden lg:block relative">
+            {/* Right Column - Hero Image */}
+            <div className="hidden lg:block relative">
               <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-slate-900/20 z-10"></div>
                 <Image
@@ -161,29 +155,23 @@ export default function HavenBridgeLanding() {
                   priority
                 />
               </div>
-              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-linear-to-r from-slate-50 to-cyan-50">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {/* Simplified Stats */}
+      <section className="py-12 bg-slate-50">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <div key={i} className="group text-center">
-                  <div className="relative">
-                    <Icon
-                      className={`w-12 h-12 mx-auto mb-4 ${stat.color} transform group-hover:scale-110 transition-transform`}
-                    />
-                    <div className="text-4xl font-bold text-slate-900 mb-2">
-                      {stat.value}
-                    </div>
-                    <div className="text-gray-600 font-medium">
-                      {stat.label}
-                    </div>
-                  </div>
+                <div key={i} className="text-center p-4">
+                  <Icon className="w-8 h-8 mx-auto mb-2 text-cyan-500" />
+                  <div className="text-3xl font-bold text-slate-900">{stat.value}</div>
+                  <div className="text-sm text-gray-600">{stat.label}</div>
+                  <div className="text-xs text-gray-400 mt-1">{stat.footnote}</div>
                 </div>
               );
             })}
@@ -191,146 +179,26 @@ export default function HavenBridgeLanding() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-cyan-500/10 rounded-full">
-              <Sparkles className="w-4 h-4 text-cyan-500" />
-              <span className="text-sm font-semibold text-cyan-600">
-                WHAT WE DO
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Our Core Services
+      {/* Governance Differentiator */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Governance Framework
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From affordable and social housing to childcare, aged care, and
-              modular cabin parks, we deliver developments that are financially
-              sound, socially responsible, and culturally informed.
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Clear controls for government, CHP, and institutional partners
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {services.map((service, i) => {
-              // Map icon string to actual icon component
-              const iconMap: any = { Home, Building, Heart, Baby, HeartHandshake, Handshake };
-              const IconComponent = iconMap[service.icon];
-              
-              return (
-                <div key={i} className="group relative">
-                  <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-
-                  <a
-                    href={`/services/${service.id}`}
-                    className="relative overflow-hidden rounded-3xl bg-white border border-gray-100 p-8 hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
-                  >
-                    <div className="aspect-[4/3] mb-8 rounded-2xl overflow-hidden relative">
-                      {service.imageUrl ? (
-                        <>
-                          <Image
-                            src={service.imageUrl}
-                            alt={service.title}
-                            fill
-                            className="object-cover transform group-hover:scale-110 transition-transform duration-700"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                          <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent"></div>
-                        </>
-                      ) : (
-                        <div
-                          className={`w-full h-full bg-linear-to-br ${service.color} flex items-center justify-center`}
-                        >
-                          <IconComponent className="w-20 h-20 text-white/80" />
-                        </div>
-                      )}
-
-                      <div className="absolute top-6 right-6 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full">
-                        <span className="text-base font-bold text-slate-900">
-                          {service.stats}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex-1">
-                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 group-hover:text-cyan-600 transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 text-base mb-6 line-clamp-3">
-                        {service.desc}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                      <span className="inline-flex items-center text-cyan-600 font-semibold text-base group-hover:gap-2 transition-all">
-                        Learn More <ArrowRight className="w-5 h-5 ml-1" />
-                      </span>
-                      
-                    </div>
-                  </a>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="text-center mt-12">
-            <p className="text-gray-600 mb-4">
-              Not sure which pathway is right for you?
-            </p>
-            <a
-              href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center bg-linear-to-r from-slate-900 to-slate-800 text-white px-8 py-3 rounded-lg font-bold hover:from-slate-800 hover:to-slate-700 transition-all shadow-lg"
-            >
-              <span className="relative z-10">Contact Our Experts</span>
-              <ArrowRight className="relative z-10 w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-linear-to-br from-slate-50 via-white to-cyan-50">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-amber-400/10 rounded-full">
-              <span className="text-sm font-semibold text-amber-600">
-                WHY CHOOSE US
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Why HavenBridge
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              A developer with institutional capability, community insight, and
-              a deep commitment to social impact.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyChooseUs.map((item, i) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {governanceFramework.map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={i} className="group relative">
-                  <div
-                    className={`absolute -inset-2 bg-linear-to-br ${item.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                  ></div>
-
-                  <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-gray-100">
-                    <div
-                      className={`p-4 rounded-xl bg-linear-to-br ${item.color} w-fit mb-6`}
-                    >
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-cyan-600 transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
-
-                    <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-2 h-2 bg-linear-to-r from-amber-400 to-cyan-500 rounded-full"></div>
-                    </div>
-                  </div>
+                <div key={i} className="bg-slate-50 rounded-xl p-6 text-center">
+                  <Icon className="w-10 h-10 mx-auto mb-4 text-cyan-500" />
+                  <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600">{item.desc}</p>
                 </div>
               );
             })}
@@ -338,129 +206,118 @@ export default function HavenBridgeLanding() {
         </div>
       </section>
 
-      <section className="py-20 bg-linear-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between mb-16">
-            <div>
-              <div className="inline-flex items-center gap-2 mb-2 px-4 py-2 bg-cyan-500/10 rounded-full">
-                <Zap className="w-4 h-4 text-cyan-500" />
-                <span className="text-sm font-semibold text-cyan-600">
-                  FEATURED WORK
-                </span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-                Featured Projects
-              </h2>
-              <p className="text-xl text-gray-600 mt-2">
-                Real impact through real developments
-              </p>
-            </div>
-            <a
-              href="/projects"
-              className="hidden md:inline-flex items-center gap-2 text-cyan-600 font-semibold hover:text-cyan-700 transition-colors group"
-            >
-              View All Projects{" "}
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+      {/* Case Studies */}
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Evidence-Based Delivery
+            </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6">
             {featuredProjects.map((project, i) => (
               <a
                 key={i}
-                href={`/projects/${project.id}`}
-                className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500"
+                href={`/case-studies/${project.id}`}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
               >
-                <div className="absolute -inset-2 bg-linear-to-r from-amber-400/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-
-                <div className="relative overflow-hidden rounded-3xl">
-                  <div className="aspect-[4/5] relative overflow-hidden">
-                    {project.heroImage ? (
-                      <Image
-                        src={project.heroImage}
-                        alt={project.name}
-                        fill
-                        className="object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-linear-to-br from-slate-800 to-slate-600" />
-                    )}
-                    
-                    <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 to-transparent" />
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-10">
-                    <h3 className="text-3xl md:text-4xl font-bold mb-3 group-hover:text-amber-400 transition-colors">
-                      {project.name}
-                    </h3>
-                    <p className="text-gray-200 text-base md:text-lg">
-                      {project.location}
-                    </p>
-                  </div>
-
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                    <div className="bg-white/90 backdrop-blur-sm p-5 rounded-full">
-                      <ArrowRight className="w-10 h-10 text-slate-900" />
-                    </div>
+                <div className="aspect-[4/3] relative">
+                  {project.heroImage ? (
+                    <Image
+                      src={project.heroImage}
+                      alt={project.name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-200"></div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-slate-900 mb-2">{project.name}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{project.location}</p>
+                  <div className="text-cyan-600 text-sm font-semibold">
+                    View Case Study →
                   </div>
                 </div>
               </a>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-12">
+      {/* Partner Pathways */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Partner With Us
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {partnerPathways.map((pathway, i) => (
+              <div key={i} className={`rounded-xl p-8 ${pathway.color} text-center`}>
+                <h3 className="text-xl font-bold mb-4">{pathway.title}</h3>
+                <p className="text-gray-600 mb-6">{pathway.desc}</p>
+                <a
+                  href={pathway.link}
+                  className="text-cyan-600 font-semibold hover:text-cyan-700"
+                >
+                  {pathway.cta} →
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-slate-900">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Partner?
+          </h2>
+          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+            Download our capability statement or speak with our partnerships team.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/projects"
-              className="group relative inline-flex items-center justify-center bg-linear-to-r from-slate-900 to-slate-800 text-white px-10 py-4 rounded-xl font-bold hover:from-slate-800 hover:to-slate-700 transition-all shadow-xl gap-3"
+              href="#capability-statement"
+              className="bg-amber-400 text-slate-900 px-8 py-4 rounded-lg font-bold hover:bg-amber-500 transition-colors inline-flex items-center gap-2"
             >
-              <span className="relative z-10">View Full Portfolio</span>
-              <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
+              <Download className="w-5 h-5" />
+              Capability Statement
+            </a>
+            <a
+              href="/contact?type=government"
+              className="bg-white/10 text-white px-8 py-4 rounded-lg font-bold border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Book Partner Call
             </a>
           </div>
         </div>
       </section>
 
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-blue-900 to-slate-800">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
-          <div className="max-w-3xl mx-auto">
-            <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-6" />
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Let&apos;s Build Something
-              <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-white to-cyan-500">
-                That Lasts.
-              </span>
-            </h2>
-            <p className="text-xl mb-10 max-w-2xl mx-auto text-gray-200">
-              Book your consultation today and partner with a developer that
-              understands both community and capital.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://forms.gle/hHLnMLZ8Arnc1dcB9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center bg-linear-to-r from-amber-400 to-amber-500 text-slate-900 px-12 py-5 text-xl font-bold rounded-xl hover:from-amber-500 hover:to-amber-400 transition-all shadow-2xl"
-              >
-                <span className="relative z-10">Book a Consultation</span>
-                <div className="absolute -inset-1 bg-linear-to-r from-amber-400 to-cyan-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
-              </a>
-              <a
-                href="/about"
-                className="group relative inline-flex items-center justify-center bg-white/10 backdrop-blur-sm text-white px-8 py-5 text-lg font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all"
-              >
-                Learn About Us
-                <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </div>
+      {/* Capability Statement PDF Section */}
+      <section id="capability-statement" className="py-12 bg-cyan-50">
+        <div className="container mx-auto px-6 text-center">
+          <FileText className="w-12 h-12 text-cyan-500 mx-auto mb-4" />
+          <h3 className="text-2xl font-bold text-slate-900 mb-2">
+            Download Capability Statement
+          </h3>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Complete overview of our governance framework, delivery models, and institutional capabilities
+          </p>
+          <a
+            href="/downloads/havenbridge-capability-statement.pdf"
+            download
+            className="inline-flex items-center justify-center bg-cyan-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-cyan-600 transition-colors gap-2"
+          >
+            <Download className="w-5 h-5" />
+            Download PDF (2.4 MB)
+          </a>
         </div>
       </section>
 
