@@ -152,7 +152,7 @@ export default function HavenBridgeLanding() {
   const featuredProjects = projectsData.filter(project => project.featured);
 
   return (
-    <div className="bg-gradient-to-b from-[#FDF8F0] to-[#F8F1E9] font-sans antialiased min-h-screen">
+    <div className="bg-gradient-to-b from-sky-50 to-blue-50/50 font-sans antialiased min-h-screen">
 
       <Navbar />
 
@@ -192,7 +192,7 @@ export default function HavenBridgeLanding() {
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center pt-6 md:pt-8">
               <a
                 href="/contact?type=partner"
-                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 text-base md:text-lg font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 text-base md:text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10">Partner with Us</span>
               </a>
@@ -212,19 +212,19 @@ export default function HavenBridgeLanding() {
       <section className="py-16 md:py-20 -mt-16 relative z-20">
         <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
           <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-amber-100/50 p-10 md:p-12">
-            <p className="text-center text-base uppercase tracking-wider text-teal-800 font-semibold mb-10">
+            <p className="text-center text-base uppercase tracking-wider text-blue-800 font-semibold mb-10">
               Trusted by Leading Institutions & Partners
             </p>
 
             <div className="flex flex-wrap justify-center gap-8 md:gap-14 lg:gap-20">
               {trustPartners.map((p, i) => (
                 <div key={i} className="group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2">
-                  <div className="h-16 w-40 md:w-48 bg-gradient-to-br from-white to-teal-50/30 rounded-xl shadow-md border border-teal-100 group-hover:border-teal-300 group-hover:shadow-xl flex items-center justify-center mb-4 transition-all">
-                    <span className="text-teal-800 font-bold text-base md:text-lg tracking-tight">
+                  <div className="h-16 w-40 md:w-48 bg-gradient-to-br from-white to-sky-50/30 rounded-xl shadow-md border border-blue-100 group-hover:border-amber-300 group-hover:shadow-xl flex items-center justify-center mb-4 transition-all">
+                    <span className="text-blue-800 font-bold text-base md:text-lg tracking-tight">
                       {p.placeholder}
                     </span>
                   </div>
-                  <span className="text-sm md:text-base font-medium text-slate-700 group-hover:text-teal-900">
+                  <span className="text-sm md:text-base font-medium text-slate-700 group-hover:text-blue-900">
                     {p.name}
                   </span>
                 </div>
@@ -239,15 +239,15 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* Stats – prominent, warm cards */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-[#F8F1E9] to-white">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-blue-50/50 to-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-center">
             {stats.map((stat, i) => (
               <div 
                 key={i} 
-                className="bg-white rounded-2xl p-8 shadow-lg border border-teal-50 hover:border-teal-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-white rounded-2xl p-8 shadow-lg border border-blue-50 hover:border-amber-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-teal-800 mb-3">
+                <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-700 mb-3">
                   {stat.value}
                 </div>
                 <div className="text-lg md:text-xl font-semibold text-slate-800 mb-2">
@@ -265,29 +265,29 @@ export default function HavenBridgeLanding() {
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl text-center">
           <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-slate-800 leading-relaxed">
             Our projects sit at the intersection of{" "}
-            <span className="text-teal-700 font-bold">social impact</span>,{" "}
-            <span className="text-teal-700 font-bold">commercial excellence</span>, and{" "}
-            <span className="text-teal-700 font-bold">cultural insight</span>.
+            <span className="text-blue-700 font-bold">social impact</span>,{" "}
+            <span className="text-blue-700 font-bold">commercial excellence</span>, and{" "}
+            <span className="text-amber-600 font-bold">cultural insight</span>.
           </p>
         </div>
       </section>
 
       {/* Services */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-white to-[#FDF8F0]">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-white to-sky-50">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-teal-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-blue-900">
             What We Do
           </h2>
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {services.map((item, i) => (
               <div
                 key={i}
-                className="group bg-white rounded-3xl p-8 md:p-10 border border-teal-100 hover:border-teal-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className="group bg-white rounded-3xl p-8 md:p-10 border border-blue-100 hover:border-amber-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <item.icon className="w-10 h-10 text-teal-700" />
+                <div className="w-20 h-20 bg-gradient-to-br from-sky-100 to-blue-200 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <item.icon className="w-10 h-10 text-blue-700" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-teal-900 text-center">
+                <h3 className="text-2xl font-bold mb-4 text-blue-900 text-center">
                   {item.title}
                 </h3>
                 <p className="text-slate-700 leading-relaxed text-center text-base">
@@ -300,23 +300,23 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* Why stakeholders */}
-      <section className="py-20 md:py-28 bg-[#FDF8F0]">
+      <section className="py-20 md:py-28 bg-sky-50">
         <div className="container mx-auto px-6 max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-teal-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-blue-900">
             Why Stakeholders Choose Us
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {valuePoints.map((point, i) => (
               <div
                 key={i}
-                className="group bg-white rounded-2xl p-7 shadow-md border border-teal-50 hover:border-teal-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group bg-white rounded-2xl p-7 shadow-md border border-blue-50 hover:border-amber-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start gap-5">
-                  <div className="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-teal-100 transition-colors">
-                    <point.icon className="w-7 h-7 text-teal-700" />
+                  <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-amber-50 transition-colors">
+                    <point.icon className="w-7 h-7 text-blue-700 group-hover:text-amber-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-teal-900 mb-2">
+                    <h3 className="text-xl font-semibold text-blue-900 mb-2">
                       {point.title}
                     </h3>
                     <p className="text-slate-700">{point.desc}</p>
@@ -329,9 +329,9 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-[#FDF8F0] to-white">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-sky-50 to-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-teal-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-blue-900">
             Featured Projects
           </h2>
 
@@ -339,7 +339,7 @@ export default function HavenBridgeLanding() {
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-teal-100 hover:border-teal-400 hover:-translate-y-2"
+                className="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:border-amber-400 hover:-translate-y-2"
               >
                 <div className="aspect-[4/3] relative overflow-hidden">
                   <Image
@@ -352,7 +352,7 @@ export default function HavenBridgeLanding() {
                   <div className="absolute top-6 right-6">
                     <span className={`px-4 py-2 text-sm font-semibold rounded-full shadow-md ${
                       project.status === 'Completed' ? 'bg-green-600 text-white' :
-                      project.status === 'In Progress' ? 'bg-teal-600 text-white' :
+                      project.status === 'In Progress' ? 'bg-blue-600 text-white' :
                       'bg-amber-600 text-white'
                     }`}>
                       {project.status}
@@ -366,8 +366,8 @@ export default function HavenBridgeLanding() {
                 <div className="p-8">
                   <p className="text-slate-700 mb-6 line-clamp-2">{project.desc}</p>
                   <div className="grid grid-cols-2 gap-5 mb-6">
-                    <div className="text-center p-4 bg-teal-50/70 rounded-2xl">
-                      <div className="font-bold text-teal-900 text-lg">{project.units}</div>
+                    <div className="text-center p-4 bg-sky-50/70 rounded-2xl">
+                      <div className="font-bold text-blue-900 text-lg">{project.units}</div>
                       <div className="text-sm text-slate-600">Units</div>
                     </div>
                     <div className="text-center p-4 bg-amber-50/70 rounded-2xl">
@@ -379,7 +379,7 @@ export default function HavenBridgeLanding() {
                     <span className="text-base text-slate-600 font-medium">{project.type}</span>
                     <a 
                       href={`/projects/${project.id}`} 
-                      className="text-teal-700 font-semibold flex items-center gap-2 hover:text-teal-900 transition-colors"
+                      className="text-blue-700 font-semibold flex items-center gap-2 hover:text-amber-600 transition-colors"
                     >
                       View details <ArrowRight className="w-5 h-5" />
                     </a>
@@ -392,7 +392,7 @@ export default function HavenBridgeLanding() {
           <div className="text-center mt-16">
             <a 
               href="/projects" 
-              className="inline-flex items-center gap-3 text-xl font-bold text-teal-700 hover:text-teal-900 transition-colors"
+              className="inline-flex items-center gap-3 text-xl font-bold text-blue-700 hover:text-amber-600 transition-colors"
             >
               View All Projects <ArrowRight className="w-6 h-6" />
             </a>
@@ -401,7 +401,7 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 md:py-32 bg-gradient-to-br from-teal-700 via-teal-800 to-amber-900 text-white">
+      <section className="py-24 md:py-32 bg-gradient-to-br from-blue-700 via-blue-800 to-amber-900 text-white">
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 drop-shadow-lg">
@@ -412,7 +412,7 @@ export default function HavenBridgeLanding() {
             </p>
             <a
               href="/submit-project"
-              className="group relative inline-flex items-center justify-center px-10 md:px-14 py-5 md:py-6 text-xl md:text-2xl font-bold bg-white text-teal-900 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+              className="group relative inline-flex items-center justify-center px-10 md:px-14 py-5 md:py-6 text-xl md:text-2xl font-bold bg-white text-blue-900 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-1 overflow-hidden hover:bg-amber-50"
             >
               <span className="relative z-10 flex items-center gap-4">
                 Project Intake Form <ArrowRight className="w-6 h-6 md:w-7 md:h-7" />
