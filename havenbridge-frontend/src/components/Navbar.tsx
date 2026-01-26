@@ -91,7 +91,6 @@ export default function Navbar() {
         { name: "Templates", href: "/resources/templates", description: "Downloadable tools", icon: Download },
       ],
     },
-    { name: "Careers", href: "/careers", icon: Briefcase },
     { name: "Contact", href: "/contact", icon: Phone },
   ];
 
@@ -99,21 +98,21 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white shadow-lg py-3"
-          : "bg-white/95 backdrop-blur-md py-5 shadow-sm"
+          ? "bg-white shadow-md py-3"
+          : "bg-white/95 backdrop-blur-md py-4 shadow-sm"
       }`}
     >
-      <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-5 lg:px-8 xl:px-12 max-w-7xl">
+        <div className="flex items-center justify-between gap-8">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 md:w-12 md:h-12">
+          <a href="/" className="flex items-center gap-3 group shrink-0">
+            <div className="relative w-10 h-10 md:w-11 md:h-11">
               <Image
                 src="/logo2.png"
                 alt="HavenBridge logo"
                 fill
                 className="object-contain transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 44px, 48px"
+                sizes="(max-width: 768px) 40px, 44px"
                 priority
               />
             </div>
@@ -121,14 +120,14 @@ export default function Navbar() {
               <div className="text-xl font-bold text-slate-900 tracking-tight leading-none">
                 HavenBridge
               </div>
-              <div className="text-xs font-semibold text-teal-700 uppercase tracking-widest mt-0.5">
+              <div className="text-[10px] md:text-xs font-semibold text-teal-700 uppercase tracking-widest mt-0.5">
                 DEVELOPMENTS
               </div>
             </div>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-10">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-6">
             {navLinks.map((link) => (
               <div
                 key={link.name}
@@ -139,15 +138,15 @@ export default function Navbar() {
                 {link.dropdown ? (
                   <button
                     type="button"
-                    className="group flex items-center gap-1.5 py-2.5 px-3 rounded-lg hover:bg-teal-50/40 transition-colors"
+                    className="group flex items-center gap-1.5 py-2.5 px-2.5 rounded-lg hover:bg-teal-50/50 transition-colors whitespace-nowrap"
                     onMouseEnter={cancelClose}
                   >
-                    {link.icon && <link.icon className="w-4.5 h-4.5 text-teal-600 flex-shrink-0" />}
-                    <span className="font-semibold text-sm uppercase tracking-wide text-slate-800 group-hover:text-teal-700">
+                    {link.icon && <link.icon className="w-4 h-4 text-teal-600 flex-shrink-0" />}
+                    <span className="font-semibold text-[13px] uppercase tracking-wide text-slate-800 group-hover:text-teal-700">
                       {link.name}
                     </span>
                     <ChevronDown
-                      className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${
+                      className={`w-3.5 h-3.5 text-slate-500 transition-transform duration-200 ${
                         dropdownOpen === link.name ? "rotate-180" : ""
                       }`}
                     />
@@ -155,12 +154,12 @@ export default function Navbar() {
                 ) : (
                   <a
                     href={link.href}
-                    className="group flex items-center gap-1.5 py-2.5 px-3 rounded-lg hover:bg-teal-50/40 transition-colors"
+                    className="group flex items-center gap-1.5 py-2.5 px-2.5 rounded-lg hover:bg-teal-50/50 transition-colors whitespace-nowrap"
                   >
                     {link.icon && (
-                      <link.icon className="w-4.5 h-4.5 text-teal-600 group-hover:text-teal-700 transition-colors flex-shrink-0" />
+                      <link.icon className="w-4 h-4 text-teal-600 group-hover:text-teal-700 transition-colors flex-shrink-0" />
                     )}
-                    <span className="font-semibold text-sm uppercase tracking-wide text-slate-800 group-hover:text-teal-700">
+                    <span className="font-semibold text-[13px] uppercase tracking-wide text-slate-800 group-hover:text-teal-700">
                       {link.name}
                     </span>
                   </a>
@@ -186,7 +185,7 @@ export default function Navbar() {
                         <a
                           key={item.name}
                           href={item.href}
-                          className="flex items-center gap-4 px-6 py-4 hover:bg-teal-50/50 transition-colors group/item"
+                          className="flex items-center gap-4 px-6 py-4 hover:bg-teal-50/60 transition-colors group/item"
                         >
                           {item.icon && (
                             <item.icon className="w-5 h-5 text-teal-600 group-hover/item:text-teal-700 flex-shrink-0" />
@@ -208,23 +207,6 @@ export default function Navbar() {
                 )}
               </div>
             ))}
-
-            {/* CTA area */}
-            <div className="flex items-center gap-5 ml-8 pl-8 border-l border-teal-100">
-              <a
-                href="/capability-statement.pdf"
-                className="group flex items-center gap-2.5 text-teal-700 hover:text-teal-800 font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-teal-50/40 transition-all"
-              >
-                <Download className="w-4.5 h-4.5 group-hover:animate-bounce" />
-                Capability Statement
-              </a>
-              <a
-                href="/contact"
-                className="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-7 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:from-teal-700 hover:to-teal-800 transition-all hover:-translate-y-0.5"
-              >
-                Get in Touch
-              </a>
-            </div>
           </div>
 
           {/* Mobile toggle */}
@@ -300,26 +282,6 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-
-              {/* Mobile CTAs */}
-              <div className="pt-8 mt-4 border-t border-teal-100 px-4 space-y-5">
-                <a
-                  href="/capability-statement.pdf"
-                  className="flex items-center justify-center gap-3 py-4 px-6 bg-teal-50 text-teal-800 font-semibold rounded-2xl hover:bg-teal-100 transition-colors border border-teal-200"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Download className="w-5 h-5" />
-                  Capability Statement
-                </a>
-
-                <a
-                  href="/contact"
-                  className="block text-center py-4 px-6 bg-gradient-to-r from-teal-600 to-teal-700 text-white rounded-2xl font-semibold shadow-md hover:shadow-lg transition-all"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Get in Touch
-                </a>
-              </div>
             </div>
           </div>
         )}
