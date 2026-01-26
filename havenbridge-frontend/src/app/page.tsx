@@ -7,7 +7,6 @@ import {
   Building2,
   Handshake,
   FileText,
-  Download,
   ArrowRight,
   CheckCircle2,
   Home,
@@ -15,7 +14,7 @@ import {
   Shield,
 } from "lucide-react";
 
-// Import or define projects data
+// Your projects data (unchanged)
 const projectsData = [
   {
     id: "melbourne-modular-village",
@@ -83,12 +82,11 @@ const projectsData = [
 ];
 
 export default function HavenBridgeLanding() {
-  // Data arrays
   const stats = [
-    { value: "45", label: "Years of Experience", sub: "across real estate, development & government" },
-    { value: "500+", label: "Dwellings Delivered", sub: "completed + under management" },
-    { value: "$300M+", label: "Project Value", sub: "delivered + pipeline" },
-    { value: "98%", label: "On Time", sub: "project delivery performance" },
+    { value: "45", label: "Years of Combined Experience", sub: "across real estate, development, investment & government" },
+    { value: "500+", label: "Dwellings Delivered", sub: "completed and under management" },
+    { value: "$300M+", label: "Project Value", sub: "delivered and current pipeline" },
+    { value: "98%", label: "On Time Delivery", sub: "proven project performance" },
   ];
 
   const services = [
@@ -142,21 +140,23 @@ export default function HavenBridgeLanding() {
     }
   ];
 
-  const partners = [
-    { name: "Community Housing Providers", icon: Home },
-    { name: "Government Agencies", icon: Building2 },
-    { name: "Delivery Partners", icon: Users },
-    { name: "Finance Partners", icon: Shield },
+  const trustPartners = [
+    { name: "Victorian Government", placeholder: "VIC Gov" },
+    { name: "Housing Australia", placeholder: "Housing Aus" },
+    { name: "Community Housing Ltd", placeholder: "CHL" },
+    { name: "AustralianSuper", placeholder: "AustralianSuper" },
+    { name: "Tier 1 CHP Partners", placeholder: "Registered CHPs" },
+    { name: "Institutional Capital", placeholder: "Industry Funds" },
   ];
 
-  // Get only featured projects for homepage
   const featuredProjects = projectsData.filter(project => project.featured);
 
   return (
-    <div className="bg-white font-sans antialiased">
+    <div className="bg-gradient-to-b from-[#FDF8F0] to-[#F8F1E9] font-sans antialiased min-h-screen">
+
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Hero Section – slightly deeper overlay for better contrast */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
@@ -175,32 +175,31 @@ export default function HavenBridgeLanding() {
               priority
             />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
         </div>
 
         <div className="relative z-10 container mx-auto px-6 lg:px-8 xl:px-12 text-center text-white">
           <div className="max-w-5xl mx-auto space-y-6 md:space-y-8 px-4">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold leading-tight md:leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold leading-tight md:leading-tight drop-shadow-lg">
               Delivering social and affordable housing with{" "}
-              <span className="text-amber-400 block md:inline-block mt-2 md:mt-0">governance institutions trust</span>
+              <span className="text-amber-300 block md:inline-block mt-2 md:mt-0">governance institutions trust</span>
             </h1>
 
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-100/90 max-w-3xl mx-auto leading-relaxed font-light">
-              We partner with community housing providers, government, and delivery teams to bring projects from feasibility to completion.
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-100/90 max-w-3xl mx-auto leading-relaxed font-light drop-shadow-md">
+              We partner with community housing providers, government, and delivery teams to bring projects from feasibility to completion—with transparent reporting and strong controls.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center pt-6 md:pt-8">
               <a
                 href="/contact?type=partner"
-                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-3 md:py-4 text-base md:text-lg font-semibold bg-blue-500 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 text-base md:text-lg font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10">Partner with Us</span>
-                <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
 
               <a
                 href="/submit-project"
-                className="group inline-flex items-center justify-center px-8 md:px-10 py-3 md:py-4 text-base md:text-lg font-semibold text-white bg-white/10 border-2 border-white/30 rounded-xl backdrop-blur-sm hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105"
+                className="group inline-flex items-center justify-center px-8 md:px-10 py-4 text-base md:text-lg font-semibold text-white bg-white/15 border-2 border-white/40 rounded-xl backdrop-blur-md hover:bg-white/25 hover:border-white/60 transition-all duration-300 hover:scale-105"
               >
                 Submit a Project / Site
               </a>
@@ -209,45 +208,52 @@ export default function HavenBridgeLanding() {
         </div>
       </section>
 
-      {/* Trust Bar Section */}
-      <section className="py-12 md:py-16 bg-blue-50">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm md:text-base uppercase tracking-widest text-slate-600 mb-6 md:mb-8 font-medium">
-            Trusted by leading partners
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {partners.map((partner, i) => {
-              const Icon = partner.icon;
-              return (
-                <div key={i} className="text-center">
-                  <div className="h-24 md:h-28 bg-white rounded-xl flex flex-col items-center justify-center p-4 shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
-                      <Icon className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <span className="text-slate-700 font-semibold text-sm md:text-base">
-                      {partner.name}
+      {/* Trust Bar – warmer, lifted cards */}
+      <section className="py-16 md:py-20 -mt-16 relative z-20">
+        <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+          <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-amber-100/50 p-10 md:p-12">
+            <p className="text-center text-base uppercase tracking-wider text-teal-800 font-semibold mb-10">
+              Trusted by Leading Institutions & Partners
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-8 md:gap-14 lg:gap-20">
+              {trustPartners.map((p, i) => (
+                <div key={i} className="group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2">
+                  <div className="h-16 w-40 md:w-48 bg-gradient-to-br from-white to-teal-50/30 rounded-xl shadow-md border border-teal-100 group-hover:border-teal-300 group-hover:shadow-xl flex items-center justify-center mb-4 transition-all">
+                    <span className="text-teal-800 font-bold text-base md:text-lg tracking-tight">
+                      {p.placeholder}
                     </span>
                   </div>
+                  <span className="text-sm md:text-base font-medium text-slate-700 group-hover:text-teal-900">
+                    {p.name}
+                  </span>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+
+            <p className="text-center text-sm text-slate-600 mt-12 max-w-3xl mx-auto">
+              Government departments · Registered community housing providers · Institutional investors · Major delivery consortia
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 md:py-16 bg-white border-t border-blue-100">
+      {/* Stats – prominent, warm cards */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-[#F8F1E9] to-white">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-center">
             {stats.map((stat, i) => (
-              <div key={i} className="space-y-2">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-800">
+              <div 
+                key={i} 
+                className="bg-white rounded-2xl p-8 shadow-lg border border-teal-50 hover:border-teal-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-teal-800 mb-3">
                   {stat.value}
                 </div>
-                <div className="text-base md:text-lg font-semibold text-slate-600">
+                <div className="text-lg md:text-xl font-semibold text-slate-800 mb-2">
                   {stat.label}
                 </div>
-                <div className="text-xs md:text-sm text-slate-500">{stat.sub}</div>
+                <div className="text-sm text-slate-600">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -255,37 +261,36 @@ export default function HavenBridgeLanding() {
       </section>
 
       {/* Positioning Statement */}
-      <section className="py-16 md:py-20 bg-slate-50">
-        <div className="container mx-auto px-6 lg:px-8 xl:px-12 max-w-4xl text-center">
-          <p className="text-xl md:text-2xl lg:text-3xl text-slate-800 leading-relaxed font-medium">
+      <section className="py-20 md:py-28 bg-white">
+        <div className="container mx-auto px-6 lg:px-8 max-w-5xl text-center">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-slate-800 leading-relaxed">
             Our projects sit at the intersection of{" "}
-            <span className="text-amber-600 font-semibold">social impact</span>,{" "}
-            <span className="text-amber-600 font-semibold">commercial excellence</span>, and{" "}
-            <span className="text-amber-600 font-semibold">cultural insight</span>.
+            <span className="text-teal-700 font-bold">social impact</span>,{" "}
+            <span className="text-teal-700 font-bold">commercial excellence</span>, and{" "}
+            <span className="text-teal-700 font-bold">cultural insight</span>.
           </p>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 md:py-20 bg-white">
+      {/* Services */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-white to-[#FDF8F0]">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-12 md:mb-16 text-slate-800">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-teal-900">
             What We Do
           </h2>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {services.map((item, i) => (
               <div
                 key={i}
-                className="group bg-slate-50 rounded-2xl p-6 md:p-8 border border-blue-100 hover:border-blue-400 hover:shadow-xl transition-all duration-300"
+                className="group bg-white rounded-3xl p-8 md:p-10 border border-teal-100 hover:border-teal-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="w-14 h-14 md:w-16 md:h-16 bg-white rounded-2xl flex items-center justify-center mb-4 md:mb-6 mx-auto group-hover:bg-blue-50 transition-colors">
-                  <item.icon className="w-7 h-7 md:w-8 md:h-8 text-blue-500" />
+                <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <item.icon className="w-10 h-10 text-teal-700" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-slate-800">
+                <h3 className="text-2xl font-bold mb-4 text-teal-900 text-center">
                   {item.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+                <p className="text-slate-700 leading-relaxed text-center text-base">
                   {item.desc}
                 </p>
               </div>
@@ -294,29 +299,28 @@ export default function HavenBridgeLanding() {
         </div>
       </section>
 
-      {/* Value Points Section */}
-      <section className="py-16 md:py-20 bg-slate-50">
-        <div className="container mx-auto px-6 lg:px-8 xl:px-12 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mb-8 md:mb-12 text-slate-800">
-            Why stakeholders work with us
+      {/* Why stakeholders */}
+      <section className="py-20 md:py-28 bg-[#FDF8F0]">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-teal-900">
+            Why Stakeholders Choose Us
           </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {valuePoints.map((point, i) => (
               <div
                 key={i}
-                className="flex items-start gap-4 bg-white p-5 md:p-6 rounded-xl border border-blue-100 hover:border-blue-300 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl p-7 shadow-md border border-teal-50 hover:border-teal-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <point.icon className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold text-slate-800 mb-1">
-                    {point.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm md:text-base">
-                    {point.desc}
-                  </p>
+                <div className="flex items-start gap-5">
+                  <div className="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-teal-100 transition-colors">
+                    <point.icon className="w-7 h-7 text-teal-700" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-teal-900 mb-2">
+                      {point.title}
+                    </h3>
+                    <p className="text-slate-700">{point.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -324,71 +328,60 @@ export default function HavenBridgeLanding() {
         </div>
       </section>
 
-      {/* Projects Section - Using real projects data */}
-      <section className="py-16 md:py-20 bg-white">
+      {/* Featured Projects */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-[#FDF8F0] to-white">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-800 mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-              Delivering quality housing with community-focused outcomes across Australia.
-            </p>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-teal-900">
+            Featured Projects
+          </h2>
 
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-blue-300 hover:-translate-y-1"
+                className="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-teal-100 hover:border-teal-400 hover:-translate-y-2"
               >
                 <div className="aspect-[4/3] relative overflow-hidden">
                   <Image
                     src={project.image}
-                    alt={`${project.name} - ${project.location}`}
+                    alt={project.name}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1.5 text-xs font-semibold rounded-full ${
-                      project.status === 'Completed' ? 'bg-green-100 text-green-700' :
-                      project.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                      'bg-amber-100 text-amber-700'
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent group-hover:from-black/50 transition-all" />
+                  <div className="absolute top-6 right-6">
+                    <span className={`px-4 py-2 text-sm font-semibold rounded-full shadow-md ${
+                      project.status === 'Completed' ? 'bg-green-600 text-white' :
+                      project.status === 'In Progress' ? 'bg-teal-600 text-white' :
+                      'bg-amber-600 text-white'
                     }`}>
                       {project.status}
                     </span>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                    <p className="text-white text-sm font-medium">{project.location}</p>
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <p className="text-xl font-bold drop-shadow-md">{project.name}</p>
+                    <p className="text-base opacity-90">{project.location}</p>
                   </div>
                 </div>
-                <div className="p-5 md:p-6">
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">
-                    {project.name}
-                  </h3>
-                  <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                    {project.desc}
-                  </p>
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="text-center p-2 bg-slate-50 rounded-lg">
-                      <div className="text-sm font-semibold text-slate-800">{project.units}</div>
-                      <div className="text-xs text-slate-500">Units</div>
+                <div className="p-8">
+                  <p className="text-slate-700 mb-6 line-clamp-2">{project.desc}</p>
+                  <div className="grid grid-cols-2 gap-5 mb-6">
+                    <div className="text-center p-4 bg-teal-50/70 rounded-2xl">
+                      <div className="font-bold text-teal-900 text-lg">{project.units}</div>
+                      <div className="text-sm text-slate-600">Units</div>
                     </div>
-                    <div className="text-center p-2 bg-slate-50 rounded-lg">
-                      <div className="text-sm font-semibold text-slate-800">{project.value}</div>
-                      <div className="text-xs text-slate-500">Value</div>
+                    <div className="text-center p-4 bg-amber-50/70 rounded-2xl">
+                      <div className="font-bold text-amber-800 text-lg">{project.value}</div>
+                      <div className="text-sm text-slate-600">Value</div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-500">
-                      {project.type}
-                    </span>
-                    <a
-                      href={`/projects/${project.id}`}
-                      className="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-2 transition-colors text-sm"
+                  <div className="flex justify-between items-center">
+                    <span className="text-base text-slate-600 font-medium">{project.type}</span>
+                    <a 
+                      href={`/projects/${project.id}`} 
+                      className="text-teal-700 font-semibold flex items-center gap-2 hover:text-teal-900 transition-colors"
                     >
-                      View details <ArrowRight className="w-4 h-4" />
+                      View details <ArrowRight className="w-5 h-5" />
                     </a>
                   </div>
                 </div>
@@ -396,35 +389,34 @@ export default function HavenBridgeLanding() {
             ))}
           </div>
 
-          <div className="text-center mt-10 md:mt-12">
-            <a
-              href="/projects"
-              className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors text-lg"
+          <div className="text-center mt-16">
+            <a 
+              href="/projects" 
+              className="inline-flex items-center gap-3 text-xl font-bold text-teal-700 hover:text-teal-900 transition-colors"
             >
-              View all projects <ArrowRight className="w-5 h-5" />
+              View All Projects <ArrowRight className="w-6 h-6" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white">
+      {/* Final CTA */}
+      <section className="py-24 md:py-32 bg-gradient-to-br from-teal-700 via-teal-800 to-amber-900 text-white">
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 drop-shadow-lg">
               Have a site or a project?
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl mb-10 opacity-95 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl mb-10 opacity-95 max-w-2xl mx-auto">
               Submit details in 3 minutes — start the conversation today.
             </p>
             <a
               href="/submit-project"
-              className="group relative inline-flex items-center justify-center px-10 md:px-12 py-4 md:py-5 text-lg md:text-xl font-bold bg-white text-slate-800 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+              className="group relative inline-flex items-center justify-center px-10 md:px-14 py-5 md:py-6 text-xl md:text-2xl font-bold bg-white text-teal-900 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
             >
-              <span className="relative z-10 flex items-center gap-3">
-                Project Intake Form <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+              <span className="relative z-10 flex items-center gap-4">
+                Project Intake Form <ArrowRight className="w-6 h-6 md:w-7 md:h-7" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-100 to-amber-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
           </div>
         </div>

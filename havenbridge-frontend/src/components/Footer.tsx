@@ -111,10 +111,6 @@ export default function Footer() {
                     info@havenbridge.com.au
                   </a>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                  <span>+61 (0) 3 9999 9999</span>
-                </div>
               </div>
             </div>
 
