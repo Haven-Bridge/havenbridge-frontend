@@ -78,7 +78,7 @@ export default function Navbar() {
       ],
     },
     { name: "What We Do", href: "/what-we-do", icon: Briefcase },
-    { name: "Our Partners", href: "/our-partners", icon: Handshake },
+    { name: "Our Partners", href: "/investors", icon: Handshake },
     { name: "Projects", href: "/projects", icon: FolderKanban },
     {
       name: "Resources",
