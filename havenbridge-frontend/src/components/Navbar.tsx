@@ -67,7 +67,6 @@ export default function Navbar() {
   }
 
   const navLinks: NavLink[] = [
-    { name: "Home", href: "/", icon: Building2 },
     {
       name: "About Us",
       icon: Users,
@@ -98,12 +97,12 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white shadow-md py-3"
-          : "bg-white/95 backdrop-blur-md py-4 shadow-sm"
+          ? "bg-gradient-to-r from-sky-50 to-blue-50 shadow-md py-3"
+          : "bg-gradient-to-r from-sky-50/95 to-blue-50/95 backdrop-blur-md py-4 shadow-sm"
       }`}
     >
       <div className="container mx-auto px-5 lg:px-8 xl:px-12 max-w-7xl">
-        <div className="flex items-center justify-between gap-8">
+        <div className="flex items-center justify-between gap-12 lg:gap-16 xl:gap-20">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative w-10 h-10 md:w-11 md:h-11">
@@ -120,14 +119,14 @@ export default function Navbar() {
               <div className="text-xl font-bold text-slate-900 tracking-tight leading-none">
                 HavenBridge
               </div>
-              <div className="text-[10px] md:text-xs font-semibold text-teal-700 uppercase tracking-widest mt-0.5">
+              <div className="text-[10px] md:text-xs font-semibold text-amber-600 uppercase tracking-widest mt-0.5">
                 DEVELOPMENTS
               </div>
             </div>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-6">
+          <div className="hidden lg:flex items-center gap-7 xl:gap-9">
             {navLinks.map((link) => (
               <div
                 key={link.name}
@@ -138,11 +137,11 @@ export default function Navbar() {
                 {link.dropdown ? (
                   <button
                     type="button"
-                    className="group flex items-center gap-1.5 py-2.5 px-2.5 rounded-lg hover:bg-teal-50/50 transition-colors whitespace-nowrap"
+                    className="group flex items-center gap-1.5 py-2.5 px-4 rounded-lg hover:bg-amber-50/70 transition-colors whitespace-nowrap"
                     onMouseEnter={cancelClose}
                   >
-                    {link.icon && <link.icon className="w-4 h-4 text-teal-600 flex-shrink-0" />}
-                    <span className="font-semibold text-[13px] uppercase tracking-wide text-slate-800 group-hover:text-teal-700">
+                    {link.icon && <link.icon className="w-4 h-4 text-blue-600 flex-shrink-0" />}
+                    <span className="font-semibold text-[13px] uppercase tracking-wide text-slate-800 group-hover:text-amber-700">
                       {link.name}
                     </span>
                     <ChevronDown
@@ -154,12 +153,12 @@ export default function Navbar() {
                 ) : (
                   <a
                     href={link.href}
-                    className="group flex items-center gap-1.5 py-2.5 px-2.5 rounded-lg hover:bg-teal-50/50 transition-colors whitespace-nowrap"
+                    className="group flex items-center gap-1.5 py-2.5 px-4 rounded-lg hover:bg-amber-50/70 transition-colors whitespace-nowrap"
                   >
                     {link.icon && (
-                      <link.icon className="w-4 h-4 text-teal-600 group-hover:text-teal-700 transition-colors flex-shrink-0" />
+                      <link.icon className="w-4 h-4 text-blue-600 group-hover:text-amber-600 transition-colors flex-shrink-0" />
                     )}
-                    <span className="font-semibold text-[13px] uppercase tracking-wide text-slate-800 group-hover:text-teal-700">
+                    <span className="font-semibold text-[13px] uppercase tracking-wide text-slate-800 group-hover:text-amber-700">
                       {link.name}
                     </span>
                   </a>
@@ -168,30 +167,30 @@ export default function Navbar() {
                 {/* Desktop Dropdown */}
                 {link.dropdown && dropdownOpen === link.name && (
                   <div
-                    className="absolute top-full left-0 mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-teal-100/60 overflow-hidden z-50"
+                    className="absolute top-full left-0 mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-blue-100/60 overflow-hidden z-50"
                     onMouseEnter={cancelClose}
                     onMouseLeave={closeDropdown}
                   >
-                    <div className="p-5 bg-gradient-to-r from-teal-50/70 to-white border-b border-teal-100">
+                    <div className="p-5 bg-gradient-to-r from-sky-50/70 to-blue-50/70 border-b border-blue-100">
                       <div className="flex items-center gap-3">
-                        {link.icon && <link.icon className="w-6 h-6 text-teal-700" />}
-                        <span className="font-bold text-teal-900 text-base uppercase tracking-wide">
+                        {link.icon && <link.icon className="w-6 h-6 text-blue-700" />}
+                        <span className="font-bold text-slate-900 text-base uppercase tracking-wide">
                           {link.name}
                         </span>
                       </div>
                     </div>
-                    <div className="divide-y divide-teal-50/70">
+                    <div className="divide-y divide-blue-50/70">
                       {link.dropdown.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
-                          className="flex items-center gap-4 px-6 py-4 hover:bg-teal-50/60 transition-colors group/item"
+                          className="flex items-center gap-4 px-6 py-4 hover:bg-amber-50/60 transition-colors group/item"
                         >
                           {item.icon && (
-                            <item.icon className="w-5 h-5 text-teal-600 group-hover/item:text-teal-700 flex-shrink-0" />
+                            <item.icon className="w-5 h-5 text-blue-600 group-hover/item:text-amber-600 flex-shrink-0" />
                           )}
                           <div>
-                            <div className="font-semibold text-slate-900 group-hover/item:text-teal-800">
+                            <div className="font-semibold text-slate-900 group-hover/item:text-amber-800">
                               {item.name}
                             </div>
                             {item.description && (
@@ -212,43 +211,43 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-3 rounded-xl hover:bg-teal-50 transition-colors"
+            className="lg:hidden p-3 rounded-xl hover:bg-amber-50/70 transition-colors"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-7 h-7 text-teal-800" /> : <Menu className="w-7 h-7 text-teal-800" />}
+            {mobileMenuOpen ? <X className="w-7 h-7 text-blue-800" /> : <Menu className="w-7 h-7 text-blue-800" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-8 border-t border-teal-100 bg-white/95 backdrop-blur-md">
+          <div className="lg:hidden mt-4 pb-8 border-t border-blue-100 bg-gradient-to-r from-sky-50/95 to-blue-50/95 backdrop-blur-md">
             <div className="px-4 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
               {navLinks.map((link) => (
                 <div key={link.name} className="rounded-2xl overflow-hidden">
                   {link.href ? (
                     <a
                       href={link.href}
-                      className="flex items-center gap-4 py-4 px-5 text-teal-900 hover:bg-teal-50 rounded-xl transition-colors font-medium"
+                      className="flex items-center gap-4 py-4 px-5 text-slate-900 hover:bg-amber-50/70 rounded-xl transition-colors font-medium"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      {link.icon && <link.icon className="w-6 h-6 text-teal-600 flex-shrink-0" />}
+                      {link.icon && <link.icon className="w-6 h-6 text-blue-600 flex-shrink-0" />}
                       <span className="text-lg">{link.name}</span>
                     </a>
                   ) : (
                     <>
                       <div
-                        className={`flex items-center justify-between py-4 px-5 text-teal-900 font-medium hover:bg-teal-50 rounded-xl transition-colors cursor-pointer ${
-                          activeMobileDropdown === link.name ? "bg-teal-50" : ""
+                        className={`flex items-center justify-between py-4 px-5 text-slate-900 font-medium hover:bg-amber-50/70 rounded-xl transition-colors cursor-pointer ${
+                          activeMobileDropdown === link.name ? "bg-amber-50/70" : ""
                         }`}
                         onClick={() => toggleMobileDropdown(link.name)}
                       >
                         <div className="flex items-center gap-4">
-                          {link.icon && <link.icon className="w-6 h-6 text-teal-600 flex-shrink-0" />}
+                          {link.icon && <link.icon className="w-6 h-6 text-blue-600 flex-shrink-0" />}
                           <span className="text-lg">{link.name}</span>
                         </div>
                         {link.dropdown && (
                           <ChevronDown
-                            className={`w-6 h-6 text-teal-600 transition-transform ${
+                            className={`w-6 h-6 text-blue-600 transition-transform ${
                               activeMobileDropdown === link.name ? "rotate-180" : ""
                             }`}
                           />
@@ -256,22 +255,22 @@ export default function Navbar() {
                       </div>
 
                       {link.dropdown && activeMobileDropdown === link.name && (
-                        <div className="bg-teal-50/50 px-5 py-3 space-y-2">
+                        <div className="bg-sky-50/50 px-5 py-3 space-y-2">
                           {link.dropdown.map((item) => (
                             <a
                               key={item.name}
                               href={item.href}
-                              className="flex items-center gap-4 py-3 px-5 text-teal-800 hover:text-teal-900 hover:bg-teal-100/50 rounded-xl transition-colors text-base"
+                              className="flex items-center gap-4 py-3 px-5 text-slate-800 hover:text-amber-900 hover:bg-amber-100/50 rounded-xl transition-colors text-base"
                               onClick={() => {
                                 setMobileMenuOpen(false);
                                 setActiveMobileDropdown(null);
                               }}
                             >
-                              {item.icon && <item.icon className="w-5 h-5 text-teal-600 flex-shrink-0" />}
+                              {item.icon && <item.icon className="w-5 h-5 text-blue-600 flex-shrink-0" />}
                               <div>
                                 <div className="font-medium">{item.name}</div>
                                 {item.description && (
-                                  <div className="text-sm text-teal-700 mt-0.5">{item.description}</div>
+                                  <div className="text-sm text-blue-700 mt-0.5">{item.description}</div>
                                 )}
                               </div>
                             </a>
